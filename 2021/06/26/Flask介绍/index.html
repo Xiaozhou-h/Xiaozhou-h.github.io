@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="小周的博客">
 <meta property="og:description" content="实列后端1234567891011121314151617181920212223242526# -*- coding: utf-8 -*-from flask import Flask, render_template, requestfrom  readdocx_and_doctodocx import tikuapp = Flask(__name__)@app.route(&quot;/mayuan&quot;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2021-06-26T15:41:25.439Z">
+<meta property="og:updated_time" content="2021-06-27T09:44:11.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flask介绍">
 <meta name="twitter:description" content="实列后端1234567891011121314151617181920212223242526# -*- coding: utf-8 -*-from flask import Flask, render_template, requestfrom  readdocx_and_doctodocx import tikuapp = Flask(__name__)@app.route(&quot;/mayuan&quot;">
@@ -232,7 +232,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
 
   </li>
         
@@ -249,7 +249,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>A propos</a>
 
   </li>
         
@@ -283,7 +283,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -300,7 +300,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -387,19 +387,31 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
                 
               
 
-              <time title="Post created: 2021-06-26 23:39:09 / Updated at: 23:41:25" itemprop="dateCreated datePublished" datetime="2021-06-26T23:39:09+08:00">2021-06-26</time>
+              <time title="Post created: 2021-06-26 23:39:09" itemprop="dateCreated datePublished" datetime="2021-06-26T23:39:09+08:00">2021-06-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2021-06-27 17:44:11" itemprop="dateModified" datetime="2021-06-27T17:44:11+08:00">2021-06-27</time>
               
             
           </span>
@@ -444,6 +456,8 @@
       
         <h3 id="实列"><a href="#实列" class="headerlink" title="实列"></a>实列</h3><h4 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request</span><br><span class="line"><span class="keyword">from</span>  readdocx_and_doctodocx <span class="keyword">import</span> tiku</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route("/mayuan")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mayuan</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>,datas=&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/get_daan',methods=['POST', 'GET'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_daan</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        val = request.form[<span class="string">"val"</span>]</span><br><span class="line">        ti,daan = tiku(val)</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">'题目：'</span> : ti,</span><br><span class="line">            <span class="string">'答案：'</span> : daan</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>, datas=data)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>,datas=&#123;&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="keyword">True</span>, host=<span class="string">"0.0.0.0"</span>, port=<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
 <h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">'margin:100px auto;width:400px'</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"http://127.0.0.1:5000/get_daan"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"val"</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"op"</span> <span class="attr">value</span>=<span class="string">"查询"</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">        &#123;% for k in datas.items() %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; k[0] &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span>&#123;&#123; k[1] &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        &#123;% endfor %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h3><h4 id="nginx"><a href="#nginx" class="headerlink" title="nginx:"></a>nginx:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">        listen 5000;</span><br><span class="line">        server_name 127.0.0.1;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        client_max_body_size 75M;</span><br><span class="line">        access_log  /root/Test_tiku/nginx.log;</span><br><span class="line"></span><br><span class="line">        location /&#123;</span><br><span class="line">        include /etc/nginx/uwsgi_params;</span><br><span class="line">        uwsgi_pass 127.0.0.1:622;</span><br><span class="line">        uwsgi_read_timeout 24;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="uwsgi"><a href="#uwsgi" class="headerlink" title="uwsgi"></a>uwsgi</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">socket= 127.0.0.1:622</span><br><span class="line">chdir=/root/Test_tiku</span><br><span class="line">wsgi-file=app.py</span><br><span class="line">master=true</span><br><span class="line">processes=24</span><br><span class="line">vacuum=true</span><br><span class="line"></span><br><span class="line">callable = app</span><br><span class="line"></span><br><span class="line">threads=2</span><br><span class="line">pidfile=uwsgi.pid</span><br><span class="line">daemonize=uwsgi.log</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -489,6 +503,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/09/23/PYTHON算法/" rel="prev" title="PYTHON算法">
+                PYTHON算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -544,10 +562,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table Des Matières
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Ensemble
           </li>
         </ul>
       
@@ -569,8 +587,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">articles</span>
                   </a>
                 </div>
               
@@ -608,8 +626,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
-                    <span class="site-state-item-name">Tags</span>
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">tags</span>
                   
                 </div>
               
@@ -661,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实列"><span class="nav-number">1.</span> <span class="nav-text">实列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#后端"><span class="nav-number">1.1.</span> <span class="nav-text">后端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端"><span class="nav-number">1.2.</span> <span class="nav-text">前端</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实列"><span class="nav-number">1.</span> <span class="nav-text">实列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#后端"><span class="nav-number">1.1.</span> <span class="nav-text">后端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端"><span class="nav-number">1.2.</span> <span class="nav-text">前端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上线"><span class="nav-number">2.</span> <span class="nav-text">上线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nginx"><span class="nav-number">2.1.</span> <span class="nav-text">nginx:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#uwsgi"><span class="nav-number">2.2.</span> <span class="nav-text">uwsgi</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -714,7 +734,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
 
 
 
