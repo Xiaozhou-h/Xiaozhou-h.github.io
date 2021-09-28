@@ -2019,7 +2019,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e20132;
+  background: #ff4ffb;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3317,7 +3317,6 @@ ul.breadcrumb li+li:last-child {
   }
 }
 body {
-  background: url("http://uploads.5068.com/allimg/1801/85-1P113093513-50.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
