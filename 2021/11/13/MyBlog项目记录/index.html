@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一、项目介绍 使用Django框架开发个人博客系统，博客系统包括用户注册登录、用户资料展示、图片墙功能、留言板功能、文章列表以及博文管理功能。 待完善：修改密码、搜索博文  二、项目设计 博客管理划分为3个数据表，分别是博文分类、博文管理、评论管理。博文分类设置文章的分类标签；博文管理提供博主对每篇文章进行修改、编辑操作；评论管理存储每篇文章的评论内容。  图片墙管理供博主管理自己上传的图片，可对">
+<meta name="keywords" content="MyBlog项目记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBlog项目记录">
+<meta property="og:url" content="http://yoursite.com/2021/11/13/MyBlog项目记录/index.html">
+<meta property="og:site_name" content="小周的博客">
+<meta property="og:description" content="一、项目介绍 使用Django框架开发个人博客系统，博客系统包括用户注册登录、用户资料展示、图片墙功能、留言板功能、文章列表以及博文管理功能。 待完善：修改密码、搜索博文  二、项目设计 博客管理划分为3个数据表，分别是博文分类、博文管理、评论管理。博文分类设置文章的分类标签；博文管理提供博主对每篇文章进行修改、编辑操作；评论管理存储每篇文章的评论内容。  图片墙管理供博主管理自己上传的图片，可对">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-11-15T12:25:57.382Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MyBlog项目记录">
+<meta name="twitter:description" content="一、项目介绍 使用Django框架开发个人博客系统，博客系统包括用户注册登录、用户资料展示、图片墙功能、留言板功能、文章列表以及博文管理功能。 待完善：修改密码、搜索博文  二、项目设计 博客管理划分为3个数据表，分别是博文分类、博文管理、评论管理。博文分类设置文章的分类标签；博文管理提供博主对每篇文章进行修改、编辑操作；评论管理存储每篇文章的评论内容。  图片墙管理供博主管理自己上传的图片，可对">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/11/13/MyBlog项目记录/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MyBlog项目记录 | 小周的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小周的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/13/MyBlog项目记录/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="周某人">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/admin.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小周的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MyBlog项目记录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2021-11-13 16:29:17" itemprop="dateCreated datePublished" datetime="2021-11-13T16:29:17+08:00">2021-11-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2021-11-15 20:25:57" itemprop="dateModified" datetime="2021-11-15T20:25:57+08:00">2021-11-15</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/11/13/MyBlog项目记录/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count gitment-comments-count" data-xid="/2021/11/13/MyBlog项目记录/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、项目介绍"><a href="#一、项目介绍" class="headerlink" title="一、项目介绍"></a>一、项目介绍</h1><blockquote>
+<p>使用Django框架开发个人博客系统，博客系统包括用户注册登录、用户资料展示、图片墙功能、留言板功能、文章列表以及博文管理功能。</p>
+<p>待完善：修改密码、搜索博文</p>
+</blockquote>
+<h1 id="二、项目设计"><a href="#二、项目设计" class="headerlink" title="二、项目设计"></a>二、项目设计</h1><ul>
+<li><p>博客管理划分为3个数据表，分别是博文分类、博文管理、评论管理。博文分类设置文章的分类标签；博文管理提供博主对每篇文章进行修改、编辑操作；评论管理存储每篇文章的评论内容。</p>
+</li>
+<li><p>图片墙管理供博主管理自己上传的图片，可对每张图片进行修改、删除操作。</p>
+</li>
+<li><p>用户管理只能看到自己的账号信息，用户的账号信息可显示在博主的资料信息页。</p>
+</li>
+<li><p>留言管理功能只能看到访客给自己的留言内容，并且具有所有操作权限。</p>
+<p><strong><strong>在设计系统架构时，必须围绕项目的核心功能进行设计，以核心功能为主题，向外延伸和完善其他功能，这是项目架构设计的思路之一。</strong></strong></p>
+</li>
+</ul>
+<h2 id="一、添加项目应用"><a href="#一、添加项目应用" class="headerlink" title="一、添加项目应用"></a>一、添加项目应用</h2><blockquote>
+<p>在Terminal中新建四个应用：account、album、article、interflow</p>
+<p><strong>python manage.py startapp account</strong></p>
+<p><strong>python manage.py startapp album</strong></p>
+<p><strong>python manage.py startapp article</strong></p>
+<p><strong>python manage.py startapp interflow</strong></p>
+<p><strong><strong>另外还需在每个应用中添加urls.py文件</strong></strong></p>
+</blockquote>
+<h2 id="二、添加资源文件夹"><a href="#二、添加资源文件夹" class="headerlink" title="二、添加资源文件夹"></a>二、添加资源文件夹</h2><p><strong><strong>在项目根目录中添加media、publicStatic、templates(已拥有就不用添加)</strong></strong></p>
+<h2 id="三、相关说明"><a href="#三、相关说明" class="headerlink" title="三、相关说明"></a>三、相关说明</h2><h3 id="1、项目应用account"><a href="#1、项目应用account" class="headerlink" title="1、项目应用account"></a>1、项目应用account</h3><blockquote>
+<p><em><em>用于实现用户注册、登录和用户资料信息页，自定义模型MyUser继承内置模型User，在内置模型User的基础上添加新字段，可以完善用户信息。模型MyUser为博主资料信息页提供数据支持，而且MyUser还需要关联其他模型。</em></em></p>
+</blockquote>
+<h3 id="2、项目应用album"><a href="#2、项目应用album" class="headerlink" title="2、项目应用album"></a>2、项目应用album</h3><blockquote>
+<p><em><em>用于实现图片墙功能，每个用户的图片墙只能显示自己上传的图片信息。模型AlbumInfo用于存储图片墙的图片信息，它设有外键字段关联模型MyUser，与模型MyUser组成一对多的数据关系。</em></em></p>
+</blockquote>
+<h3 id="3、项目应用article"><a href="#3、项目应用article" class="headerlink" title="3、项目应用article"></a>3、项目应用article</h3><blockquote>
+<p><em><em>用于实现用户的文章管理，每篇文章设有分类标签、正文内容和评论信息，三者分别对应模型ArticleTag、ArticleInfo、Comment，每个模型之间的数据关系说明如下：</em></em></p>
+<ul>
+<li>模型ArticleTag设有外键字段关联模型MyUser，与模型MyUser组成一对多的数据关系。</li>
+<li>模型ArticleInfo不仅与模型MyUser组成一对多的数据关系，并且与模型ArticleTag组成多对多的数据关系。</li>
+<li>模型Comment只对模型ArticleInfo组成一对多的数据关系。</li>
+</ul>
+</blockquote>
+<h3 id="4、项目应用interflow"><a href="#4、项目应用interflow" class="headerlink" title="4、项目应用interflow"></a>4、项目应用interflow</h3><blockquote>
+<p><em><em>用于实现留言板功能，模型Board存储留言板信息，它设有外键字段关联模型MyUser，与模型MyUser组成一对多的数据关系，从而区分每个用户的留言板内容。</em></em></p>
+</blockquote>
+<h3 id="5、媒体资源文件夹media"><a href="#5、媒体资源文件夹media" class="headerlink" title="5、媒体资源文件夹media"></a>5、媒体资源文件夹media</h3><blockquote>
+<p><em><em>用于存放用户上传的文章图片、图片墙图片、用户头像等资源文件，这类资源变动评率较高，因此与静态资源区分不同的存储路径。</em></em></p>
+</blockquote>
+<h3 id="6、静态资源文件夹publicStatic"><a href="#6、静态资源文件夹publicStatic" class="headerlink" title="6、静态资源文件夹publicStatic"></a>6、静态资源文件夹publicStatic</h3><blockquote>
+<p><em><em>用于存放网页的CSS样式文件、JavaScript脚本文件和网页图片等静态资源。</em></em></p>
+</blockquote>
+<h3 id="7、模板文件夹templates"><a href="#7、模板文件夹templates" class="headerlink" title="7、模板文件夹templates"></a>7、模板文件夹templates</h3><blockquote>
+<p><em><em>用于存放模板文件，本项目以供使用7个模板文件，每个模板文件的说明如下：</em></em></p>
+<ul>
+<li>base.html定义项目的共用模板文件</li>
+<li>album.html实现图片墙的网页内容</li>
+<li>article.html实现文章列表页</li>
+<li>board.html实现留言板的网页内容</li>
+<li>detail.html实现文章正文内容页</li>
+<li>user.html实现用户注册和登录页</li>
+<li>about.html实现用户资料信息页</li>
+</ul>
+</blockquote>
+<h2 id="四、补充说明"><a href="#四、补充说明" class="headerlink" title="四、补充说明"></a>四、补充说明</h2><blockquote>
+<p>项目需要注册登录功能，而Admin后台系统内置用户登录页面，为避免一个网页设有两个不同登录页面，对用户造成不好的体验。因此，我们将用户注册和登录页面作为Admin后台系统的登录页面。</p>
+<p><strong><strong>在项目次级目录MyBlog中添加myadmin.py和myapps.py文件，这两个文件用于自定义Admin后台系统。</strong></strong></p>
+</blockquote>
+<h1 id="三、具体实现"><a href="#三、具体实现" class="headerlink" title="三、具体实现"></a>三、具体实现</h1><h2 id="一、环境配置"><a href="#一、环境配置" class="headerlink" title="一、环境配置"></a>一、环境配置</h2><h3 id="一、在settings-py-中进行相应的环境配置："><a href="#一、在settings-py-中进行相应的环境配置：" class="headerlink" title="一、在settings.py 中进行相应的环境配置："></a>一、在settings.py 中进行相应的环境配置：</h3><h5 id="1、将项目应用写入配置属性INSTALLED-APPS"><a href="#1、将项目应用写入配置属性INSTALLED-APPS" class="headerlink" title="1、将项目应用写入配置属性INSTALLED_APPS:"></a>1、将项目应用写入配置属性INSTALLED_APPS:</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">'django.contrib.admin'</span>,</span><br><span class="line">    <span class="string">'django.contrib.auth'</span>,</span><br><span class="line">    <span class="string">'django.contrib.contenttypes'</span>,</span><br><span class="line">    <span class="string">'django.contrib.sessions'</span>,</span><br><span class="line">    <span class="string">'django.contrib.messages'</span>,</span><br><span class="line">    <span class="string">'django.contrib.staticfiles'</span>,</span><br><span class="line">    <span class="string">'account'</span>,   <span class="comment"># 添加应用account</span></span><br><span class="line">    <span class="string">'album'</span>,     <span class="comment"># 添加应用account</span></span><br><span class="line">    <span class="string">'article'</span>,   <span class="comment"># 添加应用account</span></span><br><span class="line">    <span class="string">'interflow'</span>, <span class="comment"># 添加应用account</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h5 id="2、添加中间件使得系统支持中文"><a href="#2、添加中间件使得系统支持中文" class="headerlink" title="2、添加中间件使得系统支持中文"></a>2、添加中间件使得系统支持中文</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">MIDDLEWARE = [</span><br><span class="line">    <span class="string">'django.middleware.security.SecurityMiddleware'</span>,</span><br><span class="line">    <span class="string">'django.contrib.sessions.middleware.SessionMiddleware'</span>,</span><br><span class="line">    <span class="string">'django.middleware.common.CommonMiddleware'</span>,</span><br><span class="line">    <span class="comment"># 添加中间件LocaleMiddleware以便Admin后台系统支持中文</span></span><br><span class="line">    <span class="string">'django.middleware.locale.LocaleMiddleware'</span>,</span><br><span class="line">    <span class="string">'django.middleware.csrf.CsrfViewMiddleware'</span>,</span><br><span class="line">    <span class="string">'django.contrib.auth.middleware.AuthenticationMiddleware'</span>,</span><br><span class="line">    <span class="string">'django.contrib.messages.middleware.MessageMiddleware'</span>,</span><br><span class="line">    <span class="string">'django.middleware.clickjacking.XFrameOptionsMiddleware'</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h5 id="3、在TEMPLATES中配置模板文件夹"><a href="#3、在TEMPLATES中配置模板文件夹" class="headerlink" title="3、在TEMPLATES中配置模板文件夹"></a>3、在TEMPLATES中配置模板文件夹</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">'BACKEND'</span>: <span class="string">'django.template.backends.django.DjangoTemplates'</span>,</span><br><span class="line">        <span class="comment"># 将模板文件夹templates引入Django</span></span><br><span class="line">        <span class="string">'DIRS'</span>: [os.path.join(BASE_DIR, <span class="string">'templates'</span>)],</span><br><span class="line">        <span class="string">'APP_DIRS'</span>: <span class="keyword">True</span>,</span><br><span class="line">        <span class="string">'OPTIONS'</span>: &#123;</span><br><span class="line">            <span class="string">'context_processors'</span>: [</span><br><span class="line">                <span class="string">'django.template.context_processors.debug'</span>,</span><br><span class="line">                <span class="string">'django.template.context_processors.request'</span>,</span><br><span class="line">                <span class="string">'django.contrib.auth.context_processors.auth'</span>,</span><br><span class="line">                <span class="string">'django.contrib.messages.context_processors.messages'</span>,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h5 id="4、在DATABASES中配置数据库MySQL"><a href="#4、在DATABASES中配置数据库MySQL" class="headerlink" title="4、在DATABASES中配置数据库MySQL"></a>4、在DATABASES中配置数据库MySQL</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="comment"># 选择MySQL作为我们项目的数据库</span></span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="comment"># 数据库的名字为blogdb</span></span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'blogdb'</span>,</span><br><span class="line">        <span class="string">'USER'</span>: <span class="string">'root'</span>,</span><br><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">'123456'</span>,</span><br><span class="line">        <span class="string">'HOST'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">        <span class="string">'PORT'</span>: <span class="string">'3306'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5、配置静态资源文件夹和媒体资源文件夹"><a href="#5、配置静态资源文件夹和媒体资源文件夹" class="headerlink" title="5、配置静态资源文件夹和媒体资源文件夹"></a>5、配置静态资源文件夹和媒体资源文件夹</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置自定义用户模型MyUser</span></span><br><span class="line">AUTH_USER_MODEL = <span class="string">'account.MyUser'</span></span><br><span class="line"><span class="comment"># 设置静态资源的保存路径</span></span><br><span class="line">STATIC_URL = <span class="string">'/static/'</span></span><br><span class="line">STATICFILES_DIRS = [os.path.join(BASE_DIR, <span class="string">'publicStatic'</span>)]</span><br><span class="line"><span class="comment"># 设置媒体资源的保存路径,用于前端调用资源</span></span><br><span class="line">MEDIA_URL = <span class="string">'/media/'</span></span><br><span class="line">MEDIA_ROOT = os.path.join(BASE_DIR, <span class="string">'media'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="二、在各应用中的models-py配置数据模型"><a href="#二、在各应用中的models-py配置数据模型" class="headerlink" title="二、在各应用中的models.py配置数据模型"></a>二、在各应用中的models.py配置数据模型</h3><h5 id="1、account的models-py"><a href="#1、account的models-py" class="headerlink" title="1、account的models.py"></a>1、account的models.py</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 模型MyUser继承内置模型User，这里继承AbstractUser（该类为User的父类）</span></span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> AbstractUser</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUser</span><span class="params">(AbstractUser)</span>:</span></span><br><span class="line">    name = models.CharField(<span class="string">'姓名'</span>, max_length=<span class="number">50</span>, default=<span class="string">'匿名用户'</span>)</span><br><span class="line">    introduce = models.TextField(<span class="string">'简介'</span>, default=<span class="string">'暂无介绍'</span>)</span><br><span class="line">    company = models.CharField(<span class="string">'公司'</span>, max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">    profession = models.CharField(<span class="string">'职业'</span>, max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">    address = models.CharField(<span class="string">'住址'</span>, max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">    telephone = models.CharField(<span class="string">'电话'</span>, max_length=<span class="number">11</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">    wx = models.CharField(<span class="string">'微信'</span>, max_length=<span class="number">50</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">    qq = models.CharField(<span class="string">'QQ'</span>, max_length=<span class="number">50</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">    wb = models.CharField(<span class="string">'微博'</span>,max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">    photo = models.ImageField(<span class="string">'头像'</span>, blank=<span class="keyword">True</span>, upload_to=<span class="string">'images/user/'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.name</span><br></pre></td></tr></table></figure>
+<h5 id="2、album的model-py"><a href="#2、album的model-py" class="headerlink" title="2、album的model.py"></a>2、album的model.py</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># AlbumInfo设置外键关联模型MyUser</span></span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> account.models <span class="keyword">import</span> MyUser</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AlbumInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    id = models.AutoField(primary_key=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment"># 设置外键关联</span></span><br><span class="line">    user = models.ForeignKey(MyUser, on_delete=models.CASCADE, verbose_name=<span class="string">'用户'</span>)</span><br><span class="line">    title = models.CharField(<span class="string">'标题'</span>, max_length=<span class="number">50</span>, blank=<span class="keyword">True</span>)</span><br><span class="line">    introduce = models.CharField(<span class="string">'描述'</span>, max_length=<span class="number">200</span>, blank=<span class="keyword">True</span>)</span><br><span class="line">    photo = models.ImageField(<span class="string">'图片'</span>, blank=<span class="keyword">True</span>, upload_to=<span class="string">'images/album/'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> str(self.id)</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        verbose_name = <span class="string">'图片墙管理'</span></span><br><span class="line">        verbose_name_plural = <span class="string">'图片墙管理'</span></span><br></pre></td></tr></table></figure>
+<h5 id="3、article的model-py"><a href="#3、article的model-py" class="headerlink" title="3、article的model.py"></a>3、article的model.py</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> django.utils <span class="keyword">import</span> timezone</span><br><span class="line"><span class="keyword">from</span> account.models <span class="keyword">import</span> MyUser</span><br><span class="line"><span class="comment"># 模型ArticleTag设有外键字段关联模型MyUser，一对多关系。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArticleTag</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    id = models.AutoField(primary_key=<span class="keyword">True</span>)</span><br><span class="line">    tag = models.CharField(<span class="string">'标签'</span>, max_length=<span class="number">500</span>)</span><br><span class="line">    user = models.ForeignKey(MyUser, on_delete=models.CASCADE, verbose_name=<span class="string">'用户'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.tag</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        verbose_name = <span class="string">'博文分类'</span></span><br><span class="line">        verbose_name_plural = <span class="string">'博文分类'</span></span><br><span class="line"><span class="comment"># 模型ArticleInfo设有外键字段关联模型MyUser（一对多关系），与ArticleTag组成多对多关系。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArticleInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    author = models.ForeignKey(MyUser, on_delete=models.CASCADE, verbose_name=<span class="string">'用户'</span>)</span><br><span class="line">    title = models.CharField(<span class="string">'标题'</span>, max_length=<span class="number">200</span>)</span><br><span class="line">    content = models.TextField(<span class="string">'内容'</span>)</span><br><span class="line">    articlephoto = models.ImageField(<span class="string">'文章图片'</span>, blank=<span class="keyword">True</span>, upload_to=<span class="string">'images/article/'</span>)</span><br><span class="line">    reading = models.IntegerField(<span class="string">'阅读量'</span>, default=<span class="number">0</span>)</span><br><span class="line">    liking = models.IntegerField(<span class="string">'点赞量'</span>, default=<span class="number">0</span>)</span><br><span class="line">    created = models.DateTimeField(<span class="string">'创建时间'</span>, default=timezone.now)</span><br><span class="line">    updated = models.DateTimeField(<span class="string">'更新时间'</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line">    article_tag = models.ManyToManyField(ArticleTag, blank=<span class="keyword">True</span>, verbose_name=<span class="string">'文章标签'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.title</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        verbose_name = <span class="string">'博文管理'</span></span><br><span class="line">        verbose_name_plural = <span class="string">'博文管理'</span></span><br><span class="line"><span class="comment"># 模型Comment对模型ArticleInfo组成多对多关系</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Comment</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    article = models.ForeignKey(ArticleInfo, on_delete=models.CASCADE, verbose_name=<span class="string">'所属文章'</span>)</span><br><span class="line">    commentator = models.CharField(<span class="string">'评论用户'</span>, max_length=<span class="number">90</span>)</span><br><span class="line">    content = models.TextField(<span class="string">'评论内容'</span>)</span><br><span class="line">    created = models.DateTimeField(<span class="string">'创建时间'</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.article.title</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        verbose_name = <span class="string">'评论管理'</span></span><br><span class="line">        verbose_name_plural = <span class="string">'评论管理'</span></span><br></pre></td></tr></table></figure>
+<h5 id="4、interflow的model-py"><a href="#4、interflow的model-py" class="headerlink" title="4、interflow的model.py"></a>4、interflow的model.py</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 模型Board设有外键字段关联模型MyUser，一对多关系。</span></span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> account.models <span class="keyword">import</span> MyUser</span><br><span class="line"><span class="keyword">from</span> django.utils <span class="keyword">import</span> timezone</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    id = models.AutoField(primary_key=<span class="keyword">True</span>)</span><br><span class="line">    name = models.CharField(<span class="string">'留言用户'</span>, max_length=<span class="number">50</span>)</span><br><span class="line">    email = models.CharField(<span class="string">'邮箱地址'</span>, max_length=<span class="number">50</span>)</span><br><span class="line">    content = models.CharField(<span class="string">'留言内容'</span>, max_length=<span class="number">500</span>)</span><br><span class="line">    created = models.DateTimeField(<span class="string">'创建时间'</span>, default=timezone.now)</span><br><span class="line">    user = models.ForeignKey(MyUser, on_delete=models.CASCADE, verbose_name=<span class="string">'用户'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.email</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        verbose_name = <span class="string">'博客留言'</span></span><br><span class="line">        verbose_name_plural = <span class="string">'博客留言'</span></span><br></pre></td></tr></table></figure>
+<h3 id="三、创建数据库并进行数据迁移"><a href="#三、创建数据库并进行数据迁移" class="headerlink" title="三、创建数据库并进行数据迁移"></a>三、创建数据库并进行数据迁移</h3><p><strong><strong>可通过可视化连接工具Navicat创建blogdb数据库，字符集选择utf8mb4，创建好便可进行数据迁移：</strong></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一般在创建好表单类后需要进行数据迁移，在Pycharm的Terminal窗口下：</span><br><span class="line">python manage.py makemigrations #记录改动，没有作用到数据库</span><br><span class="line">python manage.py migrate	    #将改动实例化，更新数据库</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MyBlog项目记录/" rel="tag"><i class="fa fa-tag"></i> MyBlog项目记录</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/09/23/PYTHON算法/" rel="next" title="PYTHON算法">
+                <i class="fa fa-chevron-left"></i> PYTHON算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/admin.png" alt="周某人">
+            
+              <p class="site-author-name" itemprop="name">周某人</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">Tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://shiguangzhe.top/" title="https://shiguangzhe.top/" rel="noopener" target="_blank">水墨青衫</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/huhuf/" title="https://www.cnblogs.com/huhuf/" rel="noopener" target="_blank">hhhhhhhhyyyyyyyy</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、项目介绍"><span class="nav-number">1.</span> <span class="nav-text">一、项目介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、项目设计"><span class="nav-number">2.</span> <span class="nav-text">二、项目设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、添加项目应用"><span class="nav-number">2.1.</span> <span class="nav-text">一、添加项目应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、添加资源文件夹"><span class="nav-number">2.2.</span> <span class="nav-text">二、添加资源文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、相关说明"><span class="nav-number">2.3.</span> <span class="nav-text">三、相关说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、项目应用account"><span class="nav-number">2.3.1.</span> <span class="nav-text">1、项目应用account</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、项目应用album"><span class="nav-number">2.3.2.</span> <span class="nav-text">2、项目应用album</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、项目应用article"><span class="nav-number">2.3.3.</span> <span class="nav-text">3、项目应用article</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、项目应用interflow"><span class="nav-number">2.3.4.</span> <span class="nav-text">4、项目应用interflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、媒体资源文件夹media"><span class="nav-number">2.3.5.</span> <span class="nav-text">5、媒体资源文件夹media</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、静态资源文件夹publicStatic"><span class="nav-number">2.3.6.</span> <span class="nav-text">6、静态资源文件夹publicStatic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、模板文件夹templates"><span class="nav-number">2.3.7.</span> <span class="nav-text">7、模板文件夹templates</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、补充说明"><span class="nav-number">2.4.</span> <span class="nav-text">四、补充说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、具体实现"><span class="nav-number">3.</span> <span class="nav-text">三、具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、环境配置"><span class="nav-number">3.1.</span> <span class="nav-text">一、环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、在settings-py-中进行相应的环境配置："><span class="nav-number">3.1.1.</span> <span class="nav-text">一、在settings.py 中进行相应的环境配置：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、将项目应用写入配置属性INSTALLED-APPS"><span class="nav-number">3.1.1.0.1.</span> <span class="nav-text">1、将项目应用写入配置属性INSTALLED_APPS:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、添加中间件使得系统支持中文"><span class="nav-number">3.1.1.0.2.</span> <span class="nav-text">2、添加中间件使得系统支持中文</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、在TEMPLATES中配置模板文件夹"><span class="nav-number">3.1.1.0.3.</span> <span class="nav-text">3、在TEMPLATES中配置模板文件夹</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、在DATABASES中配置数据库MySQL"><span class="nav-number">3.1.1.0.4.</span> <span class="nav-text">4、在DATABASES中配置数据库MySQL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、配置静态资源文件夹和媒体资源文件夹"><span class="nav-number">3.1.1.0.5.</span> <span class="nav-text">5、配置静态资源文件夹和媒体资源文件夹</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、在各应用中的models-py配置数据模型"><span class="nav-number">3.1.2.</span> <span class="nav-text">二、在各应用中的models.py配置数据模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、account的models-py"><span class="nav-number">3.1.2.0.1.</span> <span class="nav-text">1、account的models.py</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、album的model-py"><span class="nav-number">3.1.2.0.2.</span> <span class="nav-text">2、album的model.py</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、article的model-py"><span class="nav-number">3.1.2.0.3.</span> <span class="nav-text">3、article的model.py</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、interflow的model-py"><span class="nav-number">3.1.2.0.4.</span> <span class="nav-text">4、interflow的model.py</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、创建数据库并进行数据迁移"><span class="nav-number">3.1.3.</span> <span class="nav-text">三、创建数据库并进行数据迁移</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">周某人</span>
+
+  
+
+  
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+  
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: '',
+            repo: '',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ce717dc71ef58f203a5b0568467853963e7f7d7c',
+            
+                client_id: '9c5db405241643bb346f'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+<script type="text/javascript" color="123,143,200" opacity="0.7" zindex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+	
+</body>
+</html>
