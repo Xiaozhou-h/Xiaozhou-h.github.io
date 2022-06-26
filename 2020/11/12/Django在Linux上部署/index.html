@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="小周的博客">
 <meta property="og:description" content="一、一个Linux系统可以利用虚拟机在本地创建一个Linux系统，或者使用云服务器 1、关闭防火墙 sudo systemctl stop firewalld.service             关闭防火墙 sudo systemctl disable firewalld.service        卸载防火墙  2、下载安装相关依赖包 yum -y install openssl-deve">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2021-03-15T04:37:27.048Z">
+<meta property="og:updated_time" content="2022-02-13T13:16:21.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django在Linux上部署">
 <meta name="twitter:description" content="一、一个Linux系统可以利用虚拟机在本地创建一个Linux系统，或者使用云服务器 1、关闭防火墙 sudo systemctl stop firewalld.service             关闭防火墙 sudo systemctl disable firewalld.service        卸载防火墙  2、下载安装相关依赖包 yum -y install openssl-deve">
@@ -232,7 +232,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -249,7 +249,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -283,7 +283,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -300,7 +300,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -387,14 +387,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2020-11-12 08:37:33" itemprop="dateCreated datePublished" datetime="2020-11-12T08:37:33+08:00">2020-11-12</time>
+              <time title="Created: 2020-11-12 08:37:33" itemprop="dateCreated datePublished" datetime="2020-11-12T08:37:33+08:00">2020-11-12</time>
             
 
             
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2021-03-15 12:37:27" itemprop="dateModified" datetime="2021-03-15T12:37:27+08:00">2021-03-15</time>
+                <time title="Modified: 2022-02-13 21:16:21" itemprop="dateModified" datetime="2022-02-13T21:16:21+08:00">2022-02-13</time>
               
             
           </span>
@@ -474,8 +474,8 @@
 <p><code>cd Python-3.6.0</code># 进入文件夹</p>
 <p><code>./configure --prefix=/etc/python/python3.6</code>       # 安装到/etc/python/python3.6  </p>
 <p><code>make &amp;&amp; make install</code></p>
-<p><code>ln -s /etc/python/python3.6/bin/python3.6 /usr/bin/python3</code>     # 建立python3的软连接</p>
-<p><code>ln -s /etc/python/python3.6/bin/pip3.6 /usr/bin/pip3</code>    # 建立pip3的软连接</p>
+<p><code>ln -sf /etc/python/python3.6/bin/python3.6 /usr/bin/python3</code>     # 建立python3的软连接</p>
+<p><code>ln -sf /etc/python/python3.6/bin/pip3.6 /usr/bin/pip3</code>    # 建立pip3的软连接</p>
 <p><code>pip3 list</code> 查看pip3安装版本  <code>python3 -V</code>  查看python3安装版本</p>
 </blockquote>
 <h3 id="三、安装mysql并设置密码"><a href="#三、安装mysql并设置密码" class="headerlink" title="三、安装mysql并设置密码"></a>三、安装mysql并设置密码</h3><p><a href="https://xiaozhou.top/2020/11/14/Linux安装Mysql设置初始密码/#more" target="_blank" rel="noopener">安装mysql并设置密码</a></p>
@@ -487,12 +487,13 @@
 <p>上传整个项目、数据库文件、python安装包、pip安装包，也可以通过网络方式下载，只是速度太慢</p>
 </blockquote>
 <h4 id="3-数据库文件的导入"><a href="#3-数据库文件的导入" class="headerlink" title="3.数据库文件的导入"></a>3.数据库文件的导入</h4><blockquote>
-<p>先登陆mysql此处略，然后执行一下语句</p>
+<p>先登陆mysql此处略，然后执行以下语句</p>
 <p>create database music_db;      在数据库中创建一个与你想导入数据库同名的数据库</p>
 <p>use music_db;</p>
 <p>source /root/music_db.sql;</p>
 </blockquote>
-<h4 id="4、测试运行"><a href="#4、测试运行" class="headerlink" title="4、测试运行"></a>4、测试运行</h4><blockquote>
+<h4 id="4、测试运行"><a href="#4、测试运行" class="headerlink" title="4、测试运行"></a>4、测试运行</h4><p>方法一：</p>
+<blockquote>
 <blockquote>
 <p>pip3 install django-ckeditor   下载安装ckeditor  模块</p>
 </blockquote>
@@ -509,7 +510,7 @@
 <p> pip3 install django     下载安装django</p>
 </blockquote>
 <blockquote>
-<p> pip3 install mysqlclient     下载安装sql</p>
+<p> pip3 install mysqlclient     下载安装sql（报错则：yum install mysql-devel）</p>
 </blockquote>
 <p>#安装依赖包确保pip的时候不会有出错 </p>
 <p>[root@VM-0-6-centos Myblog]# vi /home/Myblog/Myblog/<strong>init</strong>.py<br>import pymysql<br>pymysql.install_as_MySQLdb()</p>
@@ -521,13 +522,19 @@
 <p>System check identified no issues (0 silenced).<br>March 14, 2021 - 05:44:25<br>Django version 3.1.7, using settings ‘Myblog.settings’<br>Starting development server at <a href="http://127.0.0.1:8000/" target="_blank" rel="noopener">http://127.0.0.1:8000/</a><br>Quit the server with CONTROL-C.</p>
 </blockquote>
 </blockquote>
+<p>方法二：</p>
+<blockquote>
+<p>#安装： pip install pipreqs</p>
+<p>#在当前目录生成： pipreqs ./ –encoding=utf8 –force</p>
+<p>#使用pip批量下载相应的模块： pip3 install -r requirements.txt</p>
+</blockquote>
 <h3 id="四、部署uWSGI服务器"><a href="#四、部署uWSGI服务器" class="headerlink" title="四、部署uWSGI服务器"></a>四、部署uWSGI服务器</h3><h4 id="1-在部署uWSGI前先在Linux中安装相应的模块"><a href="#1-在部署uWSGI前先在Linux中安装相应的模块" class="headerlink" title="1.在部署uWSGI前先在Linux中安装相应的模块"></a>1.在部署uWSGI前先在Linux中安装相应的模块</h4><blockquote>
 <p>[root@zhou ~]# pip3 install uwsgi</p>
 <p><code>ln -s /etc/python/python3.7/bin/uwsgi /usr/bin/uwsgi</code>   #建立uwsgi的软连接</p>
 </blockquote>
 <h4 id="2-测试uWSGI是否能正常运行"><a href="#2-测试uWSGI是否能正常运行" class="headerlink" title="2.测试uWSGI是否能正常运行"></a>2.测试uWSGI是否能正常运行</h4><p><a href="http://xiaozhou.top" target="_blank" rel="noopener">项目bug调试</a></p>
 <blockquote>
-<p>uwsgi –http :8080 –chdir /root/music -w music.wsgi    浏览器输入对应的公网ip和端口号</p>
+<p>uwsgi –http :8080 –chdir /home/Myblog -w Myblog.wsgi    浏览器输入对应的公网ip和端口号</p>
 </blockquote>
 <h5 id="报错信息：Internal-server-error"><a href="#报错信息：Internal-server-error" class="headerlink" title="报错信息：Internal server error"></a>报错信息：Internal server error</h5><blockquote>
 <p>由于使用的虚拟环境中python2 3 共存，项目中的django框架需要在python3中运行，而默认使用的却是python2故会出现此问题。 </p>
@@ -556,7 +563,7 @@
 <p>tail -f /var/log/nginx/error.log</p>
 </blockquote>
 <h4 id="1-配置nginx文件"><a href="#1-配置nginx文件" class="headerlink" title="1.配置nginx文件"></a>1.配置nginx文件</h4><blockquote>
-<p>[root@zhou ~]# cd /etc/nginx/conf.d/<br>[root@zhou conf.d]# vi music.conf            #以下配置手打不要直接复制！！！</p>
+<p>[root@zhou ~]# cd /etc/nginx/conf.d/<br>[root@zhou conf.d]# vi Myblog.conf             #以下配置手打不要直接复制！！！</p>
 <p>#设置项目music的Nginx服务器配置<br>server {<br>        listen 8090;<br>        server_name 127.0.0.1;<br>        charset utf-8;</p>
 <p>​        client_max_body_size 75M;</p>
 <p>#配置媒体资源文件<br>location /media {<br>        expires 30d;<br>        autoindex on;<br>        add_header Cache-Control private;<br>        alias /home/Myblog/media;<br>}</p>
@@ -682,10 +689,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -708,7 +715,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">21</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -759,7 +766,7 @@
                       
                     
                     <span class="site-state-item-count">18</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">tags</span>
                   
                 </div>
               
@@ -834,7 +841,7 @@
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
