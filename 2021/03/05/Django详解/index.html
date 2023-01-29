@@ -109,14 +109,14 @@
 
 
   <meta name="description" content="项目创建：(此处仅说明命令行中创建项目)1234567# 创建项目D:/&amp;gt; django-admin startproject MyDjango# 创建App（项目应用）此处创建应用indexD:/&amp;gt; python manage.py startapp index# 在命令行中运行项目D:/&amp;gt; cd MyDjangoD:/MyDjango&amp;gt; python manage.py">
-<meta name="keywords" content="Django详解">
+<meta name="keywords" content="Django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django详解">
 <meta property="og:url" content="http://yoursite.com/2021/03/05/Django详解/index.html">
 <meta property="og:site_name" content="小周的博客">
 <meta property="og:description" content="项目创建：(此处仅说明命令行中创建项目)1234567# 创建项目D:/&amp;gt; django-admin startproject MyDjango# 创建App（项目应用）此处创建应用indexD:/&amp;gt; python manage.py startapp index# 在命令行中运行项目D:/&amp;gt; cd MyDjangoD:/MyDjango&amp;gt; python manage.py">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2021-11-13T08:24:10.518Z">
+<meta property="og:updated_time" content="2023-01-29T07:28:18.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django详解">
 <meta name="twitter:description" content="项目创建：(此处仅说明命令行中创建项目)1234567# 创建项目D:/&amp;gt; django-admin startproject MyDjango# 创建App（项目应用）此处创建应用indexD:/&amp;gt; python manage.py startapp index# 在命令行中运行项目D:/&amp;gt; cd MyDjangoD:/MyDjango&amp;gt; python manage.py">
@@ -232,7 +232,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -249,7 +249,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -283,7 +283,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -300,7 +300,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -387,14 +387,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2021-03-05 19:39:33" itemprop="dateCreated datePublished" datetime="2021-03-05T19:39:33+08:00">2021-03-05</time>
+              <time title="Created: 2021-03-05 19:39:33" itemprop="dateCreated datePublished" datetime="2021-03-05T19:39:33+08:00">2021-03-05</time>
             
 
             
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2021-11-13 16:24:10" itemprop="dateModified" datetime="2021-11-13T16:24:10+08:00">2021-11-13</time>
+                <time title="Modified: 2023-01-29 15:28:18" itemprop="dateModified" datetime="2023-01-29T15:28:18+08:00">2023-01-29</time>
               
             
           </span>
@@ -459,13 +459,13 @@
 <p>用于配置项目环境，如添加app 、添加中间件、导入模板、配置数据库连接、配置自定义用户模型等。</p>
 </blockquote>
 <h5 id="2、用法案例"><a href="#2、用法案例" class="headerlink" title="2、用法案例"></a>2、用法案例</h5><blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="comment"># 配置自定义用户模型</span></span><br><span class="line">&gt; AUTH_USER_MODEL = <span class="string">'account.MyUser'</span></span><br><span class="line">&gt; </span><br><span class="line">&gt; STATIC_URL = <span class="string">'/static/'</span></span><br><span class="line">&gt; STATICFILES_DIRS = [os.path.join(BASE_DIR, <span class="string">'publicStatic'</span>)]</span><br><span class="line">&gt; <span class="comment"># 设置媒体资源的保存路径</span></span><br><span class="line">&gt; MEDIA_URL = <span class="string">'/media/'</span></span><br><span class="line">&gt; MEDIA_ROOT = os.path.join(BASE_DIR, <span class="string">'media'</span>)</span><br><span class="line">&gt; <span class="comment"># 上线配置</span></span><br><span class="line">&gt; DEBUG = <span class="keyword">False</span></span><br><span class="line">&gt; ALLOWED_HOSTS = [<span class="string">'*'</span>]</span><br><span class="line">&gt; STATIC_ROOT = os.path.join(BASE_DIR,<span class="string">'static'</span>)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="comment"># 配置自定义用户模型</span></span><br><span class="line">&gt; AUTH_USER_MODEL = <span class="string">'account.MyUser'</span></span><br><span class="line">&gt;</span><br><span class="line">&gt; STATIC_URL = <span class="string">'/static/'</span></span><br><span class="line">&gt; STATICFILES_DIRS = [os.path.join(BASE_DIR, <span class="string">'publicStatic'</span>)]</span><br><span class="line">&gt; <span class="comment"># 设置媒体资源的保存路径</span></span><br><span class="line">&gt; MEDIA_URL = <span class="string">'/media/'</span></span><br><span class="line">&gt; MEDIA_ROOT = os.path.join(BASE_DIR, <span class="string">'media'</span>)</span><br><span class="line">&gt; <span class="comment"># 上线配置</span></span><br><span class="line">&gt; DEBUG = <span class="keyword">False</span></span><br><span class="line">&gt; ALLOWED_HOSTS = [<span class="string">'*'</span>]</span><br><span class="line">&gt; STATIC_ROOT = os.path.join(BASE_DIR,<span class="string">'static'</span>)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <h2 id="二、models创建表单类"><a href="#二、models创建表单类" class="headerlink" title="二、models创建表单类"></a>二、models创建表单类</h2><h5 id="1、介绍-1"><a href="#1、介绍-1" class="headerlink" title="1、介绍"></a>1、介绍</h5><blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="comment"># Django 模型是与数据库相关的，与数据库相关的代码一般写在 models.py 中，Django 支持 sqlite3, MySQL, PostgreSQL等数据库，只需要在settings.py中配置即可，不用更改models.py中的代码，丰富的API极大的方便了使用。(用于生成对应的数据库表单能设置外键)</span></span><br><span class="line">&gt; 一般在创建好表单类后需要进行数据迁移，在Pycharm的Terminal窗口下：</span><br><span class="line">&gt; python manage.py makemigrations <span class="comment">#记录改动，没有作用到数据库</span></span><br><span class="line">&gt; python manage.py migrate	    <span class="comment">#将改动实例化，更新数据库</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <h5 id="2、用法案例-1"><a href="#2、用法案例-1" class="headerlink" title="2、用法案例"></a>2、用法案例</h5><blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="comment"># 以下为账户表单的定义与生成</span></span><br><span class="line">&gt; <span class="class"><span class="keyword">class</span> <span class="title">MyUser</span><span class="params">(AbstractUser)</span>:</span>   <span class="comment">#抽象用户</span></span><br><span class="line">&gt;     name = models.CharField(<span class="string">'姓名'</span>, max_length=<span class="number">50</span>, default=<span class="string">'匿名用户'</span>)</span><br><span class="line">&gt;     introduce = models.TextField(<span class="string">'简介'</span>,default=<span class="string">'暂无介绍'</span>)</span><br><span class="line">&gt;     company = models.CharField(<span class="string">'公司'</span>, max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">&gt;     profession = models.CharField(<span class="string">'职业'</span>, max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">&gt;     address = models.CharField(<span class="string">'住址'</span>, max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">&gt; 	<span class="comment"># 此处省略部分代码</span></span><br><span class="line">&gt;     <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">&gt;         <span class="keyword">return</span> self.name</span><br><span class="line">&gt;     </span><br><span class="line">&gt; <span class="comment"># 图片墙表单的定义生成</span></span><br><span class="line">&gt;     <span class="class"><span class="keyword">class</span> <span class="title">AlbumInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">&gt;     id = models.AutoField(primary_key=<span class="keyword">True</span>)</span><br><span class="line">&gt;     <span class="comment"># 以下便是设置外键连接</span></span><br><span class="line">&gt;     user = models.ForeignKey(MyUser, on_delete=models.CASCADE, verbose_name=<span class="string">'用户'</span>)</span><br><span class="line">&gt;     title = models.CharField(<span class="string">'标题'</span>, max_length=<span class="number">50</span>, blank=<span class="keyword">True</span>)</span><br><span class="line">&gt;     introduce = models.CharField(<span class="string">'描述'</span>, max_length=<span class="number">200</span>, blank=<span class="keyword">True</span>)</span><br><span class="line">&gt;     photo = models.ImageField(<span class="string">'图片'</span>, blank=<span class="keyword">True</span>, upload_to=<span class="string">'image/album/'</span>)</span><br><span class="line">&gt; </span><br><span class="line">&gt;     <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">&gt;         <span class="keyword">return</span> str(self.id)</span><br><span class="line">&gt; </span><br><span class="line">&gt;     <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">&gt;         verbose_name = <span class="string">'图片墙管理'</span></span><br><span class="line">&gt;         verbose_name_plural = <span class="string">'图片墙管理'</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="comment"># 以下为账户表单的定义与生成</span></span><br><span class="line">&gt; <span class="class"><span class="keyword">class</span> <span class="title">MyUser</span><span class="params">(AbstractUser)</span>:</span>   <span class="comment">#抽象用户</span></span><br><span class="line">&gt;     name = models.CharField(<span class="string">'姓名'</span>, max_length=<span class="number">50</span>, default=<span class="string">'匿名用户'</span>)</span><br><span class="line">&gt;     introduce = models.TextField(<span class="string">'简介'</span>,default=<span class="string">'暂无介绍'</span>)</span><br><span class="line">&gt;     company = models.CharField(<span class="string">'公司'</span>, max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">&gt;     profession = models.CharField(<span class="string">'职业'</span>, max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">&gt;     address = models.CharField(<span class="string">'住址'</span>, max_length=<span class="number">100</span>, default=<span class="string">'暂无信息'</span>)</span><br><span class="line">&gt; 	<span class="comment"># 此处省略部分代码</span></span><br><span class="line">&gt;     <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">&gt;         <span class="keyword">return</span> self.name</span><br><span class="line">&gt;     </span><br><span class="line">&gt; <span class="comment"># 图片墙表单的定义生成</span></span><br><span class="line">&gt;     <span class="class"><span class="keyword">class</span> <span class="title">AlbumInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">&gt;     id = models.AutoField(primary_key=<span class="keyword">True</span>)</span><br><span class="line">&gt;     <span class="comment"># 以下便是设置外键连接</span></span><br><span class="line">&gt;     user = models.ForeignKey(MyUser, on_delete=models.CASCADE, verbose_name=<span class="string">'用户'</span>)</span><br><span class="line">&gt;     title = models.CharField(<span class="string">'标题'</span>, max_length=<span class="number">50</span>, blank=<span class="keyword">True</span>)</span><br><span class="line">&gt;     introduce = models.CharField(<span class="string">'描述'</span>, max_length=<span class="number">200</span>, blank=<span class="keyword">True</span>)</span><br><span class="line">&gt;     photo = models.ImageField(<span class="string">'图片'</span>, blank=<span class="keyword">True</span>, upload_to=<span class="string">'image/album/'</span>)</span><br><span class="line">&gt;</span><br><span class="line">&gt;     <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">&gt;         <span class="keyword">return</span> str(self.id)</span><br><span class="line">&gt;</span><br><span class="line">&gt;     <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">&gt;         verbose_name = <span class="string">'图片墙管理'</span></span><br><span class="line">&gt;         verbose_name_plural = <span class="string">'图片墙管理'</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <h5 id="3、Meta详解"><a href="#3、Meta详解" class="headerlink" title="3、Meta详解"></a>3、Meta详解</h5><blockquote>
 <p>在使用 Django 的 ORM 模型进行数据库的设计时，我们常常会看到在models 中经常会出现一个 class Meta 的内部类，那它的作用是什么呢？</p>
@@ -512,7 +512,7 @@
 <p>在Python中定义类经常会用到<strong>init</strong>函数（方法），首先需要理解的是，两个下划线开头的函数是声明该属性为私有，不能在类的外部被使用或访问。而<strong>init</strong>函数（方法）支持带参数类的初始化，也可为声明该类的属性（类中的变量）。<strong>init</strong>函数（方法）的第一个参数必须为self，后续参数为自己定义。 </p>
 </blockquote>
 <h5 id="2、用法案列-2"><a href="#2、用法案列-2" class="headerlink" title="2、用法案列"></a>2、用法案列</h5><blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">from</span> django.apps <span class="keyword">import</span> AppConfig</span><br><span class="line">&gt; <span class="keyword">import</span> os</span><br><span class="line">&gt; <span class="comment"># 修改app在admin后台显示的名称</span></span><br><span class="line">&gt; <span class="comment"># default_app_config 的值来自apps.py的类名</span></span><br><span class="line">&gt; default_app_config = <span class="string">'account.IndexConfig'</span></span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="comment"># 获取当前app的命名</span></span><br><span class="line">&gt; <span class="function"><span class="keyword">def</span> <span class="title">get_current_app_name</span><span class="params">(_file)</span>:</span></span><br><span class="line">&gt;     <span class="keyword">return</span> os.path.split(os.path.dirname(_file))[<span class="number">-1</span>]</span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="comment"># 重写类IndexConfig</span></span><br><span class="line">&gt; <span class="class"><span class="keyword">class</span> <span class="title">IndexConfig</span><span class="params">(AppConfig)</span>:</span></span><br><span class="line">&gt;     name = get_current_app_name(__file__)</span><br><span class="line">&gt;     verbose_name = <span class="string">'用户管理'</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">from</span> django.apps <span class="keyword">import</span> AppConfig</span><br><span class="line">&gt; <span class="keyword">import</span> os</span><br><span class="line">&gt; <span class="comment"># 修改app在admin后台显示的名称</span></span><br><span class="line">&gt; <span class="comment"># default_app_config 的值来自apps.py的类名</span></span><br><span class="line">&gt; default_app_config = <span class="string">'account.IndexConfig'</span></span><br><span class="line">&gt;</span><br><span class="line">&gt; <span class="comment"># 获取当前app的命名</span></span><br><span class="line">&gt; <span class="function"><span class="keyword">def</span> <span class="title">get_current_app_name</span><span class="params">(_file)</span>:</span></span><br><span class="line">&gt;     <span class="keyword">return</span> os.path.split(os.path.dirname(_file))[<span class="number">-1</span>]</span><br><span class="line">&gt;</span><br><span class="line">&gt; <span class="comment"># 重写类IndexConfig</span></span><br><span class="line">&gt; <span class="class"><span class="keyword">class</span> <span class="title">IndexConfig</span><span class="params">(AppConfig)</span>:</span></span><br><span class="line">&gt;     name = get_current_app_name(__file__)</span><br><span class="line">&gt;     verbose_name = <span class="string">'用户管理'</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <h2 id="八、缺失文件"><a href="#八、缺失文件" class="headerlink" title="八、缺失文件"></a>八、缺失文件</h2><blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; /media/images</span><br><span class="line">&gt; /publicStatic/*</span><br><span class="line">&gt; /static</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
@@ -561,7 +561,7 @@ python manage.py migrate
       
         <div class="post-tags">
           
-            <a href="/tags/Django详解/" rel="tag"><i class="fa fa-tag"></i> Django详解</a>
+            <a href="/tags/Django/" rel="tag"><i class="fa fa-tag"></i> Django</a>
           
         </div>
       
@@ -642,10 +642,10 @@ python manage.py migrate
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -667,8 +667,8 @@ python manage.py migrate
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -721,7 +721,7 @@ python manage.py migrate
                       
                     
                     <span class="site-state-item-count">19</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
                
