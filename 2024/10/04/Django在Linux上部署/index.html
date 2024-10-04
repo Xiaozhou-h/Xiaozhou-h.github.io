@@ -162,7 +162,7 @@
 <p><code>ln -sf /etc/python/python3.6/bin/pip3.6 /usr/bin/pip3</code> # 建立pip3的软连接</p>
 <p><code>pip3 list</code> 查看pip3安装版本 <code>python3 -V</code> 查看python3安装版本</p>
 </blockquote>
-<h3><span id="三-安装mysql并设置密码">三、安装mysql并设置密码</span></h3><p><a target="_blank" rel="noopener" href="https://xiaozhou.top/2020/11/14/Linux%E5%AE%89%E8%A3%85Mysql%E8%AE%BE%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81/#more">安装mysql并设置密码</a></p>
+<h3><span id="三-安装mysql并设置密码">三、安装mysql并设置密码</span></h3><p><a href="https://xiaozhou.top/2020/11/14/Linux%E5%AE%89%E8%A3%85Mysql%E8%AE%BE%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81/#more">安装mysql并设置密码</a></p>
 <h4><span id="1修改项目配置文件settingspy">1.修改项目配置文件settings.py</span></h4><blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 配置文件</span><br><span class="line">&gt; DEBUG = False</span><br><span class="line">&gt;</span><br><span class="line">&gt; ALLOWED_HOSTS = [&#x27;*&#x27;]</span><br><span class="line">&gt;</span><br><span class="line">&gt; STATIC_ROOT = os.path.join(BASE_DIR, &#x27;static&#x27;)</span><br><span class="line">&gt; # 设置数据库连接信息</span><br><span class="line">&gt; DATABASES = &#123;</span><br><span class="line">&gt;     &#x27;default&#x27;: &#123;</span><br><span class="line">&gt;         &#x27;ENGINE&#x27;: &#x27;django.db.backends.mysql&#x27;,</span><br><span class="line">&gt;         &#x27;NAME&#x27;: &#x27;music_db&#x27;,</span><br><span class="line">&gt;         &#x27;USER&#x27;: &#x27;root&#x27;,</span><br><span class="line">&gt;         &#x27;PASSWORD&#x27;: &#x27;123456&#x27;,</span><br><span class="line">&gt;         &#x27;HOST&#x27;: &#x27;127.0.0.1&#x27;,</span><br><span class="line">&gt;         &#x27;PORT&#x27;: &#x27;3306&#x27;,</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; `与数据库信息一致`</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </blockquote>
@@ -216,7 +216,7 @@
 <p>[root@zhou ~]# pip3 install uwsgi</p>
 <p><code>ln -s /etc/python/python3.7/bin/uwsgi /usr/bin/uwsgi</code> #建立uwsgi的软连接</p>
 </blockquote>
-<h4><span id="2测试uwsgi是否能正常运行">2.测试uWSGI是否能正常运行</span></h4><p><a target="_blank" rel="noopener" href="http://xiaozhou.top/">项目bug调试</a></p>
+<h4><span id="2测试uwsgi是否能正常运行">2.测试uWSGI是否能正常运行</span></h4><p><a href="http://xiaozhou.top/">项目bug调试</a></p>
 <blockquote>
 <p>uwsgi –http :8080 –chdir &#x2F;home&#x2F;Myblog -w Myblog.wsgi 浏览器输入对应的公网ip和端口号</p>
 </blockquote>
