@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+
+  
+    <meta name="description" content="Zhou">
+  
+
+  
+
+  
+    <meta name="author" content="ChengZhou">
+  
+
+  
+
+  
+
+  <title>Python自动化办公 | XiaoZhou</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          XiaoZhou
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/archives">归档</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">Python自动化办公</h1>
+          <h2 class="title-sub-wrap">
+            <strong>ChengZhou</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2024-10-04T13:00:31.000Z" itemprop="datePublished">2024-10-04</time>
+          </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/">🏷️ 自动化</a></li>
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h1><span id="一-手机脚本运行">一、手机脚本运行</span></h1><h3><span id="一-基础环境">一、基础环境</span></h3><blockquote>
+<ul>
+<li>下载adb调试桥工具包<a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/releases/platform-tools?hl=zh-cn#downloads">下载地址</a></li>
+<li>配置环境变量：(下载的工具包的位置)我的是：D:\platform-tools</li>
+<li>手机打开开发者选项，允许调试，并连接电脑</li>
+<li>在CMD中运行：adb devices<ul>
+<li>结果出现unauth…即手机没有允许调试</li>
+<li>结果出现devices 即手机已经允许调试</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.jb51.net/article/164865.htm">脚本命令详解</a></li>
+</ul>
+</blockquote>
+<h3><span id="二-实例">二、实例</span></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">复制# 手机脚本代码编写</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">from PIL import Image</span><br><span class="line">import time</span><br><span class="line"># 截屏 adb shell screencap -p /images/png1.png</span><br><span class="line"># 保存 adb pull /images/png1.png</span><br><span class="line"># 点击 adb shell input tap x y</span><br><span class="line"># 翻页(滑动页面) adb shell input swipe x1 y1 x2 y2</span><br><span class="line"></span><br><span class="line"># 用于截图保存</span><br><span class="line">def screecap():</span><br><span class="line">    os.system(&#x27;adb shell screencap -p /sdcard/png1.png&#x27;)</span><br><span class="line">    os.system(&#x27;adb pull /sdcard/png1.png&#x27;)</span><br><span class="line">    print(&quot;以保存图片名为：&quot;)</span><br><span class="line"></span><br><span class="line"># 用于得到我们需要的点</span><br><span class="line">def get_y():</span><br><span class="line">    Y_list = []</span><br><span class="line">    image = Image.open(&#x27;png1.png&#x27;)</span><br><span class="line">    for x in [928]:</span><br><span class="line">        for y in range(1920):</span><br><span class="line">            # print(image.getpixel((x,y))) 输出所有，找到特征点</span><br><span class="line">            if image.getpixel((x,y)) == (254, 76, 111, 255):</span><br><span class="line">                Y_list.append(y)</span><br><span class="line">    return Y_list</span><br><span class="line"></span><br><span class="line"># 用于点击事件</span><br><span class="line">def onchilk(x,y):</span><br><span class="line">    os.system(&quot;adb shell input tap &#123;0&#125; &#123;1&#125;&quot;.format(x, y))</span><br><span class="line"></span><br><span class="line"># 翻页操作</span><br><span class="line">def FanYeDianJi():</span><br><span class="line">    for n in range(5):</span><br><span class="line">        screecap()</span><br><span class="line">        y_list = get_y()</span><br><span class="line">        for y in y_list:</span><br><span class="line">            onchilk(928, y)</span><br><span class="line">            time.sleep(1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 运行函数screecap()</span><br><span class="line"># 分析图片（利用画图工具和QQ截图获取位置与RGB数据）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="二-windows平台脚本运行">二、Windows平台脚本运行</span></h1><p><strong>办公自动化</strong></p>
+<h3><span id="一-环境搭建">一、环境搭建</span></h3><blockquote>
+<ul>
+<li>安装python和office</li>
+<li>安装pycharm</li>
+<li>cmd安装模块</li>
+</ul>
+</blockquote>
+<h3><span id="二-模块介绍">二、模块介绍</span></h3><h4><span id="xldr模块">xldr模块</span></h4><blockquote>
+<p>xldr为python第三方模块，用来读取Excel表格数据</p>
+<p>安装命令：pip install xlrd</p>
+</blockquote>
+<h5><span id="xldr常用属性方法">xldr常用属性方法</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">复制import xlrd</span><br><span class="line"># 打开文件</span><br><span class="line">data = xlrd.open_workbook(&quot;Test.xlsx&quot;)</span><br><span class="line"># 查看索引为0的工作簿是否被加载</span><br><span class="line">data.sheet_loaded(0)</span><br><span class="line"># 卸载索引为0的工作簿</span><br><span class="line">data.unload_sheet(0)</span><br><span class="line"># 获取全部的sheet</span><br><span class="line">data.sheets()</span><br><span class="line"># 根据索引获取工作表</span><br><span class="line">data.sheet_by_index(0)</span><br><span class="line"># 获取当前文件中的所有的表名</span><br><span class="line">data.sheet_names()</span><br><span class="line"># 获取当前文件的表的数量</span><br><span class="line">data.nsheets</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="1-操作行">1、操作行</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">复制import xlrd</span><br><span class="line"></span><br><span class="line"># 操作Excel行</span><br><span class="line">data = xlrd.open_workbook(&#x27;Test.xlsx&#x27;)</span><br><span class="line"># 获取第一个表</span><br><span class="line">sheet_one = data.sheet_by_index(0)</span><br><span class="line"># 获取表的有效行数</span><br><span class="line">row = sheet_one.nrows</span><br><span class="line"># 获取某一行所有单元格对象组成的列表</span><br><span class="line">row_index_data = sheet_one.row(1)</span><br><span class="line"># 获取某一行所有单元格的数据类型</span><br><span class="line">sheet_one.row_types(2)</span><br><span class="line"># 获取具体某单元格的内容-&gt;第二行第三列的值</span><br><span class="line">sheet_one.row(1)[2].value</span><br><span class="line"># 获取指定行的所有数据</span><br><span class="line">sheet_one.row_values(1)</span><br><span class="line"># 获取单元格的长度,即有效列长</span><br><span class="line">sheet_one.row_len(2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="2-操作列">2、操作列</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">复制import xlrd</span><br><span class="line"></span><br><span class="line"># 操作Excel列</span><br><span class="line">data = xlrd.open_workbook(&#x27;Test.xlsx&#x27;)</span><br><span class="line"># 获取第一个表</span><br><span class="line">sheet_one = data.sheet_by_index(0)</span><br><span class="line"></span><br><span class="line">sheet_one.ncols</span><br><span class="line">sheet_one.col(1)</span><br><span class="line">sheet_one.col(1)[3].value</span><br><span class="line">sheet_one.col_values(1)</span><br><span class="line">sheet_one.col_types(1)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="3-操作单元格">3、操作单元格</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">复制import xlrd</span><br><span class="line"></span><br><span class="line"># 操作Excel列</span><br><span class="line">data = xlrd.open_workbook(&#x27;Test.xlsx&#x27;)</span><br><span class="line"># 获取第一个表</span><br><span class="line">sheet_one = data.sheet_by_index(0)</span><br><span class="line"></span><br><span class="line"># 获取第二行第三列单元格的数据</span><br><span class="line">sheet_one.cell(1,2)</span><br><span class="line"># 获取属性（类型）</span><br><span class="line">sheet_one.cell_type(1,2)</span><br><span class="line">sheet_one.cell(1,2).ctype</span><br><span class="line"># 获取数据</span><br><span class="line">sheet_one.cell(1,2).value</span><br><span class="line">sheet_one.cell_value(1,2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4><span id="xlwt模块">xlwt模块</span></h4><blockquote>
+<p>xlwt模块为python第三方模块，用于写入Excel表格数据</p>
+<p>cmd安装命令： pip install xlwt</p>
+</blockquote>
+<h5><span id="xlwt常用属性方法">xlwt常用属性方法</span></h5><h6><span id="1-基础用法">1、基础用法</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">复制# 办公自动化</span><br><span class="line">import xlwt</span><br><span class="line"></span><br><span class="line"># 第一步：创建工作簿</span><br><span class="line">WenJian = xlwt.Workbook()</span><br><span class="line"># 第二步：创建工资表</span><br><span class="line">sheet_one = WenJian.add_sheet(&quot;sheet1&quot;)</span><br><span class="line"># 第三步：填充数据 -&gt; 合并单元格0-1行0-5列，写入数据：学生信息表</span><br><span class="line">sheet_one.write_merge(0,1,0,5,&quot;学生信息表&quot;)</span><br><span class="line"># 循环写入数据</span><br><span class="line">data = (</span><br><span class="line">    (&#x27;姓名&#x27;, &#x27;年龄&#x27;,&#x27;性别&#x27;,&#x27;学号&#x27;),</span><br><span class="line">    (&#x27;李四&#x27;, 17,&#x27;男&#x27;,2001010222),</span><br><span class="line">    (&#x27;王五&#x27;, 22,&#x27;男&#x27;,2001010223),</span><br><span class="line">    (&#x27;王艳&#x27;, 21,&#x27;女&#x27;,2001010224),</span><br><span class="line">)</span><br><span class="line">for i, item in enumerate(data):</span><br><span class="line">    for j, val in enumerate(item):</span><br><span class="line">        # 写入单个数据，参数对应：行、列、数据</span><br><span class="line">        sheet_one.write(i+2, j, val)</span><br><span class="line"># 写入图片-&gt; 参数对应：文件路径、行、列</span><br><span class="line">sheet_one.insert_bitmap(&#x27;图片.png&#x27;, 0, 0)</span><br><span class="line"># 第四步：保存(只支持xls格式)</span><br><span class="line">WenJian.save(&#x27;教学信息表.xls&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="2-写入格式化">2、写入格式化</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">复制# 办公自动化</span><br><span class="line">import xlwt</span><br><span class="line"></span><br><span class="line"># 标题样式 初始化</span><br><span class="line">titlestyle = xlwt.XFStyle() #</span><br><span class="line"># 字体设置</span><br><span class="line">titlefont = xlwt.Font()</span><br><span class="line">titlefont.name = &#x27;宋体&#x27; # 字体</span><br><span class="line">titlefont.bold = True # 是否加粗</span><br><span class="line">titlefont.height = 11*20 # 字号</span><br><span class="line">titlefont.colour_index = 0x08 # 字体颜色</span><br><span class="line"># 单元格对齐方式</span><br><span class="line">cellalign = xlwt.Alignment()</span><br><span class="line">cellalign.horz = 0x02 # 水平方向</span><br><span class="line">cellalign.vert = 0x01 # 垂直方向</span><br><span class="line"># 设置边框</span><br><span class="line">borders = xlwt.Borders()</span><br><span class="line">borders.right = xlwt.Borders.DASHED</span><br><span class="line">borders.bottom = xlwt.Borders.DOTTED</span><br><span class="line"></span><br><span class="line">titlestyle.font = titlefont</span><br><span class="line">titlestyle.alignment = cellalign</span><br><span class="line">titlestyle.borders = borders</span><br><span class="line"></span><br><span class="line"># 数据单元格样式初始化</span><br><span class="line">datastyle = xlwt.XFStyle()</span><br><span class="line">bgcolor = xlwt.Pattern()</span><br><span class="line">bgcolor.pattern = xlwt.Pattern.SOLID_PATTERN</span><br><span class="line">bgcolor.pattern_fore_colour = 22 # 背景颜色</span><br><span class="line">datastyle.pattern = bgcolor</span><br><span class="line"></span><br><span class="line"># 第一步：创建工作簿</span><br><span class="line">WenJian = xlwt.Workbook()</span><br><span class="line"># 第二步：创建工资表</span><br><span class="line">sheet_one = WenJian.add_sheet(&quot;sheet1&quot;)</span><br><span class="line"># 在写入数据时加入样式参数即可：</span><br><span class="line">sheet_one.write_merge(0,1,0,5,&quot;学生信息表&quot;, titlestyle)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4><span id="xlsxwriter模块">xlsxwriter模块</span></h4><blockquote>
+<p>xlsxwriter为python第三方模块，用于向生成的Excel表格插入数据、图表等操作</p>
+<p>cmd安装命令：pip install xlsxwriter</p>
+</blockquote>
+<h5><span id="xlsxwriter常用属性方法">xlsxwriter常用属性方法</span></h5><h6><span id="1-基础用法">1、基础用法</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">复制import xlsxwriter</span><br><span class="line"></span><br><span class="line">WenJian = xlsxwriter.Workbook(&#x27;data.xlsx&#x27;)</span><br><span class="line"># 创建sheet</span><br><span class="line">sheet = WenJian.add_worksheet(&#x27;newsheet&#x27;)</span><br><span class="line"># 写入</span><br><span class="line">sheet.write(0, 0, &#x27;2020年底&#x27;)</span><br><span class="line">sheet.merge_range(1, 0, 2, 2, &#x27;第一节度销售统计&#x27;)  # 合并单元格写入数据</span><br><span class="line">data = (</span><br><span class="line">    (&#x27;一月份&#x27;, 200, 300, 400),</span><br><span class="line">    (&#x27;二月份&#x27;, 200, 300, 400),</span><br><span class="line">    (&#x27;三月份&#x27;, 200, 300, 400),</span><br><span class="line">    (&#x27;四月份&#x27;, 200, 300, 400),</span><br><span class="line">)</span><br><span class="line"># 从第4行第1列，横向写入数据</span><br><span class="line">sheet.write_row(3,0, [&#x27;月份&#x27;,&#x27;预期销售额&#x27;,&#x27;实际销售额&#x27;])</span><br><span class="line"># 循环写入</span><br><span class="line">for index,item in enumerate(data):</span><br><span class="line">    sheet.write_row(index+4,0,item)</span><br><span class="line"># 写入Excel公式</span><br><span class="line">sheet.write(7,1,&quot;=sum(B5:B7)&quot;)</span><br><span class="line">sheet.write(8,2,&quot;=sum(B5:B7)&quot;)</span><br><span class="line"># 写入超链接</span><br><span class="line">sheet.write_url(9,0,&quot;http://xiaozhou.top&quot;, string=&#x27;更多数据&#x27;)</span><br><span class="line"># 写入图片</span><br><span class="line">sheet.insert_image(10,0,&#x27;图片.png&#x27;)</span><br><span class="line"># 关闭</span><br><span class="line">WenJian.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="2-写入格式化">2、写入格式化</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">复制import xlsxwriter</span><br><span class="line"></span><br><span class="line">WenJian = xlsxwriter.Workbook(&#x27;data.xlsx&#x27;)</span><br><span class="line"># cell_format = WenJian.add_format(&#123;&#x27;bold&#x27;:True&#125;)</span><br><span class="line">cell_format = WenJian.add_format()</span><br><span class="line">cell_format.set_bold()# 设置加粗</span><br><span class="line">cell_format.set_font_color(&#x27;red&#x27;) # 文本颜色</span><br><span class="line">cell_format.set_font_size(14) # 文本大小</span><br><span class="line">cell_format.set_align(&quot;center&quot;)# 对齐方式</span><br><span class="line"># 调用方法</span><br><span class="line"># sheet.write_row(3,0, [&#x27;月份&#x27;,&#x27;预期销售额&#x27;,&#x27;实际销售额&#x27;], cell_format)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="3-写入图表到excel">3、写入图表到Excel</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">复制import xlsxwriter</span><br><span class="line"></span><br><span class="line">WenJian = xlsxwriter.Workbook(&#x27;data.xlsx&#x27;)</span><br><span class="line"></span><br><span class="line"># 设置图表属性</span><br><span class="line">chart = WenJian.add_chart(&#123;&#x27;type&#x27;: &#x27;column&#x27;&#125;)</span><br><span class="line">chart.set_title(&#123;&#x27;name&#x27;: &#x27;第一节度销售统计&#x27;&#125;)</span><br><span class="line"># X,Y描述信息</span><br><span class="line">chart.set_x_axis(&#123;&#x27;name&#x27;: &#x27;月份&#x27;&#125;)</span><br><span class="line">chart.set_y_axis(&#123;&#x27;name&#x27;: &#x27;销售额&#x27;&#125;)</span><br><span class="line"># 数据</span><br><span class="line">chart.add_series(</span><br><span class="line">    &#123;</span><br><span class="line">        &#x27;name&#x27;: &#x27;预期销售额&#x27;,</span><br><span class="line">        &#x27;categories&#x27;: &#x27;=sheet1!$A$5:$A$7&#x27;,</span><br><span class="line">        &#x27;values&#x27;: [&#x27;sheet1&#x27;, 4, 1, 6, 1],</span><br><span class="line">        &#x27;data_labels&#x27;: &#123;&#x27;value&#x27;: True&#125;</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        &#x27;name&#x27;: &#x27;实际销售额&#x27;,</span><br><span class="line">        &#x27;categories&#x27;: &#x27;=sheet1!$A$5:$A$7&#x27;,# 横坐标-&gt;这里对应月份</span><br><span class="line">        &#x27;values&#x27;: [&#x27;sheet1&#x27;, 4, 2, 6, 2],# 数据来源</span><br><span class="line">        &#x27;data_labels&#x27;: &#123;&#x27;value&#x27;: True&#125; # 是否显示数据</span><br><span class="line">    &#125;,</span><br><span class="line">)</span><br><span class="line"># 插入数据</span><br><span class="line"># sheet.insert_chart(&#x27;A23&#x27;, chart)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4><span id="python-docx模块">python-docx模块</span></h4><blockquote>
+<p>python-docx为Python第三方模块，用于自动化生成和修改Word文档</p>
+<p>cmd中安装：pip install python-docx</p>
+</blockquote>
+<h5><span id="python-docx常用属性方法">python-docx常用属性方法</span></h5><h6><span id="1-基础用法">1、基础用法</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">复制from docx import Document</span><br><span class="line">from docx.shared import Pt,RGBColor</span><br><span class="line"></span><br><span class="line"># 1、新建文档对象</span><br><span class="line"># Document(&#x27;test.docx&#x27;) 读取现有的Word建立文档对象</span><br><span class="line">document = Document()</span><br><span class="line"># 2、写入内容</span><br><span class="line"># 标题，level-&gt;标题级别</span><br><span class="line">document.add_heading(&#x27;标题&#x27;, level=4)</span><br><span class="line"># 段落</span><br><span class="line">p1 = document.add_paragraph(&#x27;第一段&#x27;)</span><br><span class="line">p1.insert_paragraph_before(&#x27;在p1段落前插入一个新的段落&#x27;)</span><br><span class="line"># 段落样式</span><br><span class="line">format = p1.paragraph_format  # 创建样式对象</span><br><span class="line">format.left_indent=Pt(20)    # 左缩进</span><br><span class="line">format.right_indent=Pt(20)      # 右缩进</span><br><span class="line">format.first_line_indent=Pt(20) # 首行缩进</span><br><span class="line"># 行间距</span><br><span class="line">format.line_spacing = 1.5</span><br><span class="line">run = p1.add_run(&#x27;在段落P1后面追加的内容&#x27;)</span><br><span class="line"># 设置字体、字号、文字颜色</span><br><span class="line">run.font.size = Pt(12)</span><br><span class="line">run.font.name = &#x27;微软雅黑&#x27;</span><br><span class="line">run.font.color.rgb = RGBColor(243, 23, 23)</span><br><span class="line"># 加粗、下划线、斜体</span><br><span class="line">run.bold = True</span><br><span class="line">run.font.underline = True</span><br><span class="line">run.font.italic = True</span><br><span class="line"># 3、保存文档</span><br><span class="line">document.save(&#x27;index.docx&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="2-写入表格和图片">2、写入表格和图片</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">复制from docx import Document</span><br><span class="line">from docx.shared import Pt,RGBColor</span><br><span class="line"># 1、新建文档对象</span><br><span class="line"># Document(&#x27;test.docx&#x27;) 读取现有的Word建立文档对象</span><br><span class="line">document = Document()</span><br><span class="line"></span><br><span class="line"># 插入图片  -&gt; 设置插入图片的大小</span><br><span class="line">document.add_picture(&#x27;图片.png&#x27;, Pt(50), Pt(50))</span><br><span class="line"># 插入表格</span><br><span class="line">table = document.add_table(rows=2, cols=3)</span><br><span class="line"># 获取第一行并写入数据</span><br><span class="line">header_cells = table.rows[0].cells</span><br><span class="line">header_cells[0].text = &#x27;年&#x27;</span><br><span class="line">header_cells[1].text = &#x27;月&#x27;</span><br><span class="line">header_cells[2].text = &#x27;日&#x27;</span><br><span class="line"># 循环写入数据</span><br><span class="line">data= (</span><br><span class="line">    [2018,5,23],</span><br><span class="line">    [2019,6,24],</span><br><span class="line">    [2020,7,25],</span><br><span class="line">)</span><br><span class="line">for item in data:</span><br><span class="line">    # 在表格末尾添加新的一行，并获取这个对象</span><br><span class="line">    rows_cells = table.add_row().cells</span><br><span class="line">    rows_cells[0].text = item[0]</span><br><span class="line">    rows_cells[1].text = item[1]</span><br><span class="line">    rows_cells[2].text = item[2]</span><br><span class="line">    # 写入字符是需要str(s)进行数据类型转换在赋值</span><br><span class="line"># 获取表格</span><br><span class="line">document.tables[0].rows # 获取第一个表格的行</span><br><span class="line">document.tables[0].cell(0,2).text # 获取第一个表格中第一行第三列的内容</span><br><span class="line"></span><br><span class="line"># 3、保存文档</span><br><span class="line">document.save(&#x27;index.docx&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="3-word样式处理">3、Word样式处理</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">复制from docx import Document</span><br><span class="line">from docx.shared import Pt,RGBColor</span><br><span class="line">from docx.enum.style import WD_STYLE_TYPE</span><br><span class="line"></span><br><span class="line"># 1、新建文档对象</span><br><span class="line"># Document(&#x27;test.docx&#x27;) 读取现有的Word建立文档对象</span><br><span class="line">document = Document()</span><br><span class="line"># 2、写入内容</span><br><span class="line"># 标题，level-&gt;标题级别</span><br><span class="line">document.add_heading(&#x27;标题&#x27;, level=4)</span><br><span class="line"># 样式</span><br><span class="line">style = document.styles.add_style(&#x27;TestStyle&#x27;, WD_STYLE_TYPE.PARAGRAPH)# 段落样式PARAGRAPH</span><br><span class="line">style.font.size = Pt(5)</span><br><span class="line"># 引用样式</span><br><span class="line">p1 = document.add_paragraph(&#x27;第一段&#x27;, style=&#x27;TestStyle&#x27;)</span><br><span class="line">table = document.add_table(rows=2, cols=3, style=&#x27;Medium List 2&#x27;)# 内置样式：Medium List 2</span><br><span class="line"># 删除样式</span><br><span class="line">document.styles[&#x27;TestStyle&#x27;].delete()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="4-word转pdf">4、Word转PDF</span></h6><blockquote>
+<p>先安装：pip install pywin32</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">复制from win32com.client import constants,gencache</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">def CreatePdf(wordPath, pdfPath):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    :param wordPath: 必须写绝对路径</span><br><span class="line">    :param pdfPath: 默认路径：r&quot;C:\\Users\\Mr.Zhou\\Documents&quot;</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    word = gencache.EnsureDispatch(&#x27;Word.Application&#x27;)</span><br><span class="line">    doc = word.Documents.Open(wordPath, ReadOnly=1)</span><br><span class="line">    # 转换方法</span><br><span class="line">    doc.ExportAsFixedFormat(pdfPath, constants.wdExportFormatPDF)</span><br><span class="line">    word.Quit()</span><br><span class="line"></span><br><span class="line">CreatePdf(&#x27;E:\作业6\python\jiaoben\index.docx&#x27;, &#x27;E:\作业6\python\jiaoben\index.pdf&#x27;)</span><br><span class="line"># 多个文件转换</span><br><span class="line">print(os.listdir(&#x27;.&#x27;))# 当前文件夹下的所有文件</span><br><span class="line">wordfiles = []</span><br><span class="line">for file in os.listdir(&#x27;.&#x27;):</span><br><span class="line">    # 判断文件名是不是Word文件</span><br><span class="line">    if file.endswith((&#x27;.doc&#x27;, &#x27;.docx&#x27;)):</span><br><span class="line">        wordfiles.append(file)</span><br><span class="line">for file in wordfiles:</span><br><span class="line">    # 获取绝对路径</span><br><span class="line">    filepath = os.path.abspath(file)</span><br><span class="line">    index = filepath.rindex(&#x27;.&#x27;)</span><br><span class="line">    pdfpath = filepath[:index] + &#x27;.pdf&#x27;</span><br><span class="line">    CreatePdf(filepath, pdfpath)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4><span id="python-pptx模块">python-pptx模块</span></h4><blockquote>
+<p>python-pptx为python第三方模块，用于自动化生成和更新PowerPoint(.pptx)文件</p>
+<p>CMD中安装：pip install –index-url <a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/pypi/web/simple/">https://mirrors.ustc.edu.cn/pypi/web/simple/</a> python-pptx</p>
+</blockquote>
+<h5><span id="python-pptx常用方法属性">python-pptx常用方法属性</span></h5><h6><span id="1-基础用法">1、基础用法</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">复制import pptx</span><br><span class="line">from pptx.util import Inches</span><br><span class="line"></span><br><span class="line"># 1、得到演示文档的对象</span><br><span class="line">prs = pptx.Presentation()</span><br><span class="line"># prs = pptx.Presentation(&#x27;test.pptx&#x27;) 读取现有的PPT文件建立文档对象</span><br><span class="line"></span><br><span class="line"># 2、写入操作</span><br><span class="line"># 添加幻灯片，样式由prs.slide_layouts[0]控制</span><br><span class="line">slide1 = prs.slides.add_slide(prs.slide_layouts[0])</span><br><span class="line">slide2 = prs.slides.add_slide(prs.slide_layouts[1])</span><br><span class="line">slide3 = prs.slides.add_slide(prs.slide_layouts[2])</span><br><span class="line"># 删除幻灯片-&gt;删除第二张幻灯片</span><br><span class="line">del prs.slides_sldIdLst[1]</span><br><span class="line"># 为幻灯片添加文本-&gt; 上下左右边距Inches(5)</span><br><span class="line">text1 = slide1.shapes.add_textbox(Inches(5), Inches(5), Inches(5), Inches(5))</span><br><span class="line">text1.text = &#x27;测试文本框&#x27;</span><br><span class="line">p1 = text1.text_frame.add_paragraph()</span><br><span class="line">p1.text = &#x27;我是段落一&#x27;</span><br><span class="line">p1.add_run().text = &#x27;段落追加&#x27;</span><br><span class="line"># 设置标题</span><br><span class="line">title_shape = slide1.shapes.title</span><br><span class="line">title_shape.text = &#x27;标题一&#x27;</span><br><span class="line">slide1.shapes.placeholdres[1].text = &#x27;标题二&#x27;</span><br><span class="line"></span><br><span class="line"># 3、保存PPT文件,保存为newfile.pptx(可以理解为：另存为)</span><br><span class="line">prs.save(&#x27;newfile.pptx&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="2-添加图形到ppt">2、添加图形到PPT</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">复制import pptx</span><br><span class="line">from pptx.util import Inches, Pt</span><br><span class="line">from pptx.enum.shapes import MSO_SHAPE_TYPE</span><br><span class="line">from pptx.dml.color import RGBColor</span><br><span class="line"></span><br><span class="line"># 1、得到演示文档的对象</span><br><span class="line">prs = pptx.Presentation()</span><br><span class="line"># prs = pptx.Presentation(&#x27;test.pptx&#x27;) 读取现有的PPT文件建立文档对象</span><br><span class="line"></span><br><span class="line"># 2、写入操作</span><br><span class="line"># 添加幻灯片，样式由prs.slide_layouts[0]控制</span><br><span class="line">slide1 = prs.slides.add_slide(prs.slide_layouts[0])</span><br><span class="line"># 添加自选图形-&gt; MSO_SHAPE_TYPE.RECTANGLE是矩形</span><br><span class="line">shape = slide1.shapes.add_shape(MSO_SHAPE_TYPE.RECTANGLE, Inches(2), Inches(2), Inches(5), Inches(3),)</span><br><span class="line">fill = shape.fill</span><br><span class="line">fill.solid()</span><br><span class="line">fill.fore_color.rgb = RGBColor(255, 0, 0)</span><br><span class="line">line = shape.line</span><br><span class="line">line.color.rgb = RGBColor(55, 3, 5)</span><br><span class="line">line.width = Pt(2)</span><br><span class="line"></span><br><span class="line"># 3、保存PPT文件,保存为newfile.pptx(可以理解为：另存为)</span><br><span class="line">prs.save(&#x27;newfile.pptx&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="3-添加表格到ppt">3、添加表格到PPT</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">复制import pptx</span><br><span class="line">from pptx.util import Inches, Pt</span><br><span class="line">from pptx.enum.shapes import MSO_SHAPE_TYPE</span><br><span class="line">from pptx.dml.color import RGBColor</span><br><span class="line"></span><br><span class="line"># 1、得到演示文档的对象</span><br><span class="line">prs = pptx.Presentation()</span><br><span class="line"># prs = pptx.Presentation(&#x27;test.pptx&#x27;) 读取现有的PPT文件建立文档对象</span><br><span class="line"></span><br><span class="line"># 2、写入操作</span><br><span class="line"># 添加幻灯片，样式由prs.slide_layouts[0]控制</span><br><span class="line">slide1 = prs.slides.add_slide(prs.slide_layouts[0])</span><br><span class="line"># 添加表格 -&gt; 添加一个两行三列的表格</span><br><span class="line"># slide1.shapes.add_table(2,3,Inches(2), Inches(2), Inches(4), Inches(2))</span><br><span class="line">table = slide1.shapes.add_table(2,3,Inches(2), Inches(2), Inches(4), Inches(2)).table</span><br><span class="line"># 填充表格内容 -&gt; 填充第一行第一列数据</span><br><span class="line">table.cell(0,0).text = &#x27;name&#x27;</span><br><span class="line">table.cell(0,1).text = &#x27;age&#x27;</span><br><span class="line">table.cell(0,2).text = &#x27;class&#x27;</span><br><span class="line"># 合并单元格</span><br><span class="line">cell_one = table.cell(0,0)</span><br><span class="line">cell_two = table.cell(0,2)</span><br><span class="line">cell_one.merge(cell_two)</span><br><span class="line">table.cell(0,0).text = &#x27;合并单元格&#x27;</span><br><span class="line"># 取消合并</span><br><span class="line">cell_one.split()</span><br><span class="line"># 查看单元格是否合并</span><br><span class="line">cell_one.is_merge_origin</span><br><span class="line"></span><br><span class="line"># 3、保存PPT文件,保存为newfile.pptx(可以理解为：另存为)</span><br><span class="line">prs.save(&#x27;newfile.pptx&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6><span id="4-添加图表到ppt">4、添加图表到PPT</span></h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">复制import pptx</span><br><span class="line">from pptx.util import Inches, Pt</span><br><span class="line">from pptx.enum.shapes import MSO_SHAPE_TYPE</span><br><span class="line">from pptx.dml.color import RGBColor</span><br><span class="line">from pptx.chart.data import CategoryChartData</span><br><span class="line">from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION</span><br><span class="line"></span><br><span class="line"># 1、得到演示文档的对象</span><br><span class="line">prs = pptx.Presentation()</span><br><span class="line"># prs = pptx.Presentation(&#x27;test.pptx&#x27;) 读取现有的PPT文件建立文档对象</span><br><span class="line"># 添加幻灯片，样式由prs.slide_layouts[0]控制</span><br><span class="line">slide1 = prs.slides.add_slide(prs.slide_layouts[0])</span><br><span class="line"></span><br><span class="line"># 2、写入操作</span><br><span class="line"># 写入图表 - &gt; 创建图表</span><br><span class="line">chart_data = CategoryChartData()</span><br><span class="line">chart_data.categories = [&#x27;一月份&#x27;, &#x27;二月份&#x27;, &#x27;三月份&#x27;]# 构建X轴参数</span><br><span class="line">chart_data.add_series(&#x27;Y2021&#x27;, (326, 435, 344))# 添加数据系列</span><br><span class="line"># 写入图表 -&gt; 条形图：XL_CHART_TYPE.COLUMN_CLUSTERED</span><br><span class="line"># slide1.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Inches(2), Inches(2), Inches(6), Inches(4), chart_data)</span><br><span class="line">chart = slide1.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Inches(2), Inches(2), Inches(6), Inches(4), chart_data).chart</span><br><span class="line">chart.has_title = True #是否有标题</span><br><span class="line">chart.chart_title.text_frame.text = &#x27;第一节度销售&#x27; # 调价标题</span><br><span class="line">chart.has_legend = True # 是否有图例</span><br><span class="line">chart.legend.position =XL_LEGEND_POSITION.RIGHT</span><br><span class="line"></span><br><span class="line"># 3、保存PPT文件,保存为newfile.pptx(可以理解为：另存为)</span><br><span class="line">prs.save(&#x27;newfile.pptx&#x27;)</span><br></pre></td></tr></table></figure>
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/Django%E5%9C%A8Linux%E4%B8%8A%E9%83%A8%E7%BD%B2/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Django在Linux上部署</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/Flask%E4%BB%8B%E7%BB%8D/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Flask介绍</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://img.tukuppt.com/ad_preview/00/83/15/jmLqkl3XWx.jpg!/fw/260" class="soft-size--round soft-style--box" alt="ChengZhou">
+    
+    
+      <h2>ChengZhou</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>20</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        17
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>学习中。。。</p>
+  </div>
+</section>
+
+
+      <section class="widget-categories widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+      <span>CATEGORIES</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categories-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Django/" style="font-size: 10px;" class="tags-cloud-0">Django</a> <a href="/tags/Django-Linux/" style="font-size: 10px;" class="tags-cloud-0">Django Linux</a> <a href="/tags/Excel%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">Excel自动化</a> <a href="/tags/Flask/" style="font-size: 10px;" class="tags-cloud-0">Flask</a> <a href="/tags/Linux-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Linux Mysql</a> <a href="/tags/Python/" style="font-size: 10px;" class="tags-cloud-0">Python</a> <a href="/tags/Python-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Python Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;" class="tags-cloud-0">Redis</a> <a href="/tags/TkGUI/" style="font-size: 10px;" class="tags-cloud-0">TkGUI</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;" class="tags-cloud-0">博客搭建</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2/" style="font-size: 20px;" class="tags-cloud-10">容器部署</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;" class="tags-cloud-0">数据结构</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">浏览器自动化</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;" class="tags-cloud-0">爬虫</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80/" style="font-size: 10px;" class="tags-cloud-0">网页布局</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 15px;" class="tags-cloud-5">自动化</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" style="font-size: 10px;" class="tags-cloud-0">项目记录</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">ChengZhou</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  
+
+
+
+
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

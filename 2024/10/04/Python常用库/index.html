@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+
+  
+    <meta name="description" content="Zhou">
+  
+
+  
+
+  
+    <meta name="author" content="ChengZhou">
+  
+
+  
+
+  
+
+  <title>Python常用库 | XiaoZhou</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          XiaoZhou
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/archives">归档</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">Python常用库</h1>
+          <h2 class="title-sub-wrap">
+            <strong>ChengZhou</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2024-10-04T12:52:12.000Z" itemprop="datePublished">2024-10-04</time>
+          </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/Python/">🏷️ Python</a></li>
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h1><span id="一-时间操作">一、时间操作</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">复制import datetime</span><br><span class="line">import time</span><br><span class="line"># 获取今天的日期</span><br><span class="line">date.today()</span><br><span class="line"># 获取昨天的日期</span><br><span class="line">(datetime.date.today() + timedelta(days=-1)).strftime(&quot;%Y-%m-%d&quot;)</span><br><span class="line"># 获取明天的日期</span><br><span class="line">(datetime.date.today() + timedelta(days=1)).strftime(&quot;%Y-%m-%d&quot;)</span><br><span class="line"></span><br><span class="line"># 将字符串转成日期型数据</span><br><span class="line">d1 = datetime.datetime.strptime(&#x27;2022-01-23&#x27;, &#x27;%Y-%m-%d&#x27;)</span><br><span class="line">d2 = datetime.date(int(dates[0]), int(dates[1]), int(dates[2]))</span><br><span class="line"></span><br><span class="line"># 获取相应日期是周几</span><br><span class="line">import datetime</span><br><span class="line">today = d1.weekday() + 1</span><br><span class="line">print(today)</span><br><span class="line"># 获取相应日期是第几周</span><br><span class="line">week_num = Sunday.isocalendar()[1]</span><br><span class="line"># 年：isocalendar()[0] 第几周：isocalendar()[1] 周几：isocalendar()[1]</span><br><span class="line"></span><br><span class="line"># 两个日期相差几天</span><br><span class="line">delta = d1 - d2</span><br><span class="line">print(delta.days)</span><br><span class="line"></span><br><span class="line"># 获取上周一日期</span><br><span class="line">(date.today() + timedelta(days=-7 - date.today().weekday())).strftime(&quot;%Y-%m-%d&quot;)</span><br><span class="line"></span><br><span class="line"># 获取某月有多少天</span><br><span class="line">day_num = calendar.monthrange(2022, 2)[1]</span><br><span class="line"># 获取某天是当年第多少天</span><br><span class="line">dates = date.split(&#x27;-&#x27;)</span><br><span class="line">targetDay = datetime.date(int(dates[0]), int(dates[1]), int(dates[2]))</span><br><span class="line">dayCount = targetDay - datetime.date(targetDay.year - 1, 12, 31)</span><br><span class="line">dayCount.days</span><br><span class="line"></span><br><span class="line"># 获取上个月第一天的日期和最后一天的日期</span><br><span class="line">today = date.today()# 今天的日期</span><br><span class="line">last_day_month = date(today.year, today.month, 1) - timedelta(1)  # 获取上个月最后一天</span><br><span class="line">first_day_month = date(last_day_month.year, last_day_month.month, 1)  # 获取上个月第一天</span><br><span class="line"></span><br><span class="line"># 遍历一个时间段</span><br><span class="line">end_date = datetime.strptime(end_date, &#x27;%Y-%m-%d&#x27;).date()</span><br><span class="line">start_date = datetime.strptime(start_date, &#x27;%Y-%m-%d&#x27;).date()</span><br><span class="line"></span><br><span class="line">for i in range((end_date - start_date).days + 1):</span><br><span class="line">    download_date = str(start_date + timedelta(days=i))</span><br><span class="line">    </span><br><span class="line"># 遍历两个日期之间包含的所有月份    </span><br><span class="line">def get_month_range(start_day, end_day):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    获取两个时间之间包含的所有月份</span><br><span class="line">    :param start_day:</span><br><span class="line">    :param end_day:</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    months = (end_day.year - start_day.year) * 12 + end_day.month - start_day.month</span><br><span class="line">    month_range = [&#x27;%s-%s&#x27; % (start_day.year + mon // 12, mon % 12 + 1)</span><br><span class="line">                   for mon in range(start_day.month - 1, start_day.month + months)]</span><br><span class="line">    return month_range</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="1-判断某个日期是否再给定时间内">1、判断某个日期是否再给定时间内</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">复制def judge_time_day(start_time, end_time, target_date):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    判断传入的日期是否再给定区间内,只支持判断日</span><br><span class="line">    :param start_time: 开始时间，字符型</span><br><span class="line">    :param end_time: 结束时间， 字符型</span><br><span class="line">    :param target_date: 目标日期， 字符型</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    try:</span><br><span class="line">        target_date = str(target_date)[:10].split(&#x27;-&#x27;)</span><br><span class="line">        target_date = datetime.date(int(target_date[0]), int(target_date[1]), int(target_date[2]))</span><br><span class="line"></span><br><span class="line">        start_time = str(start_time)[:10].split(&#x27;-&#x27;)</span><br><span class="line">        start_time = datetime.date(int(start_time[0]), int(start_time[1]), int(start_time[2]))</span><br><span class="line"></span><br><span class="line">        end_time = str(end_time)[:10].split(&#x27;-&#x27;)</span><br><span class="line">        end_time = datetime.date(int(end_time[0]), int(end_time[1]), int(end_time[2]))</span><br><span class="line"></span><br><span class="line">        if start_time &lt;= target_date &lt;= end_time:</span><br><span class="line">            return True</span><br><span class="line">        else:</span><br><span class="line">            return False</span><br><span class="line">    except:</span><br><span class="line">        return False</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="二-字典操作">二、字典操作</span></h1><h4><span id="1-排序">1、排序</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">复制# 按key排序</span><br><span class="line">my_dict = &#123;&#x27;lilee&#x27;:25, &#x27;age&#x27;:24, &#x27;phone&#x27;:12&#125;</span><br><span class="line">sorted(my_dict.keys())</span><br><span class="line">输出结果为</span><br><span class="line"></span><br><span class="line">[&#x27;age&#x27;, &#x27;lilee&#x27;, &#x27;phone&#x27;]</span><br><span class="line"># 按value排序</span><br><span class="line">d = &#123;&#x27;lilee&#x27;:25, &#x27;wangyan&#x27;:21, &#x27;liqun&#x27;:32, &#x27;age&#x27;:19&#125;</span><br><span class="line">sorted(d.items(), key=lambda item:item[1])</span><br><span class="line">输出结果为</span><br><span class="line"></span><br><span class="line">[(&#x27;age&#x27;,19),(&#x27;wangyan&#x27;,21),(&#x27;lilee&#x27;,25),(&#x27;liqun&#x27;,32)]</span><br><span class="line">如果需要倒序则</span><br><span class="line"></span><br><span class="line">sorted(d.items(), key=lambda item:item[1], reverse=True)</span><br><span class="line">得到的结果就会是</span><br><span class="line"></span><br><span class="line">[(&#x27;liqun&#x27;,32),(&#x27;lilee&#x27;,25),(&#x27;wangyan&#x27;,21),(&#x27;age&#x27;,19)]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="三-文本解析bs4">三、文本解析BS4</span></h1><h2><span id="二-beautifulsoup">二、BeautifulSoup</span></h2><h3><span id="1-简介">1、简介</span></h3><blockquote>
+<p>python用于解析文本的库，支持第三方的解析器，譬如lxml、html5lib</p>
+<p>详情可查看：</p>
+<p><a target="_blank" rel="noopener" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">官方文档</a></p>
+<p>也可以查看本地文档</p>
+</blockquote>
+<h3><span id="2-常用打开方式">2、常用打开方式</span></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">复制# 对已有的字符进行解析</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">text = &#x27;&lt;a&gt;&lt;b /&gt;&lt;/a&gt;&#x27;</span><br><span class="line">soup_test = BeautifulSoup(text, &#x27;lxml&#x27;) # 会补全 html，body和p</span><br><span class="line">print(&#x27;lxml:&#x27;)</span><br><span class="line">print(soup_test)</span><br><span class="line">soup_test = BeautifulSoup(text, &#x27;html.parser&#x27;) # 会补全 p</span><br><span class="line">print(&#x27;html.parser:&#x27;)</span><br><span class="line">print(soup_test)</span><br><span class="line">soup_test = BeautifulSoup(text, &#x27;html5&#x27;)  # 会补全 html，head，body和p</span><br><span class="line">print(&#x27;html5:&#x27;)</span><br><span class="line">print(soup_test)</span><br><span class="line">soup_test = BeautifulSoup(text, &#x27;xml&#x27;)  # 会加xml头，忽略错误的标签</span><br><span class="line">print(&#x27;xml:&#x27;)</span><br><span class="line">print(soup_test)</span><br><span class="line"># 对于本地文件需要进行open</span><br><span class="line">soup = BeautifulSoup(open(&quot;index.html&quot;), &#x27;lxml&#x27;)</span><br><span class="line"></span><br><span class="line">path = &#x27;d:/Download/mydoc.html&#x27;</span><br><span class="line">htmlfile = open(path, &#x27;r&#x27;, encoding=&#x27;utf-8&#x27;)</span><br><span class="line">htmlhandle = htmlfile.read()</span><br><span class="line">soup = BeautifulSoup(htmlhandle, &#x27;lxml&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3><span id="3-查找与选择">3、查找与选择</span></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">复制# 这里只介绍CSS选择器, find_css为我们的css查找内容</span><br><span class="line">soup.select(find_css)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3><span id="4-修改属性或内容">4、修改属性或内容</span></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">复制# 修改标签名称和属性</span><br><span class="line">soup = BeautifulSoup(&#x27;&lt;b class=&quot;boldest&quot;&gt;Extremely bold&lt;/b&gt;&#x27;)</span><br><span class="line">tag = soup.b</span><br><span class="line">tag.name = &quot;blockquote&quot;</span><br><span class="line">tag[&#x27;class&#x27;] = &#x27;verybold&#x27;</span><br><span class="line">tag[&#x27;id&#x27;] = 1</span><br><span class="line">tag</span><br><span class="line"># &lt;blockquote class=&quot;verybold&quot; id=&quot;1&quot;&gt;Extremely bold&lt;/blockquote&gt;</span><br><span class="line">del tag[&#x27;class&#x27;]</span><br><span class="line">del tag[&#x27;id&#x27;]</span><br><span class="line">tag</span><br><span class="line"># &lt;blockquote&gt;Extremely bold&lt;/blockquote&gt;</span><br><span class="line"></span><br><span class="line"># 替换原本的内容</span><br><span class="line">markup = &#x27;&lt;a href=&quot;http://example.com/&quot;&gt;I linked to &lt;i&gt;example.com&lt;/i&gt;&lt;/a&gt;&#x27;</span><br><span class="line">soup = BeautifulSoup(markup)</span><br><span class="line">tag = soup.a</span><br><span class="line">tag.string = &quot;New link text.&quot;</span><br><span class="line">tag</span><br><span class="line"># &lt;a href=&quot;http://example.com/&quot;&gt;New link text.&lt;/a&gt;</span><br><span class="line"></span><br><span class="line"># 添加文本内容</span><br><span class="line">soup = BeautifulSoup(&quot;&lt;a&gt;Foo&lt;/a&gt;&quot;)</span><br><span class="line">soup.a.append(&quot;Bar&quot;)</span><br><span class="line">soup</span><br><span class="line"># &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;a&gt;FooBar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;</span><br><span class="line">soup.a.contents</span><br><span class="line"># [u&#x27;Foo&#x27;, u&#x27;Bar&#x27;]</span><br><span class="line"></span><br><span class="line"># 创建一个新标签</span><br><span class="line">soup = BeautifulSoup(&quot;&lt;b&gt;&lt;/b&gt;&quot;)</span><br><span class="line">original_tag = soup.b</span><br><span class="line">new_tag = soup.new_tag(&quot;a&quot;, href=&quot;http://www.example.com&quot;)</span><br><span class="line">original_tag.append(new_tag)</span><br><span class="line">original_tag</span><br><span class="line"># &lt;b&gt;&lt;a href=&quot;http://www.example.com&quot;&gt;&lt;/a&gt;&lt;/b&gt;</span><br><span class="line">new_tag.string = &quot;Link text.&quot;</span><br><span class="line">original_tag</span><br><span class="line"># &lt;b&gt;&lt;a href=&quot;http://www.example.com&quot;&gt;Link text.&lt;/a&gt;&lt;/b&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="四-图片合成与图片生成">四、图片合成与图片生成</span></h1><h2><span id="一-图片生成">一、图片生成</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">复制from PIL import ImageFont</span><br><span class="line">from PIL import Image</span><br><span class="line">from PIL import ImageDraw</span><br><span class="line"></span><br><span class="line">#图片颜色</span><br><span class="line">color = [random.randint(0, 255),random.randint(0, 255),random.randint(0, 255)]</span><br><span class="line"># 生成背景图片</span><br><span class="line">image = Image.new(&#x27;RGB&#x27;, (1080, 1920), (color[0],color[1],color[2]))</span><br><span class="line">#在图片上留白 x开始位置 y开始位置 x结束位置  y结束位置</span><br><span class="line">image.paste((255, 255, 255), (0, 1290, 1080 , 1410))</span><br><span class="line"># 保存原始版本</span><br><span class="line">image.save(&quot;12312.png&quot;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="二-图片附加文字">二、图片附加文字</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">复制import cv2</span><br><span class="line">from PIL import ImageFont, ImageDraw, Image</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"># 在进行字体颜色设置的时候需要注意，以RGB形式写入颜色时需要反转写入，要以BGR写入数据</span><br><span class="line"># eg: 需要写入（213， 2， 24），则fill = (24, 2, 213)</span><br><span class="line"></span><br><span class="line"># 编辑图片路径</span><br><span class="line">bk_img = cv2.imread(&quot;background.jpg&quot;)</span><br><span class="line"># 设置需要显示的字体</span><br><span class="line">fontpath = &quot;font/simsun.ttc&quot;</span><br><span class="line"># 32为字体大小</span><br><span class="line">font = ImageFont.truetype(fontpath, 32)</span><br><span class="line">img_pil = Image.fromarray(bk_img)</span><br><span class="line">draw = ImageDraw.Draw(img_pil)</span><br><span class="line"># 绘制文字信息</span><br><span class="line"># (100,300/350)为字体的位置，(255,255,255)为白色，(0,0,0)为黑色</span><br><span class="line">draw.text((100, 300),  &quot;Hello World&quot;, font = font, fill = (255, 255, 255))</span><br><span class="line">draw.text((100, 350),  &quot;你好&quot;, font = font, fill = (255, 255, 255))</span><br><span class="line">bk_img = np.array(img_pil)</span><br><span class="line"> </span><br><span class="line">cv2.imshow(&quot;add_text&quot;,bk_img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line"># 保存图片路径</span><br><span class="line">cv2.imwrite(&quot;add_text.jpg&quot;,bk_img)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="三-修改图片颜色包含主体和背景">三、修改图片颜色(包含主体和背景)</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">复制from PIL import Image</span><br><span class="line">rgb = (255, 2, 222)</span><br><span class="line">img = Image.open(&quot;./internal_data/img/money.png&quot;)</span><br><span class="line">for i in range(38):</span><br><span class="line">    for j in range(40):</span><br><span class="line">        try:  # 获取每个点的像素值（getpixel）</span><br><span class="line">            r, g, b, alpha = img.getpixel((i, j))</span><br><span class="line">            if r == 255 and g == 255 and b == 255:  # 如果当前像素点像素是这个，就替换</span><br><span class="line">                img.putpixel((i, j), (rgb[0], rgb[1], rgb[2], alpha))</span><br><span class="line">        except Exception as e:</span><br><span class="line">            continue</span><br><span class="line">img.show()</span><br><span class="line"></span><br><span class="line"># 由于这是png文件，需要在设置背景，颜色</span><br><span class="line">x, y = img.size</span><br><span class="line"># 创建一个和原图一样大的图片，背景颜色为(255, 1, 222)</span><br><span class="line">png = Image.new(&#x27;RGBA&#x27;, img.size, (255, 1, 222))</span><br><span class="line"># (0, 0, x, y)表示位置信息， 前面的img用于表示原图标，后面的img表示背景颜色</span><br><span class="line">png.paste(img, (0, 0, x, y), img)</span><br><span class="line">png.save(&#x27;rmb.png&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="四-图片叠加">四、图片叠加</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">复制def Picture_Synthesis(mother_img, son_img, save_img, factor=1, coordinate=None):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    :param factor: 子图缩小倍数</span><br><span class="line">    :param mother_img: 母图</span><br><span class="line">    :param son_img: 子图</span><br><span class="line">    :param save_img: 保存图片名</span><br><span class="line">    :param coordinate: 子图在母图的坐标</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 将图片赋值,方便后面的代码调用</span><br><span class="line">    M_Img = Image.open(mother_img)</span><br><span class="line">    try:</span><br><span class="line">        S_Img = Image.open(son_img)</span><br><span class="line">    except:</span><br><span class="line">        S_Img = son_img</span><br><span class="line"></span><br><span class="line">    # 给图片指定色彩显示格式</span><br><span class="line">    M_Img = M_Img.convert(&quot;RGBA&quot;)  # CMYK/RGBA 转换颜色格式（CMYK用于打印机的色彩，RGBA用于显示器的色彩）</span><br><span class="line"></span><br><span class="line">    # 获取图片的尺寸</span><br><span class="line">    M_Img_w, M_Img_h = M_Img.size  # 获取被放图片的大小（母图）</span><br><span class="line">    print(&quot;母图尺寸：&quot;, M_Img.size)</span><br><span class="line">    S_Img_w, S_Img_h = S_Img.size  # 获取小图的大小（子图）</span><br><span class="line">    print(&quot;子图尺寸：&quot;, S_Img.size)</span><br><span class="line"></span><br><span class="line">    size_w = int(S_Img_w / factor)</span><br><span class="line">    size_h = int(S_Img_h / factor)</span><br><span class="line"></span><br><span class="line">    # 防止子图尺寸大于母图</span><br><span class="line">    if S_Img_w &gt; size_w:</span><br><span class="line">        S_Img_w = size_w</span><br><span class="line">    if S_Img_h &gt; size_h:</span><br><span class="line">        S_Img_h = size_h</span><br><span class="line"></span><br><span class="line">    # # 重新设置子图的尺寸</span><br><span class="line">    # icon = S_Img.resize((S_Img_w, S_Img_h), Image.ANTIALIAS)</span><br><span class="line">    icon = S_Img.resize((S_Img_w, S_Img_h), Image.ANTIALIAS)</span><br><span class="line">    w = int((M_Img_w - S_Img_w) / 2)</span><br><span class="line">    h = int((M_Img_h - S_Img_h) / 2)</span><br><span class="line"></span><br><span class="line">    try:</span><br><span class="line">        if coordinate is None or coordinate == &quot;&quot;:</span><br><span class="line">            coordinate = (w, h)</span><br><span class="line">            # 粘贴子图到母图的指定坐标（当前居中）</span><br><span class="line">            M_Img.paste(icon, coordinate, mask=None)</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;已经指定坐标&quot;)</span><br><span class="line">            # 粘贴子图到母图的指定坐标（当前居中）</span><br><span class="line">            M_Img.paste(icon, coordinate, mask=None)</span><br><span class="line">    except:</span><br><span class="line">        print(&quot;坐标指定出错 &quot;)</span><br><span class="line">    # 保存图片</span><br><span class="line">    M_Img.save(save_img)</span><br><span class="line"># 调用</span><br><span class="line">Picture_Synthesis(&quot;bottom.png&quot;, create_rmb_symbol((0, 0, 0)), &quot;bottom.png&quot;, 2, (20, 20))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="五-图片放大缩小">五、图片放大缩小</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">复制# 可进行放大或者缩小</span><br><span class="line">size = (int(maximum_chart.size[0]/2), int(maximum_chart.size[1]/2))</span><br><span class="line">maximum_chart = maximum_chart.resize(size, Image.ANTIALIAS)</span><br><span class="line">maximum_chart.save(&#x27;./internal_data/img/Preview.jpg&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="六-颜色转化">六、颜色转化</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">复制# RGB 转16进制</span><br><span class="line">&#x27;#&#x27; + &#x27;&#x27;.join(i[2:] if len(i[2:]) &gt;= 2 else &#x27;0&#x27; + i[2:] for i in [hex(x) for x in RGB])</span><br><span class="line"></span><br><span class="line"># 颜色转换</span><br><span class="line">bk_img = np.array(self.Base)</span><br><span class="line">bk_img = cv2.cvtColor(bk_img, cv2.COLOR_RGB2BGR)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="七-图片拼接">七、图片拼接</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">复制# 定义图像拼接函数</span><br><span class="line">def image_compose():</span><br><span class="line">  &quot;&quot;&quot;本质是先创建一张大图，然后把需要拼接的图片都放上去&quot;&quot;&quot;</span><br><span class="line">    to_image = Image.new(&#x27;RGB&#x27;, (IMAGE_COLUMN * IMAGE_SIZE, IMAGE_ROW * IMAGE_SIZE))  # 创建一个新图</span><br><span class="line">    # 循环遍历，把每张图片按顺序粘贴到对应位置上</span><br><span class="line">    for y in range(1, IMAGE_ROW + 1):</span><br><span class="line">        for x in range(1, IMAGE_COLUMN + 1):</span><br><span class="line">            from_image = Image.open(IMAGES_PATH + image_names[IMAGE_COLUMN * (y - 1) + x - 1]).resize(</span><br><span class="line">                (IMAGE_SIZE, IMAGE_SIZE), Image.ANTIALIAS)</span><br><span class="line">            to_image.paste(from_image, ((x - 1) * IMAGE_SIZE, (y - 1) * IMAGE_SIZE))</span><br><span class="line">    return to_image.save(IMAGE_SAVE_PATH)  # 保存新图</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="八-图片裁剪">八、图片裁剪</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制# a,b,c,d分别对应起始点和终点的坐标，只能裁剪矩形</span><br><span class="line">croping = img.crop((a,b,c,d))</span><br><span class="line">croping.save(&#x27;G:/img/img1/&#x27;+ str(index) + &#x27;.jpg&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="五-word转pdf">五、word转PDF</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">复制# 基于window环境  pip install pywin32</span><br><span class="line"># 需注意生成的是pdf后缀的文件，还有就是需要设置office为默认打开方式，否则会报错拒绝连接</span><br><span class="line">from win32com.client import constants, gencache</span><br><span class="line">def createPdf(wordPath, pdfPath):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    word转pdf</span><br><span class="line">    :param wordPath: word文件路径</span><br><span class="line">    :param pdfPath:  生成pdf文件路径</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    word = gencache.EnsureDispatch(&#x27;Word.Application&#x27;)</span><br><span class="line">    doc = word.Documents.Open(wordPath, ReadOnly=1)</span><br><span class="line">    doc.ExportAsFixedFormat(pdfPath,</span><br><span class="line">                            constants.wdExportFormatPDF,</span><br><span class="line">                            Item=constants.wdExportDocumentWithMarkup,</span><br><span class="line">                            CreateBookmarks=constants.wdExportCreateHeadingBookmarks)</span><br><span class="line">    word.Quit(constants.wdDoNotSaveChanges)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">createPdf(</span><br><span class="line">    &quot;F:/ZhouCheng/员工手册/关于举办第15届中国大学生计算机设计大赛计算机类计算机工程学院校内选拔赛的通知/比赛材料/豆瓣电影/豆瓣影评TOP200数据分析-系统说明.docx&quot;,</span><br><span class="line">    &quot;F:/ZhouCheng/员工手册/关于举办第15届中国大学生计算机设计大赛计算机类计算机工程学院校内选拔赛的通知/比赛材料/豆瓣电影/zhoucheng.pdf&quot;</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="六-批量重命名-移动-删除-复制">六、批量重命名、移动、删除、复制</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">复制def file_manage():</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    以下程序用于批量重命名并移动文件到正确的位置</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    shop_names = [&#x27;京东官方旗舰店&#x27;, &#x27;官方旗舰店&#x27;, &#x27;京东自营旗舰店&#x27;]</span><br><span class="line">    for shop_name in shop_names:</span><br><span class="line">        try:</span><br><span class="line">            os.mkdir(&#x27;./upload_data//&#x27; + shop_name)</span><br><span class="line">            # 创建多级目录：os.makedirs(folder_path)</span><br><span class="line">        except BaseException:</span><br><span class="line">            print(&#x27;文件夹&#x27;, shop_name, &#x27;已创建&#x27;)</span><br><span class="line">            </span><br><span class="line">    # 遍历当前文件夹下的所有</span><br><span class="line">    filenames = os.listdir(r&#x27;./upload_data&#x27;)</span><br><span class="line">    for filename in filenames:  </span><br><span class="line">        if os.path.isfile(&#x27;./upload_data/&#x27; + filename):  # 只操作文件，不操作文件夹</span><br><span class="line">            for shop_name in shop_names:  # 遍历所有店铺</span><br><span class="line">                # 如果该文件是某个店铺的，则先将其重命名为规范格式，在移动到相应的文件夹中</span><br><span class="line">                if filename.startswith(shop_name):  </span><br><span class="line">                    os.rename(  # 重命名的同时移动文件夹</span><br><span class="line">                        &#x27;./upload_data/&#x27; + filename, </span><br><span class="line">                        &#x27;./upload_data/&#x27;+shop_name + &#x27;/标准文件名&#x27;</span><br><span class="line">                    )</span><br><span class="line"></span><br><span class="line"># 批量删除</span><br><span class="line">def del_file(filepath):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    删除某一目录下的所有文件或文件夹</span><br><span class="line">    :param filepath: 路径</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    del_list = os.listdir(filepath)</span><br><span class="line">    for f in del_list:</span><br><span class="line">        file_path = os.path.join(filepath, f)</span><br><span class="line">        if os.path.isfile(file_path):</span><br><span class="line">            os.remove(file_path)</span><br><span class="line">        elif os.path.isdir(file_path):</span><br><span class="line">            shutil.rmtree(file_path)</span><br><span class="line">            </span><br><span class="line"># 复制</span><br><span class="line">shutil.copy(srcfile, dstpath + fname)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="七-文件的常见操作">七、文件的常见操作</span></h1><h2><span id="1-文件解压">1、文件解压</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">复制import zipfile</span><br><span class="line">import os</span><br><span class="line">while True:</span><br><span class="line">    is_break = 0</span><br><span class="line">    # 获取所有文件</span><br><span class="line">    file_list = os.listdir(folder_path)</span><br><span class="line">    # 遍历文件，获取</span><br><span class="line">    for file_name in file_list:</span><br><span class="line">        if file_name.endswith(&#x27;zip&#x27;):</span><br><span class="line">            is_break = 1</span><br><span class="line">            # 得到压缩文件</span><br><span class="line">            file_zip = zipfile.ZipFile(folder_path + &#x27;/&#x27; + file_name, &#x27;r&#x27;)</span><br><span class="line">            for file in file_zip.namelist():</span><br><span class="line">                file_zip.extract(file, folder_path)  # 解压到指定文件夹</span><br><span class="line">            file_zip.close()  # 关闭文件流</span><br><span class="line">            os.remove(folder_path + &#x27;/&#x27; + file_name)  # 移动文件</span><br><span class="line">    if is_break:</span><br><span class="line">        break</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="2-获取当前文件地址">2、获取当前文件地址</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">复制os.getcwd()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="八-将xls文件转为xlsx文件">八、将xls文件转为xlsx文件</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">复制# 先将xls文件改成xlsx文件</span><br><span class="line">filenames = os.listdir(open_path)</span><br><span class="line">for filename in filenames:</span><br><span class="line">  # 如果是xls文件</span><br><span class="line">  if filename.endswith(&quot;.xls&quot;):</span><br><span class="line">    data = pd.DataFrame(pd.read_excel(open_path + &#x27;/&#x27; + filename))  # 读取xls文件</span><br><span class="line">    data.to_excel(open_path + &#x27;/&#x27; + filename.split(&#x27;.&#x27;)[0] + &#x27;.xlsx&#x27;, index=False)  # 格式转换</span><br><span class="line">    os.remove(open_path + &#x27;/&#x27; + filename)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="九-调用系统命令不出现黑框">九、调用系统命令不出现黑框</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">复制import subprocess</span><br><span class="line"></span><br><span class="line">subprocess.Popen(&#x27;del &quot;.\\cache\\updata_ver.exe&quot; /F&#x27;,</span><br><span class="line">                 shell=True,</span><br><span class="line">                 stdout=subprocess.PIPE,</span><br><span class="line">                 stderr=subprocess.STDOUT,</span><br><span class="line">                 stdin=subprocess.PIPE</span><br><span class="line">                 )</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="十-python录制屏幕">十、Python录制屏幕</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">复制import os</span><br><span class="line">import time</span><br><span class="line">from PIL import ImageGrab</span><br><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def video_record(filename, filepath, duration):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    录制视频，保存的文件类型可支持为  .avi .asf .mov等</span><br><span class="line">    帧率为24的时候录制时长最准确</span><br><span class="line">    :param filename:  保存文件名</span><br><span class="line">    :param filepath:  保存路径</span><br><span class="line">    :param duration: 录制时长</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    screen = ImageGrab.grab()  # 获取当前屏幕</span><br><span class="line">    width, high = screen.size  # 获取当前屏幕的大小</span><br><span class="line">    fourcc = cv2.VideoWriter_fourcc(&#x27;X&#x27;, &#x27;V&#x27;, &#x27;I&#x27;, &#x27;D&#x27;)  # MPEG-4编码,文件后缀可为.avi .asf .mov等</span><br><span class="line">    video = cv2.VideoWriter(filename, fourcc, 24, (width, high))  # （文件名，编码器，帧率，视频宽高）</span><br><span class="line">    print(&#x27;开始录制!&#x27;)</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    while True:</span><br><span class="line">        if (time.time() - start_time) &gt;= duration:</span><br><span class="line">            print(&quot;录制结束！&quot;)</span><br><span class="line">            global final_time</span><br><span class="line">            final_time = time.time()</span><br><span class="line">            video.release()  # 释放</span><br><span class="line">            break</span><br><span class="line">        im = ImageGrab.grab()  # 屏幕抓图，图片为RGB模式</span><br><span class="line">        frame = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2BGR)  # 转为opencv的BGR模式</span><br><span class="line">        video.write(frame)  # 写入vedio定义的文件</span><br><span class="line">    # 将已完成录制的文件移动到制定文件夹</span><br><span class="line">    try:</span><br><span class="line">        os.rename(  # 重命名的同时移动文件夹</span><br><span class="line">            &#x27;./&#x27; + filename,</span><br><span class="line">            filepath + &#x27;\\&#x27; + filename</span><br><span class="line">        )</span><br><span class="line">    except BaseException as err:</span><br><span class="line">        os.remove(&#x27;./&#x27; + filename)</span><br><span class="line">        print(&#x27;文件保存失败：&#x27; + str(err))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    video_record(&#x27;测试.avi&#x27;, &#x27;D:\\&#x27;, 10)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="十一-捕获错误详细信息">十一、捕获错误详细信息</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">复制def try_except(self,f,*args, **kwargs):</span><br><span class="line">    #print(kwargs)</span><br><span class="line">    cb = []</span><br><span class="line">    try:</span><br><span class="line">        cb = kwargs[&#x27;err_func&#x27;]</span><br><span class="line">    except:</span><br><span class="line">        pass</span><br><span class="line">    try:</span><br><span class="line">        f(*args)</span><br><span class="line">    except Exception:</span><br><span class="line">        exc_type, exc_instance, exc_traceback = sys.exc_info()</span><br><span class="line">        formatted_traceback = &#x27;&#x27;.join(traceback.format_tb(exc_traceback))</span><br><span class="line">        message = &#x27;\n&#123;0&#125;\n&#123;1&#125;:\n&#123;2&#125;&#x27;.format(</span><br><span class="line">            formatted_traceback,</span><br><span class="line">            exc_type.__name__,</span><br><span class="line">            exc_instance</span><br><span class="line">        )</span><br><span class="line">         #raise exc_type(message)</span><br><span class="line">        print(exc_type(message))</span><br><span class="line"></span><br><span class="line">        for el in cb:</span><br><span class="line">            if el[&#x27;errorname&#x27;] == exc_type.__name__ or el[&#x27;errorname&#x27;] == &#x27;&#x27;:</span><br><span class="line">                el[&#x27;function&#x27;](*el[&#x27;args&#x27;])</span><br><span class="line">                break</span><br><span class="line"></span><br><span class="line">        errorinfo_win = Tk()</span><br><span class="line">        errorinfo_win.withdraw()</span><br><span class="line">        self.info(exc_type.__name__,message)</span><br><span class="line">        errorinfo_win.destroy()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="十二-json转字典">十二、json转字典</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">复制# 通过文件转</span><br><span class="line">with open(&#x27;xx.json&#x27;, &#x27;r&#x27;) as f:</span><br><span class="line">    dict_info = json.load(f)</span><br><span class="line">    print(dict_info)</span><br><span class="line">    </span><br><span class="line"># 通过字符串转：</span><br><span class="line">dict_info = json.loads(f)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="十三-二维数组转表格">十三、二维数组转表格</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">复制def two_array_to_table(table_data):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    二维数组转表格</span><br><span class="line">    eg:</span><br><span class="line">    test = [[&#x27;第一行第一列&#x27;, &#x27;第一行第二列&#x27;, &#x27;第一行第三列&#x27;], [&#x27;第二行第一列&#x27;, &#x27;第二行第二列&#x27;, &#x27;第二行第三列&#x27;],</span><br><span class="line">        [&#x27;第三行第一列&#x27;, &#x27;第三行第二列&#x27;, &#x27;第三行第三列&#x27;], [&#x27;第四行第一列&#x27;, &#x27;第四行第二列&#x27;, &#x27;第四行第三列&#x27;]]</span><br><span class="line">    :param table_data: 二维数组</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    datetable = &#x27;&#x27;</span><br><span class="line">    for row in range(len(table_data)):</span><br><span class="line">        thisrowvalue = table_data[row]</span><br><span class="line">        for col in range(len(thisrowvalue)):</span><br><span class="line">            datetable = datetable + thisrowvalue[col]</span><br><span class="line">            if col != len(thisrowvalue) - 1:</span><br><span class="line">                datetable = datetable + &#x27;\t&#x27;</span><br><span class="line">            elif row != len(table_data) - 1:</span><br><span class="line">                datetable = datetable + &#x27;\n&#x27;</span><br><span class="line"></span><br><span class="line">    print(datetable)</span><br><span class="line">    return datetable</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="十四-复制表格格式">十四、复制表格格式</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">复制import os</span><br><span class="line">import win32com</span><br><span class="line">from win32com.client import constants as c  # 旨在直接使用VBA常数</span><br><span class="line">current_address = os.path.abspath(&#x27;.&#x27;)</span><br><span class="line"></span><br><span class="line">excel_address = os.path.join(current_address, &quot;区域复制.xlsx&quot;)</span><br><span class="line">xl_app = win32com.client.gencache.EnsureDispatch(&quot;Excel.Application&quot;)  # 若想引用常数的话使用此法调用Excel</span><br><span class="line">xl_app.Visible = True  # 是否显示Excel文件</span><br><span class="line">wb = xl_app.Workbooks.Open(excel_address)</span><br><span class="line">sht_old = wb.Worksheets(&quot;原&quot;)</span><br><span class="line">sht_new_1 = wb.Worksheets(&quot;复制1&quot;)</span><br><span class="line">sht_new_2 = wb.Worksheets(&quot;复制2&quot;)</span><br><span class="line">sht_new_3 = wb.Worksheets(&quot;复制3&quot;)</span><br><span class="line"></span><br><span class="line"># 复制工作表</span><br><span class="line">rng_data = sht_old.Range(sht_old.Cells(1, 1), sht_old.Cells(5, &quot;C&quot;))</span><br><span class="line">rng_data.Copy()</span><br><span class="line">sht_new_1.Paste(Destination=sht_new_1.Range(&quot;A1&quot;))</span><br><span class="line">sht_new_2.Range(&quot;A1&quot;).PasteSpecial(Paste=c.xlPasteValues)</span><br><span class="line">sht_new_3.Range(&quot;A1&quot;).PasteSpecial(Paste=c.xlPasteAll)</span><br><span class="line"></span><br><span class="line">wb.Save()</span><br><span class="line">wb.Close()</span><br><span class="line">xl_app.Quit()</span><br></pre></td></tr></table></figure>
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/Python%E4%B8%8EMysql%E7%9A%84%E4%BA%A4%E4%BA%92/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Python与Mysql的交互</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/MyBlog%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">MyBlog项目记录</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://img.tukuppt.com/ad_preview/00/83/15/jmLqkl3XWx.jpg!/fw/260" class="soft-size--round soft-style--box" alt="ChengZhou">
+    
+    
+      <h2>ChengZhou</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>20</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        17
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>学习中。。。</p>
+  </div>
+</section>
+
+
+      <section class="widget-categories widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+      <span>CATEGORIES</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categories-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Django/" style="font-size: 10px;" class="tags-cloud-0">Django</a> <a href="/tags/Django-Linux/" style="font-size: 10px;" class="tags-cloud-0">Django Linux</a> <a href="/tags/Excel%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">Excel自动化</a> <a href="/tags/Flask/" style="font-size: 10px;" class="tags-cloud-0">Flask</a> <a href="/tags/Linux-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Linux Mysql</a> <a href="/tags/Python/" style="font-size: 10px;" class="tags-cloud-0">Python</a> <a href="/tags/Python-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Python Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;" class="tags-cloud-0">Redis</a> <a href="/tags/TkGUI/" style="font-size: 10px;" class="tags-cloud-0">TkGUI</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;" class="tags-cloud-0">博客搭建</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2/" style="font-size: 20px;" class="tags-cloud-10">容器部署</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;" class="tags-cloud-0">数据结构</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">浏览器自动化</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;" class="tags-cloud-0">爬虫</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80/" style="font-size: 10px;" class="tags-cloud-0">网页布局</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 15px;" class="tags-cloud-5">自动化</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" style="font-size: 10px;" class="tags-cloud-0">项目记录</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">ChengZhou</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  
+
+
+
+
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

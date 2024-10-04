@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+
+  
+    <meta name="description" content="Zhou">
+  
+
+  
+
+  
+    <meta name="author" content="ChengZhou">
+  
+
+  
+
+  
+
+  <title>Django详解 | XiaoZhou</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          XiaoZhou
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/archives">归档</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">Django详解</h1>
+          <h2 class="title-sub-wrap">
+            <strong>ChengZhou</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2024-10-04T12:55:44.000Z" itemprop="datePublished">2024-10-04</time>
+          </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/Django/">🏷️ Django</a></li>
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <!-- toc -->
+
+<ul>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA%E6%AD%A4%E5%A4%84%E4%BB%85%E8%AF%B4%E6%98%8E%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE">项目创建：(此处仅说明命令行中创建项目)</a></li>
+<li><a href="#%E4%B8%80-settings%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%B1%BB">一、settings环境配置类</a><br>- <a href="#1-%E4%BB%8B%E7%BB%8D">1、介绍</a><br>- <a href="#2-%E7%94%A8%E6%B3%95%E6%A1%88%E4%BE%8B">2、用法案例</a></li>
+<li><a href="#%E4%BA%8C-models%E5%88%9B%E5%BB%BA%E8%A1%A8%E5%8D%95%E7%B1%BB">二、models创建表单类</a><br>- <a href="#1-%E4%BB%8B%E7%BB%8D-1">1、介绍</a><br>- <a href="#2-%E7%94%A8%E6%B3%95%E6%A1%88%E4%BE%8B-1">2、用法案例</a><br>- <a href="#3-meta%E8%AF%A6%E8%A7%A3">3、Meta详解</a></li>
+<li><a href="#%E4%B8%89-urls%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE">三、urls路由设置</a><br>- <a href="#1-%E5%AE%9A%E4%B9%89%E8%B7%AF%E7%94%B1%E5%88%97%E8%A1%A8">1、定义路由列表</a></li>
+<li><a href="#%E5%9B%9B-%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E7%95%A5">四、模板文件（略）</a><br>- <a href="#1-%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E5%A4%B9templates">1、模板文件夹templates</a></li>
+<li><a href="#%E4%BA%94-views%E8%A7%86%E5%9B%BE%E5%8A%9F%E8%83%BD">五、views视图功能</a><br>- <a href="#1-%E4%BB%8B%E7%BB%8D-2">1、介绍</a><br>- <a href="#2-%E7%94%A8%E6%B3%95%E6%A1%88%E5%88%97">2、用法案列</a></li>
+<li><a href="#%E5%85%AD-admin%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97">六、admin后台管理模块</a><br>- <a href="#1-%E4%BB%8B%E7%BB%8D-3">1、介绍</a><br>- <a href="#2-%E7%94%A8%E6%B3%95%E6%A1%88%E5%88%97-1">2、用法案列</a><ul>
+<li><a href="#%E4%B8%83-%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE">七、静态文件配置</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%83-init%E9%A1%B9%E7%9B%AE%E5%BA%94%E7%94%A8%E5%88%9D%E5%A7%8B%E5%8C%96">七、–init–项目应用初始化</a><br>- <a href="#1-%E4%BB%8B%E7%BB%8D-4">1、介绍</a><br>- <a href="#2-%E7%94%A8%E6%B3%95%E6%A1%88%E5%88%97-2">2、用法案列</a></li>
+<li><a href="#%E5%85%AB-%E7%BC%BA%E5%A4%B1%E6%96%87%E4%BB%B6">八、缺失文件</a><br>- <a href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%9B%E5%BB%BA">2、数据库创建</a></li>
+<li><a href="#%E4%B9%9D-%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF">九、报错信息</a><br>- <a href="#1-%E4%BE%9D%E8%B5%96%E4%BA%8E%E6%B2%A1%E6%9C%89%E8%BF%81%E7%A7%BB%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%B8%90%E6%88%B7">1、依赖于没有迁移的应用程序：帐户</a><ul>
+<li><a href="#%E5%8D%81-linux%E9%83%A8%E7%BD%B2">十、Linux部署</a><ul>
+<li><a href="#1-uwsgi%E8%AE%BE%E7%BD%AE">1、uwsgi设置</a></li>
+<li><a href="#2-nginx">2、NGINX</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<h2><span id="项目创建此处仅说明命令行中创建项目">项目创建：(此处仅说明命令行中创建项目)</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">复制# 创建项目</span><br><span class="line">D:/&gt; django-admin startproject MyDjango</span><br><span class="line"># 创建App（项目应用）此处创建应用index</span><br><span class="line">D:/&gt; python manage.py startapp index</span><br><span class="line"># 在命令行中运行项目</span><br><span class="line">D:/&gt; cd MyDjango</span><br><span class="line">D:/MyDjango&gt; python manage.py runserver 8001</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="一-settings环境配置类">一、settings环境配置类</span></h2><h5><span id="1-介绍">1、介绍</span></h5><blockquote>
+<p>用于配置项目环境，如添加app 、添加中间件、导入模板、配置数据库连接、配置自定义用户模型等。</p>
+</blockquote>
+<h5><span id="2-用法案例">2、用法案例</span></h5><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 配置自定义用户模型</span><br><span class="line">&gt; AUTH_USER_MODEL = &#x27;account.MyUser&#x27;</span><br><span class="line">&gt;</span><br><span class="line">&gt; STATIC_URL = &#x27;/static/&#x27;</span><br><span class="line">&gt; STATICFILES_DIRS = [os.path.join(BASE_DIR, &#x27;publicStatic&#x27;)]</span><br><span class="line">&gt; # 设置媒体资源的保存路径</span><br><span class="line">&gt; MEDIA_URL = &#x27;/media/&#x27;</span><br><span class="line">&gt; MEDIA_ROOT = os.path.join(BASE_DIR, &#x27;media&#x27;)</span><br><span class="line">&gt; # 上线配置</span><br><span class="line">&gt; DEBUG = False</span><br><span class="line">&gt; ALLOWED_HOSTS = [&#x27;*&#x27;]</span><br><span class="line">&gt; STATIC_ROOT = os.path.join(BASE_DIR,&#x27;static&#x27;)</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2><span id="二-models创建表单类">二、models创建表单类</span></h2><h5><span id="1-介绍">1、介绍</span></h5><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # Django 模型是与数据库相关的，与数据库相关的代码一般写在 models.py 中，Django 支持 sqlite3, MySQL, PostgreSQL等数据库，只需要在settings.py中配置即可，不用更改models.py中的代码，丰富的API极大的方便了使用。(用于生成对应的数据库表单能设置外键)</span><br><span class="line">&gt; 一般在创建好表单类后需要进行数据迁移，在Pycharm的Terminal窗口下：</span><br><span class="line">&gt; python manage.py makemigrations #记录改动，没有作用到数据库</span><br><span class="line">&gt; python manage.py migrate	    #将改动实例化，更新数据库</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5><span id="2-用法案例">2、用法案例</span></h5><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 以下为账户表单的定义与生成</span><br><span class="line">&gt; class MyUser(AbstractUser):   #抽象用户</span><br><span class="line">&gt;     name = models.CharField(&#x27;姓名&#x27;, max_length=50, default=&#x27;匿名用户&#x27;)</span><br><span class="line">&gt;     introduce = models.TextField(&#x27;简介&#x27;,default=&#x27;暂无介绍&#x27;)</span><br><span class="line">&gt;     company = models.CharField(&#x27;公司&#x27;, max_length=100, default=&#x27;暂无信息&#x27;)</span><br><span class="line">&gt;     profession = models.CharField(&#x27;职业&#x27;, max_length=100, default=&#x27;暂无信息&#x27;)</span><br><span class="line">&gt;     address = models.CharField(&#x27;住址&#x27;, max_length=100, default=&#x27;暂无信息&#x27;)</span><br><span class="line">&gt; 	# 此处省略部分代码</span><br><span class="line">&gt;     def __str__(self):</span><br><span class="line">&gt;         return self.name</span><br><span class="line">&gt;     </span><br><span class="line">&gt; # 图片墙表单的定义生成</span><br><span class="line">&gt;     class AlbumInfo(models.Model):</span><br><span class="line">&gt;     id = models.AutoField(primary_key=True)</span><br><span class="line">&gt;     # 以下便是设置外键连接</span><br><span class="line">&gt;     user = models.ForeignKey(MyUser, on_delete=models.CASCADE, verbose_name=&#x27;用户&#x27;)</span><br><span class="line">&gt;     title = models.CharField(&#x27;标题&#x27;, max_length=50, blank=True)</span><br><span class="line">&gt;     introduce = models.CharField(&#x27;描述&#x27;, max_length=200, blank=True)</span><br><span class="line">&gt;     photo = models.ImageField(&#x27;图片&#x27;, blank=True, upload_to=&#x27;image/album/&#x27;)</span><br><span class="line">&gt;</span><br><span class="line">&gt;     def __str__(self):</span><br><span class="line">&gt;         return str(self.id)</span><br><span class="line">&gt;</span><br><span class="line">&gt;     class Meta:</span><br><span class="line">&gt;         verbose_name = &#x27;图片墙管理&#x27;</span><br><span class="line">&gt;         verbose_name_plural = &#x27;图片墙管理&#x27;</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5><span id="3-meta详解">3、Meta详解</span></h5><blockquote>
+<p>在使用 Django 的 ORM 模型进行数据库的设计时，我们常常会看到在models 中经常会出现一个 class Meta 的内部类，那它的作用是什么呢？</p>
+<p>db_table 属性：自定义数据表的名称，是可选属性。默认数据表的命名规则为： 应用名_类名。</p>
+<p>　　例如：你创建了一个名为 blog 的应用时，且你为这个应用创建了一个 User 类 的models时，</p>
+<p>　　　　 这时django会将会为你创建一张名为 blog_User 的数据表。</p>
+<p>verbose_name 属性：自定义一个易于理解的名称，如上图，</p>
+<p>　　　　verbose_name &#x3D; ‘地址’, 用来标志这个表时用来存放地址信息的</p>
+<p>verbose_name_plural 属性：<br>　　　　如果此项没有设置，Django 会使用 verbose_name + “s”来表示。</p>
+<p>model属性：</p>
+<p> 绑定模型：model &#x3D; Message # 绑定models中的模型类Message</p>
+</blockquote>
+<h2><span id="三-urls路由设置">三、urls路由设置</span></h2><h5><span id="1-定义路由列表">1、定义路由列表</span></h5><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; ........</span><br><span class="line">&gt; from django.conf import settings</span><br><span class="line">&gt; urlpatterns = [</span><br><span class="line">&gt;     # Admin后台系统</span><br><span class="line">&gt;     path(&#x27;admin/&#x27;, admin.site.urls),</span><br><span class="line">&gt;     # 用户注册与登录</span><br><span class="line">&gt;     path(&#x27;user/&#x27;, include(&#x27;account.urls&#x27;)),</span><br><span class="line">&gt; ...................</span><br><span class="line">&gt;     # 留言板</span><br><span class="line">&gt;     path(&#x27;board/&#x27;, include(&#x27;interflow.urls&#x27;)),</span><br><span class="line">&gt;     # 配置媒体资源的路由信息</span><br><span class="line">&gt;     re_path(&#x27;media/(?P&lt;path&gt;.*)&#x27;, serve, &#123;&#x27;document_root&#x27;: settings.MEDIA_ROOT&#125;, name=&#x27;media&#x27;),</span><br><span class="line">&gt; ]</span><br><span class="line">&gt; # 注释： path(&#x27;user/&#x27;, include(&#x27;account.urls&#x27;)),</span><br><span class="line">&gt; # &#x27;user/&#x27;表示127.0.0.1:8000/user的路由地址</span><br><span class="line">&gt; # include(&#x27;account.urls&#x27;)表示将路由信息分发给account的urls.py处理</span><br><span class="line">&gt; #  re_path(&#x27;media/(?P&lt;path&gt;.*)&#x27;, .....路由的正则表达式</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2><span id="四-模板文件略">四、模板文件（略）</span></h2><h5><span id="1-模板文件夹templates">1、模板文件夹templates</span></h5><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; &lt;!--分页功能--&gt;</span><br><span class="line">&gt; &lt;div class=&quot;pagelist&quot;&gt;</span><br><span class="line">&gt;     &#123;% if pageInfo.has_previous %&#125;</span><br><span class="line">&gt;         &lt;a href=&quot;&#123;% url &#x27;board&#x27; id pageInfo.previous_page_number %&#125;&quot;&gt;上一页&lt;/a&gt;</span><br><span class="line">&gt;     &#123;% endif %&#125;</span><br><span class="line">&gt;     &#123;% if pageInfo.object_list %&#125;</span><br><span class="line">&gt;         &#123;% for page in pageInfo.paginator.page_range %&#125;</span><br><span class="line">&gt;             &#123;% if pageInfo.number == page %&#125;</span><br><span class="line">&gt;                 &lt;a href=&quot;javascript:;&quot; class=&quot;curPage&quot;&gt;&#123;&#123; page &#125;&#125;&lt;/a&gt;</span><br><span class="line">&gt;              &#123;% else %&#125;</span><br><span class="line">&gt;                 &lt;a href=&quot;&#123;% url &#x27;board&#x27; id page %&#125;&quot;&gt;&#123;&#123; page &#125;&#125;&lt;/a&gt;</span><br><span class="line">&gt;             &#123;% endif %&#125;</span><br><span class="line">&gt;         &#123;% endfor %&#125;</span><br><span class="line">&gt;     &#123;% endif %&#125;</span><br><span class="line">&gt; &#123;% if pageInfo.has_next %&#125;</span><br><span class="line">&gt;     &lt;a href=&quot;&#123;% url &#x27;board&#x27; id pageInfo.next_page_number %&#125;&quot;&gt;下一页&lt;/a&gt;</span><br><span class="line">&gt; &#123;% endif %&#125;</span><br><span class="line">&gt; &lt;/div&gt;</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2><span id="五-views视图功能">五、views视图功能</span></h2><h5><span id="1-介绍">1、介绍</span></h5><blockquote>
+<p>功能函数，如上传、登录等，可用于前后端数据交互</p>
+</blockquote>
+<h5><span id="2-用法案列">2、用法案列</span></h5><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; ............</span><br><span class="line">&gt; from django.urls import reverse</span><br><span class="line">&gt; def register(request):</span><br><span class="line">&gt;     title = &#x27;注册博客&#x27;</span><br><span class="line">&gt;     pageTitle = &#x27;用户注册&#x27;</span><br><span class="line">&gt;     confirmPassword = True</span><br><span class="line">&gt;     button = &#x27;注册&#x27;</span><br><span class="line">&gt;     urlText = &#x27;用户登录&#x27;</span><br><span class="line">&gt;     urlName = &#x27;userLogin&#x27;</span><br><span class="line">&gt;     if request.method == &#x27;POST&#x27;:</span><br><span class="line">&gt;         u = request.POST.get(&#x27;username&#x27;, &#x27;&#x27;)</span><br><span class="line">&gt;         p = request.POST.get(&#x27;password&#x27;, &#x27;&#x27;)</span><br><span class="line">&gt;         cp = request.POST.get(&#x27;cp&#x27;, &#x27;&#x27;)</span><br><span class="line">&gt;         if MyUser.objects.filter(username=u):</span><br><span class="line">&gt;             tips = &#x27;用户已存在&#x27;</span><br><span class="line">&gt;         elif cp != p:</span><br><span class="line">&gt;             tips = &#x27;两次密码输入不一致&#x27;</span><br><span class="line">&gt;         else:</span><br><span class="line">&gt;             d =&#123;</span><br><span class="line">&gt;                 &#x27;username&#x27;: u, &#x27;password&#x27;: p,</span><br><span class="line">&gt;                 &#x27;is_superuser&#x27;: 1, &#x27;is_staff&#x27;: 1</span><br><span class="line">&gt;             &#125;</span><br><span class="line">&gt;             user = MyUser.objects.create_user(**d)</span><br><span class="line">&gt;             user.save()</span><br><span class="line">&gt;             tips = &#x27;注册成功，请登录&#x27;</span><br><span class="line">&gt;             logout(request)</span><br><span class="line">&gt;             return redirect(reverse(&#x27;userLogin&#x27;))</span><br><span class="line">&gt;         return render(request, &#x27;user.html&#x27;, locals())</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2><span id="六-admin后台管理模块">六、admin后台管理模块</span></h2><h5><span id="1-介绍">1、介绍</span></h5><blockquote>
+<p>Django的admin可以提供一个强大的后台管理功能，可以在web界面对数据库进行操作,我们需要修改admin.py将要操作的数据表注册到后台管理中</p>
+</blockquote>
+<blockquote>
+<p>创建管理员账号</p>
+<p><strong>python manage.py createsuperuser</strong></p>
+</blockquote>
+<h5><span id="2-用法案列">2、用法案列</span></h5><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; from django.utils.translation import gettext_lazy as _</span><br><span class="line">&gt; @admin.register(MyUser)</span><br><span class="line">&gt; class MyUserAdmin(UserAdmin):</span><br><span class="line">&gt;     list_display = [&#x27;username&#x27;, &#x27;email&#x27;, &#x27;name&#x27;,</span><br><span class="line">&gt;                     &#x27;introduce&#x27;, &#x27;company&#x27;, &#x27;profession&#x27;,</span><br><span class="line">&gt;                     &#x27;address&#x27;, &#x27;telephoto&#x27;, &#x27;wx&#x27;, &#x27;qq&#x27;, &#x27;wb&#x27;, &#x27;photo&#x27;]</span><br><span class="line">&gt;     # 在修改界面添加mobile,qq,weChat的信息输入框</span><br><span class="line">&gt;     # 将源码的UserAdmin.fieldsets转换成列表格式</span><br><span class="line">&gt;     fieldsets = list(UserAdmin.fieldsets)</span><br><span class="line">&gt;     # 重写UserAdmin的fieldsets，添加模型字段信息录入</span><br><span class="line">&gt;     fieldsets[1] = (_(&#x27;Personal info&#x27;), </span><br><span class="line">&gt;                     &#123;&#x27;fields&#x27;: (&#x27;name&#x27;, &#x27;introduce&#x27;, &#x27;email&#x27;, &#x27;company&#x27;, </span><br><span class="line">&gt;                                 &#x27;profession&#x27;, &#x27;address&#x27;, &#x27;telephone&#x27;, </span><br><span class="line">&gt;                                 &#x27;wx&#x27;, &#x27;qq&#x27;, &#x27;wb&#x27;, &#x27;photo&#x27;)&#125;)</span><br><span class="line">&gt;     </span><br><span class="line">&gt;     # 根据当前用户名设置数据访问权限</span><br><span class="line">&gt;     def get_queryset(self, request): </span><br><span class="line">&gt;         qs = super().get_queryset(request)</span><br><span class="line">&gt;         return qs.filter(id=request.user.id)</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4><span id="七-静态文件配置">七、静态文件配置</span></h4><blockquote>
+<p>下面的命令会将应用里面的static复制到根目录下</p>
+<p>python manage.py collectstatic</p>
+<ul>
+<li>调试模式：DEBUG&#x3D;True，项目运行时将读取应用里的static文件夹</li>
+<li>上线模式：DEBUG&#x3D;False，项目运行时将读取根目录下的static文件夹</li>
+</ul>
+</blockquote>
+<h2><span id="七-init项目应用初始化">七、–init–项目应用初始化</span></h2><h5><span id="1-介绍">1、介绍</span></h5><blockquote>
+<p>在Python中定义类经常会用到<strong>init</strong>函数（方法），首先需要理解的是，两个下划线开头的函数是声明该属性为私有，不能在类的外部被使用或访问。而<strong>init</strong>函数（方法）支持带参数类的初始化，也可为声明该类的属性（类中的变量）。<strong>init</strong>函数（方法）的第一个参数必须为self，后续参数为自己定义。</p>
+</blockquote>
+<h5><span id="2-用法案列">2、用法案列</span></h5><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; from django.apps import AppConfig</span><br><span class="line">&gt; import os</span><br><span class="line">&gt; # 修改app在admin后台显示的名称</span><br><span class="line">&gt; # default_app_config 的值来自apps.py的类名</span><br><span class="line">&gt; default_app_config = &#x27;account.IndexConfig&#x27;</span><br><span class="line">&gt;</span><br><span class="line">&gt; # 获取当前app的命名</span><br><span class="line">&gt; def get_current_app_name(_file):</span><br><span class="line">&gt;     return os.path.split(os.path.dirname(_file))[-1]</span><br><span class="line">&gt;</span><br><span class="line">&gt; # 重写类IndexConfig</span><br><span class="line">&gt; class IndexConfig(AppConfig):</span><br><span class="line">&gt;     name = get_current_app_name(__file__)</span><br><span class="line">&gt;     verbose_name = &#x27;用户管理&#x27;</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2><span id="八-缺失文件">八、缺失文件</span></h2><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; /media/images</span><br><span class="line">&gt; /publicStatic/*</span><br><span class="line">&gt; /static</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5><span id="2-数据库创建">2、数据库创建</span></h5><blockquote>
+<p>python manage.py migrate</p>
+</blockquote>
+<h2><span id="九-报错信息">九、报错信息</span></h2><h5><span id="1-依赖于没有迁移的应用程序帐户">1、依赖于没有迁移的应用程序：帐户</span></h5><blockquote>
+<p>启动django项目时报错: ValueError: Dependency on app with no migrations: account</p>
+<p>原因没有迁移表造成的:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python manage.py makemigrations</span><br><span class="line"></span><br><span class="line">python manage.py migrate</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4><span id="十-linux部署">十、Linux部署</span></h4><h5><span id="1-uwsgi设置">1、uwsgi设置</span></h5><blockquote>
+<p>Myblog_uwsgi.ini添加: wsgi-file&#x3D;&#x2F;home&#x2F;Myblog&#x2F;Myblog&#x2F;wsgi.py</p>
+<p>#查看日志</p>
+<p>cat uwsgi.log</p>
+<p>停止：uwsgi –stop uwsgi.pid</p>
+<p>启动：uwsgi –ini uwsgi.ini</p>
+</blockquote>
+<h5><span id="2-nginx">2、NGINX</span></h5><blockquote>
+<p>#查看日志</p>
+<p>tail -f &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log</p>
+</blockquote>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">自动化邮件发送</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/Python%E4%B8%8EMysql%E7%9A%84%E4%BA%A4%E4%BA%92/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Python与Mysql的交互</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://img.tukuppt.com/ad_preview/00/83/15/jmLqkl3XWx.jpg!/fw/260" class="soft-size--round soft-style--box" alt="ChengZhou">
+    
+    
+      <h2>ChengZhou</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>20</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        17
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>学习中。。。</p>
+  </div>
+</section>
+
+
+      <section class="widget-categories widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+      <span>CATEGORIES</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categories-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Django/" style="font-size: 10px;" class="tags-cloud-0">Django</a> <a href="/tags/Django-Linux/" style="font-size: 10px;" class="tags-cloud-0">Django Linux</a> <a href="/tags/Excel%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">Excel自动化</a> <a href="/tags/Flask/" style="font-size: 10px;" class="tags-cloud-0">Flask</a> <a href="/tags/Linux-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Linux Mysql</a> <a href="/tags/Python/" style="font-size: 10px;" class="tags-cloud-0">Python</a> <a href="/tags/Python-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Python Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;" class="tags-cloud-0">Redis</a> <a href="/tags/TkGUI/" style="font-size: 10px;" class="tags-cloud-0">TkGUI</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;" class="tags-cloud-0">博客搭建</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2/" style="font-size: 20px;" class="tags-cloud-10">容器部署</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;" class="tags-cloud-0">数据结构</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">浏览器自动化</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;" class="tags-cloud-0">爬虫</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80/" style="font-size: 10px;" class="tags-cloud-0">网页布局</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 15px;" class="tags-cloud-5">自动化</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" style="font-size: 10px;" class="tags-cloud-0">项目记录</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">ChengZhou</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  
+
+
+
+
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

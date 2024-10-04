@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+
+  
+    <meta name="description" content="Zhou">
+  
+
+  
+
+  
+    <meta name="author" content="ChengZhou">
+  
+
+  
+
+  
+
+  <title>redis学习 | XiaoZhou</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          XiaoZhou
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/archives">归档</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">redis学习</h1>
+          <h2 class="title-sub-wrap">
+            <strong>ChengZhou</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2024-10-04T13:01:57.000Z" itemprop="datePublished">2024-10-04</time>
+          </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/Redis/">🏷️ Redis</a></li>
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h1><span id="一-简介">一、 简介</span></h1><blockquote>
+<p>Redis 是一个开源（BSD许可）的，内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件。</p>
+<p>它支持多种类型的数据结构，如 字符串（strings）， 散列（hashes）， 列表（lists）， 集合（sets），有序集合（sorted sets） 与范围查询， bitmaps， hyperloglogs 和 地理空间（geospatial） 索引半径查询。</p>
+<p>Redis 内置了 复制（replication），LUA脚本（Lua scripting），LRU驱动事件（LRU eviction），事务（transactions）和不同级别的 磁盘持久化（persistence）， 并通过 Redis哨兵（Sentinel）</p>
+<p>和自动分区（Cluster）提供高可用性（high availability）。</p>
+<p>不要把 Redis 用作主要的数据存储数据库！！！！</p>
+<p>不能存储太多的信息！！大数据量的信息不要存储到Redis</p>
+<p>Redis 与其他 key - value 缓存产品有以下三个特点：</p>
+<p>1、支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。</p>
+<p>2、不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。</p>
+<p>3、支持数据的备份，即master-slave模式的数据备份。</p>
+<p>优势</p>
+<p>1、性能极高：Redis能读的速度是110000次&#x2F;s，写的速度是81000次&#x2F;s 。</p>
+<p>2、丰富的数据类型：Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作。</p>
+<p>3、原子：Redis的所有操作都是原子性的，意思就是要么成功执行要么失败完全不执行。</p>
+<p> 单个操作是原子性的。多个操作也支持事务，即原子性，通过MULTI和EXEC指令包起来。</p>
+<p>4、丰富的特性：Redis还支持 publish&#x2F;subscribe, 通知, key 过期等等特性</p>
+</blockquote>
+<h1><span id="二-文档">二、 文档</span></h1><p>1、官网文档：<a target="_blank" rel="noopener" href="https://redis.io/documentation">https://redis.io/documentation</a></p>
+<p>2、中文文档：<a target="_blank" rel="noopener" href="http://www.redis.cn/documentation.html">http://www.redis.cn/documentation.html</a></p>
+<h1><span id="三-安装">三、 安装</span></h1><p>linux版本最新的是4.0.9</p>
+<p>链接地址：<a target="_blank" rel="noopener" href="https://redis.io/download">https://redis.io/download</a></p>
+<p>windows平台最好的 MicrosoftArchive 维护的版本：</p>
+<p>目前最新的3.2.100</p>
+<p>以 windows 平台下为例：</p>
+<p>1、链接：<a target="_blank" rel="noopener" href="https://github.com/MicrosoftArchive/redis/releases%EF%BC%8C%E4%B8%8B%E8%BD%BD%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84zip%EF%BC%8C%E8%A7%A3%E5%8E%8B%E7%BC%A9%E7%89%88%E6%9C%AC">https://github.com/MicrosoftArchive/redis/releases，下载对应版本的zip，解压缩版本</a></p>
+<p>2、解压到 d:\redis</p>
+<p>3、将 d:\redis 添加到 环境变量 path 中</p>
+<p>4、打开 cmd 窗口，切换到 d:\redis 目录下，运行</p>
+<p> redis-server.exe redis.windows.conf</p>
+<p> 这个 redis.windows.conf 就是相关的配置信息：</p>
+<p> 如：</p>
+<p> bind 127.0.0.1</p>
+<p> port 6379</p>
+<p> protected-mode yes</p>
+<p> 等</p>
+<p>5、可以查看到</p>
+<p> Running in standalone mode</p>
+<p> port：6379</p>
+<p> PID : 13064</p>
+<p>6、这个 cmd 窗口 就是启动服务的窗口，不要关闭</p>
+<p>7、重新开启一个cmd窗口，运行</p>
+<p> redis-cli.exe -h 127.0.0.1 -p 6379</p>
+<p> 就可以连接到 redis</p>
+<h1><span id="四-配置">四、 配置</span></h1><p>连接到 redis 命令窗口后，</p>
+<p>可以通过 config get config_key 查看，譬如：config get loglevel</p>
+<p>可以通过 config set config_key config_value ，譬如：config set loglevel ‘debug’</p>
+<p>redis.windows.conf 配置项说明如下：</p>
+<ol>
+<li>Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程</li>
+</ol>
+<p> daemonize no</p>
+<ol>
+<li>当Redis以守护进程方式运行时，Redis默认会把pid写入&#x2F;var&#x2F;run&#x2F;redis.pid文件，可以通过pidfile指定</li>
+</ol>
+<p> pidfile &#x2F;var&#x2F;run&#x2F;redis.pid</p>
+<ol>
+<li>指定Redis监听端口，默认端口为6379，作者选用6379作为默认端口，</li>
+</ol>
+<p> 因为6379在手机按键上MERZ对应的号码，而MERZ取自意大利歌女Alessia Merz的名字</p>
+<p> port 6379</p>
+<ol>
+<li>绑定的主机地址，这个已经要注意，做测试都是绑定 127.0.0.1</li>
+</ol>
+<p> bind 127.0.0.1</p>
+<p>5.当 客户端闲置多长时间后关闭连接，如果指定为0，表示关闭该功能</p>
+<p> timeout 300</p>
+<ol>
+<li>指定日志记录级别，Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose</li>
+</ol>
+<p> loglevel verbose</p>
+<ol>
+<li>日志记录方式，默认为标准输出，如果配置Redis为守护进程方式运行，</li>
+</ol>
+<p> 而这里又配置为日志记录方式为标准输出，则日志将会发送给&#x2F;dev&#x2F;null</p>
+<p> logfile stdout</p>
+<ol>
+<li>设置数据库的数量，默认数据库为0，可以使用SELECT 命令在连接上指定数据库id</li>
+</ol>
+<p> databases 16</p>
+<ol>
+<li>指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合</li>
+</ol>
+<p> 多个条件中，任意满足一个就会进行同步</p>
+<p> save</p>
+<p> Redis默认配置文件中提供了三个条件：</p>
+<p> save 900 1</p>
+<p> save 300 10</p>
+<p>save 60 10000</p>
+<p> 分别表示900秒（15分钟）内有1个更改，300秒（5分钟）内有10个更改以及60秒内有10000个更改。</p>
+<ol>
+<li>指定存储至本地数据库时是否压缩数据，默认为yes，Redis采用LZF压缩，</li>
+</ol>
+<p> 如果为了节省CPU时间，可以关闭该选项，但会导致数据库文件变的巨大</p>
+<p> rdbcompression yes</p>
+<ol>
+<li>指定本地数据库文件名，默认值为dump.rdb</li>
+</ol>
+<p> dbfilename dump.rdb</p>
+<ol>
+<li>指定本地数据库存放目录</li>
+</ol>
+<p> dir .&#x2F;</p>
+<ol>
+<li>设置当本机为slave服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步</li>
+</ol>
+<p> slaveof</p>
+<ol>
+<li>当master服务设置了密码保护时，slave服务连接master的密码</li>
+</ol>
+<p> masterauth</p>
+<ol>
+<li>设置Redis连接密码，如果配置了连接密码，</li>
+</ol>
+<p> 客户端在连接Redis时需要通过AUTH 命令提供密码，默认关闭</p>
+<p> requirepass foobared</p>
+<ol>
+<li>设置同一时间最大客户端连接数，默认无限制，Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数，</li>
+</ol>
+<p> 如果设置 maxclients 0，表示不作限制。当客户端连接数到达限制时，</p>
+<p> Redis会关闭新的连接并向客户端返回max number of clients reached错误信息</p>
+<p> maxclients 128</p>
+<ol>
+<li>指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，</li>
+</ol>
+<p> Redis会先尝试清除已到期或即将到期的Key，当此方法处理 后，仍然到达最大内存设置，</p>
+<p> 将无法再进行写入操作，但仍然可以进行读取操作。</p>
+<p> Redis新的vm机制，会把Key存放内存，Value会存放在swap区</p>
+<p> maxmemory</p>
+<ol>
+<li>指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，</li>
+</ol>
+<p> 如果不开启，可能会在断电时导致一段时间内的数据丢失。</p>
+<p> 因为 redis本身同步数据文件是按上面save条件来同步的，</p>
+<p> 所以有的数据会在一段时间内只存在于内存中。默认为no</p>
+<p> appendonly no</p>
+<ol>
+<li>指定更新日志文件名，默认为appendonly.aof</li>
+</ol>
+<p> appendfilename appendonly.aof</p>
+<ol>
+<li>指定更新日志条件，共有3个可选值：</li>
+</ol>
+<p> no：表示等操作系统进行数据缓存同步到磁盘（快）</p>
+<p> always：表示每次更新操作后手动调用fsync()将数据写到磁盘（慢，安全）</p>
+<p> everysec：表示每秒同步一次（折衷，默认值）</p>
+<p> appendfsync everysec</p>
+<ol>
+<li>指定是否启用虚拟内存机制，默认值为no，简单的介绍一下，VM机制将数据分页存放，</li>
+</ol>
+<p> 由Redis将访问量较少的页即冷数据swap到磁盘上，访问多的页面由磁盘自动换出到内存中（</p>
+<p> vm-enabled no</p>
+<ol>
+<li>虚拟内存文件路径，默认值为&#x2F;tmp&#x2F;redis.swap，不可多个Redis实例共享</li>
+</ol>
+<p> vm-swap-file &#x2F;tmp&#x2F;redis.swap</p>
+<ol>
+<li>将所有大于vm-max-memory的数据存入虚拟内存,无论vm-max-memory设置多小,</li>
+</ol>
+<p> 所有索引数据都是内存存储的(Redis的索引数据 就是keys),也就是说,</p>
+<p> 当vm-max-memory设置为0的时候,其实是所有value都存在于磁盘。默认值为0</p>
+<p> vm-max-memory 0</p>
+<ol>
+<li>Redis swap文件分成了很多的page，一个对象可以保存在多个page上面，但一个page上不能被多个对象共享，vm-page-size是要根据存储的 数据大小来设定的，作者建议如果存储很多小对象，page大小最好设置为32或者64bytes；如果存储很大大对象，则可以使用更大的page，如果不 确定，就使用默认值</li>
+</ol>
+<p> vm-page-size 32</p>
+<ol>
+<li>设置swap文件中的page数量，由于页表（一种表示页面空闲或使用的bitmap）是在放在内存中的，，在磁盘上每8个pages将消耗1byte的内存。</li>
+</ol>
+<p> vm-pages 134217728</p>
+<ol>
+<li>设置访问swap文件的线程数,最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的，可能会造成比较长时间的延迟。默认值为4</li>
+</ol>
+<p> vm-max-threads 4</p>
+<ol>
+<li>设置在向客户端应答时，是否把较小的包合并为一个包发送，默认为开启</li>
+</ol>
+<p> glueoutputbuf yes</p>
+<ol>
+<li>指定在超过一定的数量或者最大的元素超过某一临界值时，采用一种特殊的哈希算法</li>
+</ol>
+<p> hash-max-zipmap-entries 64</p>
+<p> hash-max-zipmap-value 512</p>
+<ol>
+<li>指定是否激活重置哈希，默认为开启（后面在介绍Redis的哈希算法时具体介绍）</li>
+</ol>
+<p> activerehashing yes</p>
+<ol>
+<li>指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，</li>
+</ol>
+<p> 而同时各个实例又拥有自己的特定配置文件</p>
+<p> include &#x2F;path&#x2F;to&#x2F;local.conf</p>
+<h1><span id="五-数据类型">五、 数据类型</span></h1><p>Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。</p>
+<h2><span id="1-string">1、 string</span></h2><p>字符串，单键最大512m</p>
+<p> 命令列表：</p>
+<p> set name “test” # 设置 key</p>
+<p> get name # 获取key</p>
+<p> set name aaa nx # nx参数，name 这个key 不存在时，才能新增成功，否则失败，如果已经存在，那么不修改</p>
+<p> set name aaa xx # xx参数，name 这个key 存在时，才能设置成功，否则失败，只有存在，才修改，不新增</p>
+<p> set name aaa ex 10 # ex 是失效时间，单位 秒， 不能和 px 同时存在</p>
+<p> set name aaa px 100 # px 是失效时间，单位 毫秒 ，不能和 ex同时存在</p>
+<h1><span id="incr-原子增量多个客户端请求不会冲突">incr 原子增量，多个客户端请求不会冲突</span></h1><h1><span id="类似的-incrby-decr-decrby">类似的 incrby ， decr， decrby</span></h1><p> set counter 100</p>
+<p> incr counter</p>
+<p> incr counter</p>
+<p> incrby counter 50</p>
+<p> decr counter</p>
+<h1><span id="getset-设置新值并返回旧值">getset 设置新值并返回旧值</span></h1><p> get name</p>
+<p> getset name ccc</p>
+<p> get name</p>
+<h1><span id="mget-mset-批量获取和修改">mget, mset 批量获取和修改</span></h1><p> set age 10</p>
+<p> mget name age</p>
+<p> mset name ‘ddd’ age 20</p>
+<h1><span id="exists检测键是否存在返回-0和1">exists，检测键是否存在，返回 0和1</span></h1><p> exists name</p>
+<h1><span id="del-删除key-存在返回-1-不存在返回0">del 删除key , 存在返回 1 ，不存在返回0</span></h1><p> get age</p>
+<p> del age</p>
+<p> get age</p>
+<h1><span id="expire-设置过期单位-秒">expire ，设置过期，单位 秒</span></h1><p> set age 10</p>
+<p> expire age 3</p>
+<p> get age</p>
+<h1><span id="完整的set-ex-和-px-不能同时设置">完整的set , ex 和 px 不能同时设置</span></h1><p> SET 键 值 [EX 秒][PX 毫秒] [NX | XX]</p>
+<p> set age 20 ex 10 nx</p>
+<h2><span id="2-hash">2、 hash</span></h2><p>一个键值(key&#x3D;&gt;value)对集合，每个 hash 可以存储 2^32 -1 键值对（40多亿）</p>
+<p> hmset hash_test k1 “Hello” k2 “World” # 设置 hash 的 多个 key</p>
+<p> hset hash_test k3 100 # 设置单个key</p>
+<p> hget hash_test k1 # 获取单个 hash 的key</p>
+<p> hget hash_test k2</p>
+<p> hmget hash_test k1 k2 # 获取hash 的多个 key</p>
+<p> hgetall # 获取所有value</p>
+<h1><span id="hincrby-hash中的字段-增加">hincrby hash中的字段 增加</span></h1><p> hincrby hash_test k3 9</p>
+<h2><span id="3-list">3、 list</span></h2><p>string类型的链表（和python的list有区别），按照插入顺序排序。</p>
+<p> 可以添加一个元素到list的头部（左边）或者尾部（右边）</p>
+<p> lpush list_test one # 将元素添加到list的左边</p>
+<p> lpush list_test two</p>
+<p> lpush list_test three</p>
+<p> lrange list_test 0 10 # 获取列表的元素，下标从0开始，0 是起始位置（包含）， 10是结束位置（包含）</p>
+<p> rpush list_test four # 将元素添加到list的右边</p>
+<p> lrange list_test 0 10 # 获取一个list， 0 是起始位置（包含）， 10是结束位置（包含）</p>
+<p> lrange list_test 0 -1 # -1 表示最后</p>
+<p> lpop list_test # 从左边弹出元素，获取并删除</p>
+<p> rpop list_test # 从右边弹出元素</p>
+<p> rpush mylist 1 2 3 4 5</p>
+<p> ltrim mylist 0 2 # 删除给定范围之外的元素</p>
+<h1><span id="等待列表中的元素tasks但如果5秒后没有元素可用则返回-设置为-0-秒则永久等待">等待列表中的元素tasks，但如果5秒后没有元素可用，则返回 ,设置为 0 秒，则永久等待</span></h1><p> brpop tasks 5</p>
+<p> blpop tasks 5</p>
+<h1><span id="llen-返回长度">llen 返回长度</span></h1><p> llen tasks</p>
+<h1><span id="不能更改已经存在key的类型以下代码会出错">不能更改已经存在key的类型，以下代码会出错</span></h1><p> set foo bar</p>
+<p> lpush foo 1 2 3 # 不能把一个 字符串 类型的key，修改为 list , 反之可以，从list可以通过set 修改为 字符串</p>
+<h1><span id="弹出所有元素后key会被删除">弹出所有元素后，key会被删除</span></h1><p> del foo</p>
+<p> lpush foo 1 2</p>
+<p> lpop foo</p>
+<p> lpop foo</p>
+<p> exists foo</p>
+<h2><span id="4-set">4、 set</span></h2><p>string类型元素的无序集合，最大的成员数为 2^32 - 1(40多亿)</p>
+<p> sadd set_test one # 在set 中增加 元素</p>
+<p> sadd set_test two three four</p>
+<p> sadd set_test three # 这条命令会被忽略，因为 set 中已经有 three 这个值存在了。</p>
+<p> smembers set_test # 获取set的所有值</p>
+<p> sismember set_test 3 # 检测 set 中是否存在某个 值</p>
+<h1><span id="sinter-不同的set之间的交集2个集合中都存在的数据">sinter 不同的set之间的交集，2个集合中都存在的数据</span></h1><p> sadd set_test1 one 1 two 2</p>
+<p> sinter set_test set_test1</p>
+<h1><span id="srandmember-随机获取一个元素不会删除元素在集合中的存在对比-spop">srandmember 随机获取一个元素，不会删除元素在集合中的存在，对比 spop</span></h1><p> srandmember deck</p>
+<h1><span id="spop-弹出一个元素-会在集合中-删除该元素">spop 弹出一个元素 ,会在集合中 删除该元素</span></h1><p> spop set_test1 [count]</p>
+<h1><span id="sunionstore-复制-set-的副本">sunionstore 复制 set 的副本</span></h1><p> sadd deck C1 C2 C3 C4 C5 C6 C7 C8 C9 C10 CJ CQ CK D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 DJ DQ DK H1 H2 H3 H4 H5 H6 H7 H8 H9 H10 HJ HQ HK S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 SJ SQ SK</p>
+<p> sunionstore deck_s deck</p>
+<h1><span id="scard-获取-set-中的元素数量">SCARD 获取 set 中的元素数量</span></h1><p> scard deck</p>
+<h2><span id="5-zset">5、 zset</span></h2><p>string类型元素的有序集合，介于 hash和set 之间</p>
+<p> 每个元素都会关联一个double类型的分数，成员是唯一的,</p>
+<p> 但分数(score)却可以重复，根据分数从小到大排序</p>
+<p> zadd zset_test 0 one</p>
+<p> zadd zset_test 2 two</p>
+<p> zadd zset_test 1 three</p>
+<p> zadd zset_test 4 four</p>
+<p> zadd zset_test 2 five # 同样的分数，根据value的顺序排序，redis 2.8 之后新特性</p>
+<p> zadd zset_test 2 zero # 同样的分数，根据value的顺序排序，redis 2.8 之后新特性</p>
+<p> zadd zset_test 10001 six</p>
+<p> zrangebyscore zset_test 0 1000 # 根据分数范围查找元素, 不是下标！！！是分数！！</p>
+<p> zrange zset_test 0 1000 # 从小到大 获取元素</p>
+<p> zrevrange zset_test 0 -1 # 从大到小 获取元素</p>
+<h1><span id="withscores-连元素和分数一起返回">withscores 连元素和分数一起返回</span></h1><p> zrange zset_test 0 -1 withscores</p>
+<h1><span id="zrangebyscore-获取分数小于等于这个值的所有元素">zrangebyscore 获取分数小于等于这个值的所有元素</span></h1><p> zrangebyscore zset_test -inf 4</p>
+<h1><span id="zremrangebyscore-删除-分数范围之间的元素-并且返回删除的个数">zremrangebyscore 删除 分数范围之间的元素 ,并且返回删除的个数</span></h1><p> zremrangebyscore zset_test 1 3</p>
+<h1><span id="zrank-获取指定元素的位置-从-0-开始的">zrank 获取指定元素的位置 ，从 0 开始的</span></h1><p> zrange zset_test 0 -1</p>
+<p> zrank zset_test six</p>
+<h1><span id="获取zset的长度">获取zset的长度</span></h1><p> zcard zset_test</p>
+<h2><span id="6-其他">6、 其他</span></h2><p>keys * ： 查看所有的key</p>
+<p>select num： 切换到指定数据库，默认是0：select 0</p>
+<p>flushall ： 删除所有数据库</p>
+<p>flushdb ： 删除当前数据库</p>
+<h1><span id="六-python操作redis">六、 python操作redis</span></h1><h2><span id="1-使用-redis-库">1、 使用 redis 库</span></h2><p>安装： pip install redis</p>
+<p>当前最新版：2.10.6</p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/redis">https://pypi.python.org/pypi/redis</a></p>
+<h2><span id="2-连接">2、 连接：</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">复制# host是redis主机，需要redis服务端和客户端都启动 redis默认端口是6379</span><br><span class="line"># decode_responses=True，写入的键值对中的value为str类型，为 False 写入的则为字节类型，默认为False。</span><br><span class="line">r = redis.Redis(host=&#x27;localhost&#x27;, port=6379, decode_responses=True)</span><br><span class="line">r.set(&#x27;name&#x27;, &#x27;junxi&#x27;)  # key是&quot;foo&quot; value是&quot;bar&quot; 将键值对存入redis缓存</span><br><span class="line">print(r[&#x27;name&#x27;])</span><br><span class="line">print(r.get(&#x27;name&#x27;))  # 取出键name对应的值</span><br><span class="line">print(type(r.get(&#x27;name&#x27;)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="3-连接池">3、 连接池</span></h2><p>pool &#x3D; redis.ConnectionPool(host&#x3D;’127.0.0.1’, port&#x3D;6379)</p>
+<p>r &#x3D; redis.Redis(connection_pool&#x3D;pool)</p>
+<p>一般情况下，我们不需要指定连接池，Redis 会自动使用</p>
+<h2><span id="4-管道技术">4、 管道技术</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">复制4.1 多行编写</span><br><span class="line"></span><br><span class="line">pipe = r.pipeline(transaction=True)</span><br><span class="line">pipe.set(&#x27;name&#x27;, &#x27;python&#x27;)</span><br><span class="line">pipe.set(&#x27;age&#x27;, 22)</span><br><span class="line"># execute提交</span><br><span class="line">pipe.execute()</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">4.2 一行编写</span><br><span class="line">pipe = r.pipeline()</span><br><span class="line">pipe.set(&#x27;foo&#x27;, &#x27;bar&#x27;).sadd(&#x27;faz&#x27;, &#x27;baz&#x27;).incr(&#x27;auto_number&#x27;).execute()</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">4.3 事务</span><br><span class="line">with r.pipeline() as pipe:</span><br><span class="line">    while True:</span><br><span class="line">        try:</span><br><span class="line">            # 监控 OUR-SEQUENCE-KEY  密钥</span><br><span class="line">            pipe.watch(&#x27;OUR-SEQUENCE-KEY&#x27;)</span><br><span class="line">            # 监听后，管道会进行 立刻执行命令 模式，除非我们设置为缓存模式</span><br><span class="line">            # 这样允许我们获得序列的值</span><br><span class="line">            current_value = pipe.get(&#x27;OUR-SEQUENCE-KEY&#x27;)</span><br><span class="line">            next_value = int(current_value) + 1</span><br><span class="line">            # 使用 multi 恢复到缓存模式</span><br><span class="line">            pipe.multi()</span><br><span class="line">            pipe.set(&#x27;OUR-SEQUENCE-KEY&#x27;, next_value)</span><br><span class="line">            # 执行许多行动</span><br><span class="line">            # 最后执行 命令</span><br><span class="line">            pipe.execute()</span><br><span class="line">            # 一直执行到这里，所以命令全部实现</span><br><span class="line">            # 退出</span><br><span class="line">            break</span><br><span class="line">        except WatchError as e:</span><br><span class="line">            # 另一个客户端修改了 OUR-SEQUENCE-KEY 的值，</span><br><span class="line">            # 在我们监听之后，到最后 执行之前 这个时间段内</span><br><span class="line">            # 回滚，重新执行</span><br><span class="line">            continue</span><br></pre></td></tr></table></figure>
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/flex%E5%B8%83%E5%B1%80/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">flex布局</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/Django%E5%9C%A8Linux%E4%B8%8A%E9%83%A8%E7%BD%B2/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Django在Linux上部署</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://img.tukuppt.com/ad_preview/00/83/15/jmLqkl3XWx.jpg!/fw/260" class="soft-size--round soft-style--box" alt="ChengZhou">
+    
+    
+      <h2>ChengZhou</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>20</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        17
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>学习中。。。</p>
+  </div>
+</section>
+
+
+      <section class="widget-categories widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+      <span>CATEGORIES</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categories-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Django/" style="font-size: 10px;" class="tags-cloud-0">Django</a> <a href="/tags/Django-Linux/" style="font-size: 10px;" class="tags-cloud-0">Django Linux</a> <a href="/tags/Excel%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">Excel自动化</a> <a href="/tags/Flask/" style="font-size: 10px;" class="tags-cloud-0">Flask</a> <a href="/tags/Linux-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Linux Mysql</a> <a href="/tags/Python/" style="font-size: 10px;" class="tags-cloud-0">Python</a> <a href="/tags/Python-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Python Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;" class="tags-cloud-0">Redis</a> <a href="/tags/TkGUI/" style="font-size: 10px;" class="tags-cloud-0">TkGUI</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;" class="tags-cloud-0">博客搭建</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2/" style="font-size: 20px;" class="tags-cloud-10">容器部署</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;" class="tags-cloud-0">数据结构</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">浏览器自动化</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;" class="tags-cloud-0">爬虫</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80/" style="font-size: 10px;" class="tags-cloud-0">网页布局</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 15px;" class="tags-cloud-5">自动化</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" style="font-size: 10px;" class="tags-cloud-0">项目记录</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">ChengZhou</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  
+
+
+
+
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

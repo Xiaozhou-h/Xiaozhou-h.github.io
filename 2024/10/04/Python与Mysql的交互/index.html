@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+
+  
+    <meta name="description" content="Zhou">
+  
+
+  
+
+  
+    <meta name="author" content="ChengZhou">
+  
+
+  
+
+  
+
+  <title>Python与Mysql的交互 | XiaoZhou</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          XiaoZhou
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/archives">归档</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">Python与Mysql的交互</h1>
+          <h2 class="title-sub-wrap">
+            <strong>ChengZhou</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2024-10-04T12:53:51.000Z" itemprop="datePublished">2024-10-04</time>
+          </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/Python-Mysql/">🏷️ Python Mysql</a></li>
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h3><span id="一-创建数据表">一、创建数据表</span></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">复制from sqlalchemy import create_engine, Integer, String  # 这里定义表的元素类型需要导入</span><br><span class="line">from sqlalchemy.orm import sessionmaker</span><br><span class="line">from sqlalchemy.ext.declarative import declarative_base</span><br><span class="line">from sqlalchemy import Column</span><br><span class="line"></span><br><span class="line"># 建立数据库连接，&quot;mysql+pymysql://用户名:密码@主机地址:端口号/数据库名?charset=utf8&quot;</span><br><span class="line">engine = create_engine(&quot;mysql+pymysql://root:123456@127.0.0.1:3306/doban?charset=utf8&quot;)</span><br><span class="line"></span><br><span class="line"># 操作数据库，需要我们创建一个session</span><br><span class="line">Session = sessionmaker(bind=engine)</span><br><span class="line"></span><br><span class="line"># 声明一个基类</span><br><span class="line">Base = declarative_base()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class dobantables(Base):</span><br><span class="line">    # 表名称</span><br><span class="line">    __tablename__ =&#x27;doban_data&#x27;</span><br><span class="line">    # 电影id,设置数据类型为Integer，并设置为主键和自动增长</span><br><span class="line">    film_id = Column(Integer, primary_key=True, autoincrement=True)</span><br><span class="line">    # 电影名，设置为string型，且不可为空</span><br><span class="line">    film_name = Column(String(length=50), nullable=False)</span><br><span class="line">    # 电影国家，设置为string型，且不可为空</span><br><span class="line">    film_country = Column(String(length=100), nullable=False)</span><br><span class="line">    # 电影类型，设置为string型，且不可为空</span><br><span class="line">    film_type = Column(String(length=100), nullable=False)</span><br><span class="line">    # 电影导演，设置为string型，且不可为空</span><br><span class="line">    film_director = Column(String(length=100), nullable=False)</span><br><span class="line">    # 电影主演，设置为string型，且不可为空</span><br><span class="line">    film_actor = Column(String(length=100), nullable=False)</span><br><span class="line">    # 抓取日期</span><br><span class="line">    crawl_date = Column(String(length=50), nullable=False)</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    # 创建数据表</span><br><span class="line">    dobantables.metadata.create_all(engine)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3><span id="二-增删改查">二、增删改查</span></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">复制#!usr/bin/env python</span><br><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">@author:DOULIHANG</span><br><span class="line">@file: db_operation.py</span><br><span class="line">@time: 2020/07/01</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import json</span><br><span class="line"></span><br><span class="line">import pymysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class DbOperation():</span><br><span class="line">    def __init__(self, host, user, password, database, port=3306):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        host：数据库服务器地址</span><br><span class="line">        user：登录数据库的用户名</span><br><span class="line">        password：登录数据库的密码</span><br><span class="line">        database：要连接的数据库名称</span><br><span class="line">        port：连接数据库的端口</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.host = host</span><br><span class="line">        self.user = user</span><br><span class="line">        self.password = password</span><br><span class="line">        self.database = database</span><br><span class="line">        self.port = port</span><br><span class="line">        # 连接数据库</span><br><span class="line">        self.conn = pymysql.connect(host=self.host,</span><br><span class="line">                                    user=self.user,</span><br><span class="line">                                    password=self.password,</span><br><span class="line">                                    database=self.database,</span><br><span class="line">                                    port=self.port)</span><br><span class="line"></span><br><span class="line">    def select(self, sql):</span><br><span class="line">        try:</span><br><span class="line">            # 使用cursor操作游标</span><br><span class="line">            cursor = self.conn.cursor()</span><br><span class="line">            # 执行sql</span><br><span class="line">            cursor.execute(sql)</span><br><span class="line">            # 获取所有记录，返回格式为元组</span><br><span class="line">            results = cursor.fetchall()</span><br><span class="line">            return results</span><br><span class="line">        except:</span><br><span class="line">            print(&quot;SQL语句: &#123;&#125; 无法查询&quot;.format(sql))</span><br><span class="line"></span><br><span class="line">    def update(self, sql):</span><br><span class="line">        try:</span><br><span class="line">            # 使用cursor操作游标</span><br><span class="line">            cursor = self.conn.cursor()</span><br><span class="line">            # 执行sql</span><br><span class="line">            cursor.execute(sql)</span><br><span class="line">            # 提交到数据库执行</span><br><span class="line">            self.conn.commit()</span><br><span class="line">        except:</span><br><span class="line">            # 发生错误时回滚</span><br><span class="line">            self.conn.rollback()</span><br><span class="line"></span><br><span class="line">    def delete(self, sql):</span><br><span class="line">        try:</span><br><span class="line">            # 使用cursor操作游标</span><br><span class="line">            cursor = self.conn.cursor()</span><br><span class="line">            # 执行sql</span><br><span class="line">            cursor.execute(sql)</span><br><span class="line">            # 提交到数据库执行</span><br><span class="line">            self.conn.commit()</span><br><span class="line">        except:</span><br><span class="line">            # 发生错误时回滚</span><br><span class="line">            self.conn.rollback()</span><br><span class="line"></span><br><span class="line">    def insert(self, sql):</span><br><span class="line">        try:</span><br><span class="line">            # 使用cursor操作游标</span><br><span class="line">            cursor = self.conn.cursor()</span><br><span class="line">            # 执行sql</span><br><span class="line">            cursor.execute(sql)</span><br><span class="line">            # 提交到数据库执行</span><br><span class="line">            self.conn.commit()</span><br><span class="line">        except:</span><br><span class="line">            # 发生错误时回滚</span><br><span class="line">            self.conn.rollback()</span><br><span class="line"></span><br><span class="line">    def run_stored_procedure(self, args):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        调用存储过程</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        try:</span><br><span class="line">            cur = self.conn.cursor()</span><br><span class="line">            # 调用存储过程，QSP_Clean_Data为存储过程名称，args为存储过程要传入的参数，格式为元组</span><br><span class="line">            cur.callproc(&#x27;QSP_Clean_Data&#x27;, args)</span><br><span class="line">            self.conn.commit()</span><br><span class="line">        except:</span><br><span class="line">            # 发生错误时回滚</span><br><span class="line">            self.conn.rollback()</span><br><span class="line"></span><br><span class="line">    def close(self):</span><br><span class="line">        # 关闭数据库连接</span><br><span class="line">        self.conn.close()</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    sql = DbOperation(host=&#x27;localhost&#x27;,user=&#x27;root&#x27;,password=&#x27;123456&#x27;,database=&#x27;doban&#x27;)</span><br><span class="line">    doban_daan = sql.select(&quot;select * from doban_data&quot;)</span><br><span class="line">    for text in doban_daan:</span><br><span class="line">        print(text)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3><span id="三-mysql查询语句大全">三、MySQl查询语句大全</span></h3><h4><span id="一-综合使用-查询-目录">一、综合使用 查询 目录：</span></h4><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; #----综合使用</span><br><span class="line">&gt; 书写顺序</span><br><span class="line">&gt; select distinct * from &#x27;表名&#x27; where &#x27;限制条件&#x27;  group by &#x27;分组依据&#x27; having &#x27;过滤条件&#x27; order by  limit &#x27;展示条数&#x27;</span><br><span class="line">&gt; 执行顺序</span><br><span class="line">&gt; from       -- 查询</span><br><span class="line">&gt; where      -- 限制条件</span><br><span class="line">&gt; group by   -- 分组</span><br><span class="line">&gt; having     -- 过滤条件</span><br><span class="line">&gt; order by   -- 排序</span><br><span class="line">&gt; limit      -- 展示条数</span><br><span class="line">&gt; distinct   -- 去重</span><br><span class="line">&gt; select     -- 查询的结果</span><br><span class="line">&gt; 正则：select * from emp where name regexp &#x27;^j.*(n|y)$&#x27;;</span><br><span class="line">&gt; 集合查询：max 、min 、avg 、sum 、count 、group_concat 。</span><br><span class="line">&gt; 内连接：inner join</span><br><span class="line">&gt; 左连接：left join</span><br><span class="line">&gt; 右连接：right join</span><br><span class="line">&gt; 全连接： 左连接 union 右连接</span><br><span class="line">&gt; replace 替换</span><br><span class="line">&gt;</span><br><span class="line">&gt; 拼接：concat、concat_ws、group_concat</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4><span id="二-常规设置操作">二、常规设置操作</span></h4><blockquote>
+<h4><span id="1服务器设置远程访问">1.服务器设置远程访问</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; grant all privileges on *.* to &#x27;root&#x27;@&#x27;%&#x27; identified by &#x27;123456&#x27; with grant option;</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="2linux中数据库的基本操作命令">2.Linux中数据库的基本操作命令</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; 1.使用service </span><br><span class="line">&gt;   启动：service mysql start</span><br><span class="line">&gt;   停止：service mysql stop</span><br><span class="line">&gt;   重启：service mysql restart</span><br><span class="line">&gt; 2.清屏：clear,reset</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="3备份数据库">3.备份数据库</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; #mysqldump -uroot -p密码 数据库名 &gt; D:/备份文件名.sql</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="4恢复备份的数据库">4.恢复备份的数据库</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; #首先在mysql里建好数据库名</span><br><span class="line">&gt; #mysql -uroot -p密码 数据库名 &lt; D:/备份文件名.sql</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="5查询binlog日志是否开启">5.查询binlog日志是否开启</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; show variables like &#x27;log_%&#x27;; </span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4><span id="三-基本操作">三、基本操作：</span></h4><blockquote>
+<h4><span id="1单表约束">1.单表约束</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; #主键约束：PRIMARY KEY              要求被装饰的字段：唯一和非空</span><br><span class="line">&gt; #唯一约束：UNIQUE               要求被装饰的字段：唯一，</span><br><span class="line">&gt; #                             .联合唯一：在结尾：unique(字段1，字段2)</span><br><span class="line">&gt; #非空约束：NOT NULL             要求被装饰的字段：非空</span><br><span class="line">&gt; #外键约束：FOREIGN KEY          某主表的外键</span><br><span class="line">&gt; #自动增加：AUTO_INCREMENT       自动增加(需要和主键 PRIMARY KEY 同时用)</span><br><span class="line">&gt; #设置默认值:DEFAULT             为该属性设置默认值</span><br><span class="line">&gt; # 在int、char中：zerofill            不足位数默认填充0</span><br><span class="line">&gt; #</span><br><span class="line">&gt; # </span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="2常用数据类型">2.常用数据类型</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; int        #整型，4个字节  一般不需要指定宽度，（8）：只是显示为8位，默认有负号设置无负号： unsigned</span><br><span class="line">&gt; double     #浮点型，例如double(5,2),标识最多5位，其中2位为小数，即最大为999.99</span><br><span class="line">&gt; varchar        #可变长度字符串类型。例如：varchar(10) &#x27;aaa&#x27; 占3位</span><br><span class="line">&gt; char       #固定长度字符串类型。例如：char(10) &#x27;aaa&#x27; 占10位</span><br><span class="line">&gt; text       #大文本字符串类型。</span><br><span class="line">&gt; blob       #字节类型。例如：</span><br><span class="line">&gt; datetime   #日期时间类型。例如：datetime(yyyy-MM-dd hh:mm:ss)</span><br><span class="line">&gt; date       #日期类型。例如：date(yyyy:MM:dd)</span><br><span class="line">&gt; time       #时间类型。例如：time(hh:mm:ss)</span><br><span class="line">&gt; timestamp  #时间戳类型。例如：timestamp(yyyy-MM-dd hh:mm:ss)  会自动赋值</span><br><span class="line">&gt; enum       #枚举 多选一 enum(&#x27;male&#x27;,&#x27;female&#x27;)，default为默认值</span><br><span class="line">&gt; 例如：sex enum(&#x27;male&#x27;,&#x27;female&#x27;) not null default &#x27;male&#x27;</span><br><span class="line">&gt; set            #集合 多选多,可以选一个 set（&#x27;read&#x27;,&#x27;DJ&#x27;,&#x27;DBJ&#x27;,&#x27;run&#x27;)</span><br><span class="line">&gt; 注：字符串类型和时间类型都要用单引号括起来，空值为null</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="3查看数据列表">3.查看数据列表</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; show databases; -- 查看所有数据库</span><br><span class="line">&gt; show create table 表名; -- 查看表的创建细节</span><br><span class="line">&gt; desc 表名; -- 查看表结构</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="4进入数据库">4.进入数据库</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; #use 数据名</span><br><span class="line">&gt; use Python_7</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="5创建数据库">5.创建数据库</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; #CREATE DATABASE 数据库名</span><br><span class="line">&gt; CREATE DATABASE Python_7; </span><br><span class="line">&gt; CREATE DATABASE pyrhon_7 charset utf8</span><br><span class="line">&gt;</span><br><span class="line">&gt; # 修改数据库编码</span><br><span class="line">&gt; alter database db1 charset gbk;</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="6删除数据库">6.删除数据库</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; #drop database 需要删除的数据库名</span><br><span class="line">&gt; drop database Python_7;</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="7查看表">7.查看表</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; select database();  # 查看当前所在的库</span><br><span class="line">&gt; show tables; -- 查看数据库中所有表</span><br><span class="line">&gt; desc 表名; -- 查看表结构</span><br><span class="line">&gt; show create table 表名; -- 查看表的创建细节</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="8创建表">8.创建表</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 创建新表</span><br><span class="line">&gt; # create table 新建数据表名（</span><br><span class="line">&gt; #      字段名 类型(长度) [约束(具体见1)],</span><br><span class="line">&gt; #      字段名 类型(长度) [约束(具体见1)]</span><br><span class="line">&gt; #  );</span><br><span class="line">&gt; create table class(</span><br><span class="line">&gt;       id INT AUTO_INCREMENT,</span><br><span class="line">&gt;   name varchar(32) UNIQUE,</span><br><span class="line">&gt;   age varchar(32) NOT NULL</span><br><span class="line">&gt; );</span><br><span class="line">&gt;</span><br><span class="line">&gt; #需要注意</span><br><span class="line">&gt;</span><br><span class="line">&gt;</span><br><span class="line">&gt; #根据已有的表创建新表</span><br><span class="line">&gt; create table 新表 like 旧表  -- 使用旧表创建新表</span><br><span class="line">&gt; create table 新表 as select 字段1 字段2... from definition only -- 使用自定义值去新建表</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="9删除表">9.删除表</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; #drop table 数据库表名</span><br><span class="line">&gt; drop table Python</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="10修改表">10.修改表</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; alter table 表名 add 字段名 类型（长度） [约束]; -- 添加列</span><br><span class="line">&gt; alter table 表名 modify 字段名 类型（长度） [约束]; -- 修改列的类型长度及约束</span><br><span class="line">&gt; alter table 表名 change 旧字段名 新字段名 类型（长度） [约束]; -- 修改列表名</span><br><span class="line">&gt; alter table 表名 drop 字段名; -- 删除列</span><br><span class="line">&gt; alter table 表名 character set 字符集; -- 修改表的字符集</span><br><span class="line">&gt; rename table 表名 to 新表名; -- 修改表名</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="11增加数据">11.增加数据</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; insert into 表(字段名1，字段名2..) values(值1，值2..);-- 向表中插入某些列</span><br><span class="line">&gt; insert into 表 values(值1，值2，值3..); -- 向表中插入所有列</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="12修改数据">12.修改数据</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; update 表名 set 字段名=值,字段名=值...; -- 这个会修改所有的数据，把一列的值都变了</span><br><span class="line">&gt; update 表名 set 字段名=值,字段名=值... where 条件; -- 只改符合where条件的行</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="13删除数据">13.删除数据</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; delete from 表名  -- 删除表中所有记录</span><br><span class="line">&gt; delete from 表名 where 条件 -- 删除符合 where条件的数据</span><br><span class="line">&gt; truncate table 表名; -- 把表直接drop掉，重新建表，auto_increment将置为零。删除的数据不能找回。执行速度比delete快</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="14数据的简单查询">14.数据的简单查询</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; select * from 表名; -- 查询所有列</span><br><span class="line">&gt; select 字段名1,字段名2,字段名3.. from 表名; -- 查询指定列</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="15几个简单的基本的sql语句">15.几个简单的基本的sql语句</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; select * from 表名 where 范围                           -- 选择查询</span><br><span class="line">&gt; insert into 表名(field1,field2) values(value1,value2)   -- 插入</span><br><span class="line">&gt; delete from 表名 where 范围                             -- 删除</span><br><span class="line">&gt; update 表名 set field1=value1 where 范围                -- 更新</span><br><span class="line">&gt; select * from 表名 where field1 like ’%value1%’            -- 查找</span><br><span class="line">&gt; select * from 表名 order by field1,field2 [desc]        -- 排序：</span><br><span class="line">&gt; select count as 需要统计总数的字段名 from 表名             -- 总数</span><br><span class="line">&gt; select sum(field1) as sumvalue from 表名               -- 求和</span><br><span class="line">&gt; select avg(field1) as avgvalue from 表名               -- 平均</span><br><span class="line">&gt; select max(field1) as maxvalue from 表名               -- 最大</span><br><span class="line">&gt; select min(field1) as minvalue from 表名               -- 最小</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="16存储引擎">16.存储引擎</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 查看所有的存储引擎</span><br><span class="line">&gt; show engines;</span><br><span class="line">&gt;</span><br><span class="line">&gt; # 查看不同存储引擎存储表结构文件特点</span><br><span class="line">&gt; create table t1(id int)engine=innodb; -- MySQL默认的存储引擎,支持事务,支持行锁，支持外键。有且只有一个主键，用来组织数据的依据</span><br><span class="line">&gt; create table t2(id int)engine=myisam; -- 不支持事务，不支持外键，支持全文索引，处理速度快。</span><br><span class="line">&gt; create table t3(id int)engine=blackhole; -- 黑洞，写入它的任何内容都会消失</span><br><span class="line">&gt; create table t4(id int)engine=memory;-- 将表中的数据存储在内存中。表结构以文件存储于磁盘。</span><br><span class="line">&gt;</span><br><span class="line">&gt; insert into t1 values(1);</span><br><span class="line">&gt; insert into t2 values(1);</span><br><span class="line">&gt; insert into t3 values(1);</span><br><span class="line">&gt; insert into t4 values(1);</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="17设置严格模式">17.设置严格模式</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 查询</span><br><span class="line">&gt; show variables like &#x27;%mode%&#x27;;</span><br><span class="line">&gt; # 设置</span><br><span class="line">&gt; set session -- 设置当前窗口下有效</span><br><span class="line">&gt; set global  -- 全局有效，终身受用</span><br><span class="line">&gt; set global sql_mode = &quot;STRICT_TRANS_TABLES&quot;;</span><br><span class="line">&gt; # 设置完成后需要退出客户端，重新登录客户端即可，不需要重启服务端</span><br><span class="line">&gt;</span><br><span class="line">&gt; group by分组涉及到的模式：</span><br><span class="line">&gt; 设置sql_mode为only_full_group_by，意味着以后但凡分组，只能取到分组的依据，</span><br><span class="line">&gt; 不应该在去取组里面的单个元素的值，那样的话分组就没有意义了，因为不分组就是对单个元素信息的随意获取</span><br><span class="line">&gt; &quot;&quot;&quot;</span><br><span class="line">&gt; set global sql_mode=&quot;strict_trans_tables,only_full_group_by&quot;;</span><br><span class="line">&gt; # 重新链接客户端</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="18like-的用法">18.like 的用法</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; A:% 包含零个或多个字符的任意字符串：</span><br><span class="line">&gt; 1、like&#x27;Mc%&#x27; 将搜索以字母 Mc 开头的所有字符串（如 McBadden）。</span><br><span class="line">&gt; 2、like&#x27;%inger&#x27; 将搜索以字母 inger 结尾的所有字符串（如 Ringer、Stringer）。</span><br><span class="line">&gt; 3、like&#x27;%en%&#x27; 将搜索在任何位置包含字母 en 的所有字符串（如 Bennet、Green、McBadden）。</span><br><span class="line">&gt;</span><br><span class="line">&gt; B:_（下划线） 任何单个字符：</span><br><span class="line">&gt;   like&#x27;_heryl&#x27; 将搜索以字母 heryl 结尾的所有六个字母的名称（如 Cheryl、Sheryl）。</span><br><span class="line">&gt;</span><br><span class="line">&gt; C：[ ] 指定范围 ([a-f]) 或集合 ([abcdef]) 中的任何单个字符： </span><br><span class="line">&gt;   1，like&#x27;[CK]ars[eo]n&#x27; 将搜索下列字符串：Carsen、Karsen、Carson 和 Karson（如 Carson）。</span><br><span class="line">&gt;   2、like&#x27;[M-Z]inger&#x27; 将搜索以字符串 inger 结尾、以从 M 到 Z 的任何单个字母开头的所有名称（如 Ringer）。</span><br><span class="line">&gt;</span><br><span class="line">&gt; D：[^] 不属于指定范围 ([a-f]) 或集合 ([abcdef]) 的任何单个字符：</span><br><span class="line">&gt;   like&#x27;M[^c]%&#x27; 将搜索以字母 M 开头，并且第二个字母不是 c 的所有名称（如MacFeather）。</span><br><span class="line">&gt;</span><br><span class="line">&gt; E：* 它同于DOS命令中的通配符，代表多个字符：</span><br><span class="line">&gt;   c*c代表cc,cBc,cbc,cabdfec等多个字符。</span><br><span class="line">&gt;</span><br><span class="line">&gt; F：？同于DOS命令中的？通配符，代表单个字符 :</span><br><span class="line">&gt;   b?b代表brb,bFb等</span><br><span class="line">&gt;</span><br><span class="line">&gt; G：# 大致同上，不同的是代只能代表单个数字。k#k代表k1k,k8k,k0k 。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 下面我们来举例说明一下：</span><br><span class="line">&gt;</span><br><span class="line">&gt; 例1，查询name字段中包含有“明”字的。</span><br><span class="line">&gt; select * from table1 where name like &#x27;%明%&#x27;</span><br><span class="line">&gt;</span><br><span class="line">&gt; 例2，查询name字段中以“李”字开头。</span><br><span class="line">&gt; select * from table1 where name like &#x27;李*&#x27;</span><br><span class="line">&gt;</span><br><span class="line">&gt; 例3，查询name字段中含有数字的。</span><br><span class="line">&gt; select * from table1 where name like &#x27;%[0-9]%&#x27;</span><br><span class="line">&gt;</span><br><span class="line">&gt; 例4，查询name字段中含有小写字母的。</span><br><span class="line">&gt; select * from table1 where name like &#x27;%[a-z]%&#x27;</span><br><span class="line">&gt;</span><br><span class="line">&gt; 例5，查询name字段中不含有数字的。</span><br><span class="line">&gt; select * from table1 where name like &#x27;%[!0-9]%&#x27;</span><br><span class="line">&gt;</span><br><span class="line">&gt; 以上例子能列出什么值来显而易见。但在这里，我们着重要说明的是通配符“*”与“%”的区别。</span><br><span class="line">&gt;</span><br><span class="line">&gt; 很多朋友会问，为什么我在以上查询时有个别的表示所有字符的时候用&quot;%&quot;而不用“*”？先看看下面的例子能分别出现什么结果：</span><br><span class="line">&gt; select * from table1 where name like &#x27;*明*&#x27;</span><br><span class="line">&gt; select * from table1 where name like &#x27;%明%&#x27;</span><br><span class="line">&gt; 大家会看到，前一条语句列出来的是所有的记录，而后一条记录列出来的是name字段中含有“明”的记录，所以说，当我们作字符型字段包含一个子串的查询时最好采用“%”而不用“*”,用“*”的时候只在开头或者只在结尾时，而不能两端全由“*”代替任意字符的情况下。</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4><span id="四-高级查询操作">四、高级查询操作</span></h4><blockquote>
+<h4><span id="1-外键表创建">1、外键表创建</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; 一对多（Foreign Key）</span><br><span class="line">&gt; # foreign key(需要关联的本字段) references 需要关联对表的表(需要关联对表的字段)</span><br><span class="line">&gt; 例如：</span><br><span class="line">&gt; 创建dep</span><br><span class="line">&gt; foreign key(dep_id) references dep(id)</span><br><span class="line">&gt; # 同步更新，同步删除</span><br><span class="line">&gt; on update cascade #同步更新</span><br><span class="line">&gt; on delete cascade #同步删除</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="2-表复制">2、表复制</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; 复制表</span><br><span class="line">&gt; create table t1 select * from test;</span><br><span class="line">&gt; 只复制表结构</span><br><span class="line">&gt; create table t1 select * from test where 1=2;</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="3-单表查询查询">3、单表查询查询</span></h4><h5><span id="0综合使用">0.综合使用</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; #----综合使用</span><br><span class="line">&gt; 书写顺序</span><br><span class="line">&gt; select distinct * from &#x27;表名&#x27; where &#x27;限制条件&#x27;  group by &#x27;分组依据&#x27; having &#x27;过滤条件&#x27; order by  limit &#x27;展示条数&#x27;</span><br><span class="line">&gt; 执行顺序</span><br><span class="line">&gt; from       -- 查询</span><br><span class="line">&gt; where      -- 限制条件</span><br><span class="line">&gt; group by   -- 分组</span><br><span class="line">&gt; having     -- 过滤条件</span><br><span class="line">&gt; order by   -- 排序</span><br><span class="line">&gt; limit      -- 展示条数</span><br><span class="line">&gt; distinct   -- 去重</span><br><span class="line">&gt; select     -- 查询的结果</span><br><span class="line">&gt;</span><br><span class="line">&gt; 正则：select * from emp where name regexp &#x27;^j.*(n|y)$&#x27;;</span><br><span class="line">&gt; 集合查询：max 、min 、avg 、sum 、count 、group_concat 。</span><br><span class="line">&gt; 拼接：concat、concat_ws、group_concat</span><br><span class="line">&gt; 内连接：inner join</span><br><span class="line">&gt; 左连接：left join</span><br><span class="line">&gt; 右连接：right join</span><br><span class="line">&gt; 全连接： 左连接 union 右连接</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="1where-查询">1.where 查询</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # between 在...之间</span><br><span class="line">&gt; select id,name from emp where id &gt;= 3 and id &lt;= 6;</span><br><span class="line">&gt; 相当于：</span><br><span class="line">&gt; select *  from emp where id between 3 and 6;  </span><br><span class="line">&gt;</span><br><span class="line">&gt; # or 或者</span><br><span class="line">&gt; select *  from emp where id &gt;= 3 or id &lt;= 6;</span><br><span class="line">&gt;</span><br><span class="line">&gt; # in，后面可以跟多个值</span><br><span class="line">&gt; select * from 表名 where 字段名 in (条件1,条件2,条件三); </span><br><span class="line">&gt;</span><br><span class="line">&gt; # like （见上18）</span><br><span class="line">&gt; # char——length()  取字符长度</span><br><span class="line">&gt; select * from 表名 where char_length(需要获取长度的字段名) = 4;</span><br><span class="line">&gt;</span><br><span class="line">&gt;</span><br><span class="line">&gt; not 配合使用</span><br><span class="line">&gt; 注意：判断空不能用 = ，只能用 is </span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="2group-by-分组">2.group by 分组</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; select 查询字段1,查询字段2,... from 表名</span><br><span class="line">&gt;       where 过滤条件</span><br><span class="line">&gt;       group by分组依据  # 分组后取出的是每个组的第一条数据</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="3聚合查询-以组为单位统计组内数据gtgtgt聚合查询聚集到一起合成为一个结果">3.聚合查询 ：以组为单位统计组内数据&gt;&gt;&gt;聚合查询(聚集到一起合成为一个结果)</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # max 最大值</span><br><span class="line">&gt; # 每个部门的最高工资</span><br><span class="line">&gt; select post,max(salary) from emp group by post;</span><br><span class="line">&gt;</span><br><span class="line">&gt; # min 最小值</span><br><span class="line">&gt; # 每个部门的最低工资</span><br><span class="line">&gt; select post,min(salary) from emp group by post;</span><br><span class="line">&gt;</span><br><span class="line">&gt; # avg 平均值</span><br><span class="line">&gt; # 每个部门的平均工资</span><br><span class="line">&gt; select post,avg(salary) from emp group by post;</span><br><span class="line">&gt; # 每个部门的工资总和</span><br><span class="line">&gt;</span><br><span class="line">&gt; # sum 求和</span><br><span class="line">&gt; select post,sum(salary) from emp group by post;</span><br><span class="line">&gt;</span><br><span class="line">&gt; # count（需要计数字段） 计数</span><br><span class="line">&gt; # 每个部门的人数</span><br><span class="line">&gt; select post,count(id) from emp group by post;</span><br><span class="line">&gt;</span><br><span class="line">&gt; # group_concat(需要分组后的字段) # 不仅可以用来显示除分组外字段还有拼接字符串的作用</span><br><span class="line">&gt;   select post,group_concat(name) from emp group by post; </span><br><span class="line">&gt;   -- post：分组字段，name 需要分组后显示的字段</span><br><span class="line">&gt; 拼接：</span><br><span class="line">&gt;   concat（不分组时用）拼接字符串达到更好的显示效果 as语法使用</span><br><span class="line">&gt;   举例：</span><br><span class="line">&gt;       select concat(&quot;NAME: &quot;,name) as 姓名 from emp;    </span><br><span class="line">&gt;   concat_ws: 如果拼接的符号是统一的可以用</span><br><span class="line">&gt;   举例：</span><br><span class="line">&gt;       select concat_ws(&#x27;:&#x27;,name,age,sex) as info from emp;</span><br><span class="line">&gt;   group_concat： </span><br><span class="line">&gt;   举例：</span><br><span class="line">&gt;       select post,group_concat(name,&#x27;DSB&#x27;) from emp group by post;</span><br><span class="line">&gt;       </span><br><span class="line">&gt; 补充：as语法 起别名</span><br><span class="line">&gt; select name as 姓名,salary as 薪资 from emp;</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="4having-过滤查询">4.having 过滤查询</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # having的语法格式与where一致，只不过having是在分组之后进行的过滤，即where虽然不能用聚合函数，但是having可以！</span><br><span class="line">&gt;</span><br><span class="line">&gt; # 用法</span><br><span class="line">&gt; select 查询字段1,查询字段2,... from 表名</span><br><span class="line">&gt;       where 过滤条件1</span><br><span class="line">&gt;       group by分组依据</span><br><span class="line">&gt; having avg(过滤条件2) &gt; 10000;</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="5distinct-去重">5.distinct 去重</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 对有重复的展示数据进行去重操作</span><br><span class="line">&gt; select distinct 需取重字段 from 表名;</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="6order-by-排序">6.order by 排序</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; select * from emp order by salary asc; #默认升序排</span><br><span class="line">&gt; select * from emp order by salary desc; #降序排</span><br><span class="line">&gt;</span><br><span class="line">&gt; # 多条件排序</span><br><span class="line">&gt; #先按照age降序排，在年轻相同的情况下再按照薪资升序排</span><br><span class="line">&gt; select * from emp order by age desc,salary asc; </span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="7limit-限制展示条数">7.limit 限制展示条数</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 限制展示条数</span><br><span class="line">&gt; select * from emp limit 3;</span><br><span class="line">&gt; # 查询工资最高的人的详细信息</span><br><span class="line">&gt; select * from emp order by salary desc limit 1;</span><br><span class="line">&gt;</span><br><span class="line">&gt; # 分页显示</span><br><span class="line">&gt; select * from emp limit 0,5;  # 第一个参数表示起始位置，第二个参数表示的是条数，不是索引位置</span><br><span class="line">&gt; select * from emp limit 5,5;</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="8正则">8.正则</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; select * from emp where name regexp &#x27;^j.*(n|y)$&#x27;;</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="9replace-替换">9.replace 替换</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; replace(str1,old,new) -- str1：需要替换的字段名</span><br><span class="line">&gt; update gd_km set mc=replace（mc,&#x27;土地&#x27;,&#x27;房子&#x27;）</span><br><span class="line">&gt; 说明：new替换str1中出现的所有old，返回新的字符串，如果有某个参数为NULL，此函数返回NULL </span><br><span class="line">&gt; 该函数可以多次替换，只要str1中还有old存在，最后都被替换成new </span><br><span class="line">&gt; 若new为空，则删除old</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h4><span id="四-多表查询">四、多表查询</span></h4><h5><span id="1内连接-左连接-右连接-全连接">1.内连接、左连接、右连接、全连接</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; 1、内连接：只取两张表有对应关系的记录（只拼两个表共有的）</span><br><span class="line">&gt; 左表 inner join 右表 on 条件</span><br><span class="line">&gt;   select * from emp inner join dep on emp.dep_id = dep.id</span><br><span class="line">&gt;        where dep.name = &quot;技术&quot;;</span><br><span class="line">&gt;</span><br><span class="line">&gt; 2、左连接：在内连接的基础上，保留左边的数据，右边没有就为空</span><br><span class="line">&gt; 左表 inner left 右表 on 条件</span><br><span class="line">&gt; 3、右连接：在内连接的基础上，保留右边的数据，左边没有就为空</span><br><span class="line">&gt; 左表 inner right 右表 on 条件</span><br><span class="line">&gt; 4、全连接：左右连接都有，用union连接</span><br><span class="line">&gt; 左表 inner left 右表 on 条件 union 左表 inner right 右表 on 条件</span><br><span class="line">&gt; select * from emp left join dep on emp.dep_id = dep.id</span><br><span class="line">&gt; union</span><br><span class="line">&gt; select * from emp right join dep on emp.dep_id = dep.id;</span><br><span class="line">&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h5><span id="2子查询">2.子查询</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 就是将一个查询语句的结果用括号括起来当作另外一个查询语句的条件去用</span><br><span class="line">&gt; select name from where id in(select dep_id from emp where age&gt;25);</span><br></pre></td></tr></table></figure></blockquote>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/Django%E8%AF%A6%E8%A7%A3/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Django详解</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/Python%E5%B8%B8%E7%94%A8%E5%BA%93/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Python常用库</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://img.tukuppt.com/ad_preview/00/83/15/jmLqkl3XWx.jpg!/fw/260" class="soft-size--round soft-style--box" alt="ChengZhou">
+    
+    
+      <h2>ChengZhou</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>20</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        17
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>学习中。。。</p>
+  </div>
+</section>
+
+
+      <section class="widget-categories widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+      <span>CATEGORIES</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categories-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Django/" style="font-size: 10px;" class="tags-cloud-0">Django</a> <a href="/tags/Django-Linux/" style="font-size: 10px;" class="tags-cloud-0">Django Linux</a> <a href="/tags/Excel%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">Excel自动化</a> <a href="/tags/Flask/" style="font-size: 10px;" class="tags-cloud-0">Flask</a> <a href="/tags/Linux-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Linux Mysql</a> <a href="/tags/Python/" style="font-size: 10px;" class="tags-cloud-0">Python</a> <a href="/tags/Python-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Python Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;" class="tags-cloud-0">Redis</a> <a href="/tags/TkGUI/" style="font-size: 10px;" class="tags-cloud-0">TkGUI</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;" class="tags-cloud-0">博客搭建</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2/" style="font-size: 20px;" class="tags-cloud-10">容器部署</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;" class="tags-cloud-0">数据结构</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">浏览器自动化</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;" class="tags-cloud-0">爬虫</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80/" style="font-size: 10px;" class="tags-cloud-0">网页布局</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 15px;" class="tags-cloud-5">自动化</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" style="font-size: 10px;" class="tags-cloud-0">项目记录</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">ChengZhou</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  
+
+
+
+
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

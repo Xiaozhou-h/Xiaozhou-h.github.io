@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+
+  
+    <meta name="description" content="Zhou">
+  
+
+  
+
+  
+    <meta name="author" content="ChengZhou">
+  
+
+  
+
+  
+
+  <title>Python的Excel自动化 | XiaoZhou</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          XiaoZhou
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/archives">归档</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">Python的Excel自动化</h1>
+          <h2 class="title-sub-wrap">
+            <strong>ChengZhou</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2024-10-04T12:46:31.000Z" itemprop="datePublished">2024-10-04</time>
+          </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/Excel%E8%87%AA%E5%8A%A8%E5%8C%96/">🏷️ Excel自动化</a></li>
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h1><span id="一-openpyxl操作">一、openpyxl操作</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">复制# 打开带宏的Excel文件，指带xlsm文件</span><br><span class="line">openpyxl.load_workbook(path, keep_vba=True)</span><br><span class="line"></span><br><span class="line"># 创建一个excel文件</span><br><span class="line">wb = openpyxl.Workbook()        </span><br><span class="line">sheet = wb.active               # 获得一个的工作表</span><br><span class="line">sheet.title = &quot;首都信息&quot;</span><br><span class="line">#设置写入数据类型</span><br><span class="line">sh.cell(row, column, vlaue).data_type = &quot;int&quot;</span><br><span class="line"># 选择指定的sheet表</span><br><span class="line">wb = load_workbook(r&#x27;test.xlsx&#x27;)</span><br><span class="line">print(wb._sheets[0])</span><br><span class="line">print(wb.active）   # 在新版本中是 wb.active</span><br><span class="line"># 获取所有表明</span><br><span class="line">workbook.sheetnames</span><br><span class="line"></span><br><span class="line">print(wb.get_sheet_by_name(&#x27;Sheet1&#x27;))</span><br><span class="line">print(wb[&#x27;Sheet1&#x27;])</span><br><span class="line">print(wb.worksheets[0])</span><br><span class="line"></span><br><span class="line"># 读取某单元格数据</span><br><span class="line">sheet.cell(row=3, column=4).value</span><br><span class="line">      </span><br><span class="line"># 读取具体的值，而不是公式，保存后会导致公式丢失</span><br><span class="line">wb = openpyxl.load_workbook(path, data_only=True)</span><br><span class="line">      </span><br><span class="line"># 新建表格</span><br><span class="line">wb = openpyxl.Workbook()</span><br><span class="line">sheet = wb.create_sheet(title=sheet_name, index=sheet_index)</span><br><span class="line">      </span><br><span class="line"># 写入非法字符</span><br><span class="line">ILLEGAL_CHARACTERS_RE = re.compile(r&#x27;[\000-\010]|[\013-\014]|[\016-\037]&#x27;)</span><br><span class="line">ILLEGAL_CHARACTERS_RE.sub(r&#x27;&#x27;, evaluation_content)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="一-保存图片插入图片">一、保存图片，插入图片</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">复制# 需要下载模块</span><br><span class="line">pip install pillow</span><br><span class="line">from openpyxl.drawing.image import Image</span><br><span class="line"></span><br><span class="line">img = Image(local_path + &#x27;/img/photo.png&#x27;)</span><br><span class="line">img.width, img.height = (100, 100)</span><br><span class="line">sh.add_image(img, &#x27;H4&#x27;)</span><br><span class="line"></span><br><span class="line">def excel_Link_to_Picture(path, pic_path):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    将excel中的图片链接转为图片，并以副本的形式保存</span><br><span class="line">    :param path: excel文件地址</span><br><span class="line">    :param pic_path: 图片下载的保存地址</span><br><span class="line">    :return:</span><br><span class="line">    eg:</span><br><span class="line">        path = &quot;D:\\ZhouCheng\\测试环境\\ZC_波司登\\波司登户外天猫旗舰店_竞品排行.xlsx&quot;</span><br><span class="line">        pic_path = &#x27;D:&#x27;  # 图片的保存路径</span><br><span class="line">        excel_Link_to_Picture(path, pic_path)</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def urllib_download(url, path, name):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        下载图片</span><br><span class="line">        :param url: 下载的图片链接</span><br><span class="line">        :param path: 保存路径</span><br><span class="line">        :param name: 保存的文件名</span><br><span class="line">        :return:</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        start_time = time.time()</span><br><span class="line">        while True:</span><br><span class="line">            try:</span><br><span class="line">                from urllib.request import urlretrieve</span><br><span class="line">                urlretrieve(url, path + &#x27;/&#x27; + name)</span><br><span class="line">            except BaseException as err:</span><br><span class="line">                import requests</span><br><span class="line">                with open(path + &#x27;/&#x27; + name, &#x27;wb&#x27;) as f:</span><br><span class="line">                    f.write(requests.get(url).content)</span><br><span class="line"></span><br><span class="line">            if os.path.getsize(path + &#x27;/&#x27; + name) &gt; 3000:</span><br><span class="line">                break</span><br><span class="line"></span><br><span class="line">            if time.time() - start_time &gt; 45:</span><br><span class="line">                return False</span><br><span class="line">                # raise Exception(&#x27;下载失败！！！&#x27; + url)</span><br><span class="line"></span><br><span class="line">        return True</span><br><span class="line"></span><br><span class="line">    def num_to_col(num):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        获取某一数值对应的列名</span><br><span class="line">        :param num: 将数字装换为对应的列名</span><br><span class="line">        :return: 返回装换后的列名</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if type(num) != int:</span><br><span class="line">            raise Exception(&#x27;只接受int型参数&#x27;)</span><br><span class="line"></span><br><span class="line">        if num % 26 == 0:</span><br><span class="line">            if num == 26:</span><br><span class="line">                return &#x27;Z&#x27;</span><br><span class="line">            else:</span><br><span class="line">                return num_to_col(num // 26 - 1) + &#x27;Z&#x27;</span><br><span class="line">        else:</span><br><span class="line">            if num &lt; 26:</span><br><span class="line">                return chr(64 + num)</span><br><span class="line">            else:</span><br><span class="line">                return num_to_col(num // 26) + num_to_col(num % 26)</span><br><span class="line"></span><br><span class="line">    def save_report():</span><br><span class="line">        &quot;&quot;&quot;保存报表&quot;&quot;&quot;</span><br><span class="line">        filenames = os.listdir(save_path)</span><br><span class="line">        num = 0</span><br><span class="line">        while True:</span><br><span class="line">            if num == 0:</span><br><span class="line">                na = path.split(&#x27;\\&#x27;)[-1].split(&#x27;.&#x27;)[0] + &#x27;已转换图片.xlsx&#x27;</span><br><span class="line">            else:</span><br><span class="line">                na = path.split(&#x27;\\&#x27;)[-1].split(&#x27;.&#x27;)[0] + &#x27;已转换图片&#x27; + str(num) + &#x27;.xlsx&#x27;</span><br><span class="line"></span><br><span class="line">            if na in filenames:</span><br><span class="line">                num += 1</span><br><span class="line">            else:</span><br><span class="line">                WB.save(save_path + &#x27;\\&#x27; + na)</span><br><span class="line">                break</span><br><span class="line"></span><br><span class="line">    save_path = path[:-len(path.split(&#x27;\\&#x27;)[-1])]  # 文件保存路径</span><br><span class="line">    picture_suffix = [&#x27;gif&#x27;, &#x27;jpg&#x27;, &#x27;jpeg&#x27;, &#x27;png&#x27;, &#x27;GIF&#x27;, &#x27;JPG&#x27;, &#x27;PNG&#x27;]</span><br><span class="line"></span><br><span class="line">    WB = openpyxl.load_workbook(path)</span><br><span class="line">    pic_num = 0  # 图片数量</span><br><span class="line"></span><br><span class="line">    for sheetname in WB.sheetnames:  # 下载图片并替换图片</span><br><span class="line">        sh = WB[sheetname]</span><br><span class="line">        max_row = sh.max_row</span><br><span class="line">        max_col = sh.max_column</span><br><span class="line"></span><br><span class="line">        for row in range(1, max_row + 1):</span><br><span class="line">            for col in range(1, max_col + 1):</span><br><span class="line">                cell_text = sh.cell(row, col).value</span><br><span class="line">                if type(cell_text) != str:</span><br><span class="line">                    continue</span><br><span class="line"></span><br><span class="line">                if cell_text.startswith(&#x27;http&#x27;) and cell_text.split(&#x27;.&#x27;)[-1] in picture_suffix:</span><br><span class="line">                    # 判断是不是图片，是的话就下载图片并替换</span><br><span class="line">                    pic_name = str(pic_num) + &#x27;.&#x27; + cell_text.split(&#x27;.&#x27;)[-1]  # 图片名字</span><br><span class="line">                    if urllib_download(cell_text, pic_path, pic_name):</span><br><span class="line">                        sh.row_dimensions[row].height = 50  # 调整行高</span><br><span class="line">                        sh.column_dimensions[num_to_col(col)].width = 9  # 调整列宽</span><br><span class="line"></span><br><span class="line">                        img = Image(pic_path + &#x27;/&#x27; + pic_name)</span><br><span class="line">                        img.width, img.height = (60, 60)</span><br><span class="line">                        sh.add_image(img, num_to_col(col) + str(row))</span><br><span class="line">                        sh.cell(row, col, &#x27;&#x27;)</span><br><span class="line"></span><br><span class="line">                        pic_num += 1</span><br><span class="line"></span><br><span class="line">    save_report()</span><br><span class="line"></span><br><span class="line">    return True</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="二-删除某行或某列">二、删除某行或某列</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">复制wk_sheet.delete_rows(3,2) #删除从第一行开始算的2行内容</span><br><span class="line">wk_sheet.delete_cols(1,2) #删除从第一列开始算的2列内容</span><br><span class="line">wk.save(r&quot;E:\55\s.xlsx&quot;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="三-插入行或列">三、插入行或列</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">复制# 插入行,在第一行上面插入三行</span><br><span class="line">wk_sheet.insert_rows(1, 3)</span><br><span class="line"># 插入列，在第一列左边插入三列</span><br><span class="line">wk_sheet.insert_cols(1, 3)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="四-影藏行或列设置长宽">四、影藏行或列，设置长宽</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">复制# 影藏行</span><br><span class="line">sheet.row_dimensions[2].hidden = 1</span><br><span class="line"># 影藏列</span><br><span class="line">sheet.column_dimensions[&#x27;a&#x27;].hidden = 1</span><br><span class="line"></span><br><span class="line"># 取消隐藏</span><br><span class="line">ws.column_dimensions.group(&#x27;A&#x27;,&#x27;D&#x27;, hidden=True)</span><br><span class="line">ws.row_dimensions.group(1,10, hidden=True)</span><br><span class="line">sheet.row_dimensions[2].hidden = 0</span><br><span class="line"></span><br><span class="line"># 设置某行或某列的宽度</span><br><span class="line">sheet.row_dimensions[1].height = 50  # 设置行宽</span><br><span class="line">sheet.column_dimensions[&#x27;a&#x27;].width = 50  # 设置列宽</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2><span id="五-合并拆分单元格">五、合并拆分单元格</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">复制#！ 合并的单元格无法二次合并</span><br><span class="line"></span><br><span class="line"># 合并单元格</span><br><span class="line">ws.merge_cells(range_string=&#x27;A1:B3&#x27;)</span><br><span class="line"># 拆分单元格</span><br><span class="line">ws.unmerge_cells(range_string=&#x27;A1:B3&#x27;)</span><br><span class="line"></span><br><span class="line"># 寻找合并的单元格，sh.merged_cell_ranges</span><br><span class="line">str([x for x in sh.merged_cell_ranges if &#x27;A&#x27; + str(insert_row_tm-1) in x][0])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1><span id="二-pandas操作">二、pandas操作</span></h1><h2><span id="1-读取excel">1、读取Excel</span></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">复制read_excel(io, sheet_name=0, header=0, skiprows=None, skip_footer=0, index_col=None,names=None, parse_cols=None, parse_dates=False,date_parser=None,na_values=None,thousands=None, convert_float=True, has_index_names=None, converters=None,dtype=None, true_values=None, false_values=None, engine=None, squeeze=False, **kwds)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>io : excel 路径。</p>
+</li>
+<li><p>sheetname : 返回多表使用sheetname&#x3D;[0,1],若sheetname&#x3D;None是返回全表 注意：int&#x2F;string 返回的是dataframe，而none和list返回的是dict of dataframe</p>
+</li>
+<li><p>header :指定列名行，默认0，即取第一行，数据为列名行以下的数据 若数据不含列名，则设定 header &#x3D; None</p>
+</li>
+<li><p>skiprows : 省略指定行数的数据</p>
+</li>
+<li><p>skip_footer : 省略从尾部数的int行数据</p>
+</li>
+<li><p>index_col : 指定列为索引列，也可以使用u”strings”</p>
+</li>
+<li><p>names : 指定列的名字。</p>
+</li>
+<li><p>usecols指定读取的列</p>
+</li>
+<li><pre><code>复制# 将&#39;1,234&#39;读取为&#39;1234&#39;的数字
+thousands=&#39;,&#39;
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  ​</span><br><span class="line"></span><br><span class="line">## 2、常见用法</span><br><span class="line"></span><br><span class="line">### 1、筛选与取值</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<p>复制# 指定第七行为列名<br>daily_df &#x3D; pd.read_excel(self.daily_path, header&#x3D;7)</p>
+<h1><span id="指定列名">指定列名</span></h1><p>flow_df &#x3D; pd.read_excel(self.flow_path, names&#x3D;[‘date’, ‘tp’, ‘flow’, ‘detailed’, ‘visitor_num’])</p>
+<h1><span id="多条件筛选">多条件筛选</span></h1><p>data &#x3D; flow_df[<br>  (flow_df.flow &#x3D;&#x3D; ‘付费流量’) &amp;<br>  (flow_df.date &#x3D;&#x3D; date) &amp;<br>  (flow_df.detailed &#x3D;&#x3D; detailed)<br>]</p>
+<h1><span id="高级筛选">高级筛选</span></h1><p>all_data &#x3D; pd.read_excel(self.path, sheet_name&#x3D;2)<br>data &#x3D; all_data[<br>    all_data[‘客户’].map(lambda x: x &#x3D;&#x3D; ‘四川’) &amp;<br>    all_data[‘商品名称’].map(lambda x: ‘休闲鞋’ in x)<br>]<br>print(data)</p>
+<h1><span id="获取当前对象dataframe或series的行列数已元祖形式返回">获取当前对象（dataframe或series）的行列数，已元祖形式返回</span></h1><p>data.shape # 返回（3,4）表示当前对象有3行4列数据</p>
+<h1><span id="取指定列的第一个数针对series数据">取指定列的第一个数：针对series数据</span></h1><p>data_invoice[data_invoice[‘订单号’] &#x3D;&#x3D; Id][‘结算金额’].iloc[0]</p>
+<h1><span id="获取行索引值针对series数据-serindex0">获取行（索引值）：针对series数据， ser.index[0]</span></h1><p>data_source[‘商品名称’].value_counts().index[0]</p>
+<h1><span id="获取某单元格的数据针对dataframe">获取某单元格的数据：针对DataFrame</span></h1><p>data.iloc[0, 4]、data.loc[行名, 列名]</p>
+<h1><span id="serie转dataframe">serie转DataFrame</span></h1><p>pd.DataFrame([serie.to_dict()])</p>
+<h1><span id="serie转list">serie转list</span></h1><p>data_source[‘商品名称’].to_list()</p>
+<h1><span id="获取多个列">获取多个列</span></h1><p>df[[‘货号’, ‘支付件数’]]</p>
+<h1><span id="获取某行">获取某行</span></h1><p>data[i:j]</p>
+<h1><span id="获取某列">获取某列</span></h1><p>data[列名]、data.列名</p>
+<h1><span id="获取所有行的第一列的数据">获取所有行的第一列的数据</span></h1><p>pd.values[:, 1]</p>
+<h1><span id="获取某一列不为空的值">获取某一列不为空的值</span></h1><p>[x for x in info_data[list_columns[0][1]] if str(x) !&#x3D; “nan”]</p>
+<h1><span id="将dataframe转为list">将dataframe转为list</span></h1><p>pd.read_excel(path + ‘&#x2F;‘ + filename)[0:1].values.tolist()</p>
+<h1><span id="判断空-dfs-x3dx3d-npnan">判断空, df[‘s’] &#x3D;&#x3D; np.nan</span></h1><p>df[‘访客数’].to_list().index(np.nan)</p>
+<h1><span id="仅获取表头列">仅获取表头列</span></h1><p>[x for x in pd.read_excel(local_path + ‘&#x2F;download_data&#x2F;‘ + filename).columns]</p>
+<h1><span id="转置">转置</span></h1><p>df.T</p>
+<h1><span id="保存不带索引和表头">保存不带索引和表头</span></h1><p>save_path &#x3D; ‘C:\Users\LM0060\Desktop\规划数据.xlsx’<br>dt.T.to_excel(save_path, index&#x3D;False, header&#x3D;False)</p>
+<h1><span id="去调列名那一行后面的空格">去调列名那一行后面的空格</span></h1><p>stock &#x3D; pd.read_excel(path, sheet_name&#x3D;’透视’, header&#x3D;3)<br>stock.columns &#x3D; stock.columns.str.rstrip()  # 去掉列名后面空格，会把数值型设为空<br>stock.columns &#x3D; stock.columns.map(lambda x: x.rtrip()) # 去掉列名后面空格，更好用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 2、去重</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制planets.drop_duplicates(subset&#x3D;[‘method’,’year’],keep&#x3D;’first’,inplace&#x3D;False)</p>
+<h1><span id="subset参数是一个列表可指定多个列名用于去重的列">subset参数是一个列表，可指定多个列名，用于去重的列。</span></h1><h1><span id="keep的取值有三个keepx3dfirst时保留相同数据的第一条-keepx3dlast时保存相同数据的最后一条-keepx3dfalse时所有相同的数据都不保留">keep的取值有三个：keep&#x3D;first时，保留相同数据的第一条。keep&#x3D;last时，保存相同数据的最后一条。								keep&#x3D;false时，所有相同的数据都不保留。</span></h1><h1><span id="inplacex3dtrue时会对原数据进行修改-否则只返回视图不对原数据修改">inplace&#x3D;True时，会对原数据进行修改。否则，只返回视图，不对原数据修改。</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 3、遍历</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制# pandas 遍历 dataframe 行数据<br>for index, row in df.iterrows():<br>    print(index,row[0],row[1],)</p>
+<h1><span id="pandas-遍历-dataframe-列数据">pandas 遍历 dataframe 列数据</span></h1><p>for x in df.loc[:,’c1’]:<br>    print(x)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 4、统计重复次数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制data_source[‘商品名称’].value_counts()</p>
+<h1><span id="输出">输出：</span></h1><h1><span id="duozoulu多走路-2022春季男女情侣款国产款时尚透气走路鞋休闲鞋-11">DUOZOULU多走路 2022春季男女情侣款国产款时尚透气走路鞋休闲鞋              11</span></h1><h1><span id="duozoulu多走路2021官方冬季新款男女情侣鞋老爹鞋羊毛休闲鞋-7">DUOZOULU多走路2021官方冬季新款男女情侣鞋老爹鞋羊毛休闲鞋                 7</span></h1><h1><span id="duozoulu多走路-2022春款男女款情侣款舒适透气走路鞋国产鞋休闲鞋跑步鞋-4">DUOZOULU多走路 2022春款男女款情侣款舒适透气走路鞋国产鞋休闲鞋跑步鞋           4</span></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 5、日期型数据筛选</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制def date_filtering(datetime_str):  # 用于日期选择<br>dates &#x3D; str(datetime_str)[1:11].split(‘-‘)<br>datetime_str &#x3D; datetime.date(int(dates[0]), int(dates[1]), int(dates[2]))</p>
+<p>if Monday &lt;&#x3D; datetime_str &lt;&#x3D; Sunday:<br>return True<br>else:<br>return False</p>
+<p>data_source &#x3D; pd.read_excel(self.path, sheet_name&#x3D;3)<br>data_source &#x3D; data_source[<br>    data_source[‘付款确认时间’].map(date_filtering)<br>]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 6、求和以及求某列最大最小值</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制df.drop(index, axis&#x3D;0)，# 是去掉某一行数据；<br>df.drop(col_name, axis&#x3D;1)，#是去掉某一列的数据？</p>
+<p>df.sum(axis&#x3D;0)，# 求每列的数据之和；<br>df.sum(axis&#x3D;1)，# 求每行的数据之和;</p>
+<h1><span id="eg">eg:</span></h1><p>data_source[‘退款金额’].sum(axis&#x3D;0)</p>
+<p>df[列名].max(axis&#x3D;0)  # 最大值<br>df[列名].max(axis&#x3D;0)  # 最小值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 7、指定读取格式</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制pd.read_csv(inpath, converters&#x3D;{“列名1”:str, “列名2”:str})</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 8、pandas自动填充空数据</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制category &#x3D; pd.read_excel(path, sheet_name&#x3D;4)</p>
+<h1><span id="用前一个不为空的数据填充">用前一个不为空的数据填充</span></h1><p>category &#x3D; category.fillna(method&#x3D;’pad’)</p>
+<h1><span id="用后一个不为空的数据填充">用后一个不为空的数据填充</span></h1><p>category.fillna(method&#x3D;’bfill’,limit&#x3D;1)</p>
+<h1><span id="用默认字符填充">用默认字符填充</span></h1><p>category.fillna(‘missing’)</p>
+<h1><span id="只填充某列且作用到源数据上返回none">只填充某列，且作用到源数据上，返回None</span></h1><p>category[‘Item Sub-Category’].fillna(method&#x3D;’pad’, inplace&#x3D;True)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 9、排序问题</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制# 按某一列的值排序，默认ascending&#x3D;True升序<br>df_tm_week.sort_values(‘支付金额’, ascending&#x3D;False)</p>
+<h1><span id="按索引排序下列是取前10">按索引排序，下列是取前10</span></h1><p>df_tm_week.sort_index()[:10]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 10、分组求和</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制pds_lin_a.groupby([‘退单编号’])[‘入库数量’].sum()<br>pds_lin_a.groupby([‘退单编号’]).agg({“入库数量”:”sum”})</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 11、索引和列的转换</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制一、索引转化为列<br>df[‘index’] &#x3D; df.index<br>二、列转化为索引<br>df.set_index(‘date’)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 12、更改数据类型</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制df[‘year’]&#x3D;df[‘year’].astype(int)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 13、分组排序得序号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制”””<br>rank函数的用法<br>method参数说明：first：不并次排序：123456、dense：并次不占位排序：123345、min:并次占位排序：123356<br>“””<br>pop_RT[‘sort_id’] &#x3D; pop_RT.groupby([‘model_code_x’])[[‘conception_code’]].rank(ascending&#x3D;1, method&#x3D;’dense’)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 14、重命名列</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制rankings_pd.rename(columns &#x3D; {‘test’:’TEST’}, inplace &#x3D; True)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 3、csv文件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制# 读取CSV文件，并删除指定行，同时不带表头另存为另一个地址<br>data &#x3D; pd.read_csv(open_path + ‘&#x2F;‘ + filename, header&#x3D;None)  # 读取CSV文件<br>data.drop(data.index[int(start_row)-1:int(delete_num) + int(start_row)-1], inplace&#x3D;True)<br>data.to_csv(save_path + ‘&#x2F;‘ + filename, index&#x3D;False, encoding&#x3D;”utf-8”, header&#x3D;None)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 1、写入数据乱码问题</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制dt.to_csv(folder_path + ‘\‘ + ‘京东快车数据.csv’, encoding&#x3D;’utf_8_sig’)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 4、在已有的df中新增列</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制# 新增列的数据来源<br>def get_category(df):<br>    try:<br>        return df_main[df_main[‘商家编码13位’].map(lambda x: df[‘货号’][4:] in x)][0:1][‘三级分类’].to_list()[0]<br>    except:<br>        return ‘空’</p>
+<h1><span id="新增列的名字axisx3d1表示新增列axisx3d0表示新增行">新增列的名字，axis&#x3D;1表示新增列，axis&#x3D;0表示新增行</span></h1><p>df_tm_week.loc[:, ‘三级分类’] &#x3D; df_tm_week.apply(get_category, axis&#x3D;1)</p>
+<h1><span id="更简单的方法新增列来源于自身">更简单的方法，新增列来源于自身</span></h1><p>this_year_pd.loc[:, ‘折扣前总价’] &#x3D; this_year_pd[‘发货数量’] * this_year_pd[‘吊牌价’]</p>
+<h1><span id="分列并去空格">分列并去空格</span></h1><p>tm_pd.loc[:, ‘一级类目’] &#x3D; tm_pd[‘京东分类’].str.split(‘&gt;’, expand&#x3D;True)[0].replace(‘ ‘, ‘’)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 5、数据上下合并</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制def data_merge(path, to_file_path):<br>    “””<br>    用于合并数据<br>    :param path: 需要合并的文件夹<br>    :param to_file_path: 合并后的文件保存路径<br>    :return:<br>    “””<br>    filenames &#x3D; os.listdir(path)<br>    for index, filename in enumerate(filenames):<br>        filepath &#x3D; path + ‘&#x2F;‘ + filename<br>        if index &#x3D;&#x3D; 0:  # 第一次，只读取，不合并<br>            pds &#x3D; pd.read_excel(filepath, header&#x3D;1)<br>            continue</p>
+<pre><code>    pds_lin = pd.read_excel(filepath, header=1)
+
+    pds = pd.concat([pds, pds_lin])
+
+pds.to_excel(to_file_path, index=False)
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 6、数据左右合并</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制# how：指定连接方式。可以是inner, outer, left, right，默认为inner。</p>
+<h1><span id="on指定连接使用的列该列必须同时出现在两个dataframe中默认使用两个dataframe中的所有同名列进行连接">on：指定连接使用的列（该列必须同时出现在两个DataFrame中），默认使用两个DataFrame中的所有同名列进行连接。</span></h1><h1><span id="left_on-x2f-right_on指定左右dataframe中连接所使用的列">left_on &#x2F; right_on：指定左右DataFrame中连接所使用的列。</span></h1><h1><span id="left_index-x2f-right_index是否将左边右边dataframe中的索引作为连接列默认为false">left_index &#x2F; right_index：是否将左边（右边）DataFrame中的索引作为连接列，默认为False。</span></h1><h1><span id="suffixes当两个dataframe列名相同时指定每个列名的后缀用来区分默认为x与y">suffixes：当两个DataFrame列名相同时，指定每个列名的后缀（用来区分），默认为x与y。</span></h1><p>df1&#x3D;pd.DataFrame({“date”:[2015,2016,2017,2018,2019],”x1”:[2000,3000,5000,8000,10000],”x2”:[np.nan,”d”,”d”,”c”,”c”]})<br>df2&#x3D;pd.DataFrame({‘date’:[2017,2018,2019,2020],”y1”:[1000,2000,3000,2000]})</p>
+<h1><span id="displaydf1df2">display(df1,df2)</span></h1><p>df3&#x3D;df1.merge(df2,how&#x3D;’left’,on&#x3D;”date”)<br>display(df3)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 三、表格复制问题</span><br><span class="line"></span><br><span class="line">### 1、方案一，通过粘贴板</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制import os<br>import win32com<br>from win32com.client import constants as c  # 旨在直接使用VBA常数</p>
+<p>class CopyTablePaste:<br>    “””<br>    复制表格数据和格式，并粘贴到指定位置,支持复制选定区域的数据、格式、公式<br>    eg:<br>        ctp &#x3D; CopyTablePaste(‘D:\project\test\测试环境_代码\区域复制.xlsx’)<br>        ctp.copy_style_data(‘复制3’, ‘C6’, ‘C6’)<br>        ctp.paste_style_data(‘复制2’, ‘D6’)<br>    “””</p>
+<pre><code>def __init__(self, copy_path, paste_path=None):
+    &quot;&quot;&quot;
+    初始化，只接受绝对路径
+    :param copy_path: 需要复制的文件路径
+    :param paste_path: 需要粘贴的文件路径，默认等同于复制文件
+    &quot;&quot;&quot;
+    self.xl_app = win32com.client.gencache.EnsureDispatch(&quot;Excel.Application&quot;)  # 若想引用常数的话使用此法调用Excel
+    self.xl_app.Visible = True  # 是否显示Excel文件
+
+    self.copy_wb = self.xl_app.Workbooks.Open(copy_path)
+    if paste_path:
+        self.paste_wb = self.xl_app.Workbooks.Open(paste_path)
+    else:
+        self.paste_wb = self.copy_wb
+
+def copy_style_data(self, sheet_name, start_cell, end_cell, table_path=None):
+    &quot;&quot;&quot;
+    复制指定表格指定sheet,指定区域的的数据和格式
+    eg:
+        copy_style_data(&quot;sheet1&quot;, &quot;A3&quot;, &quot;C5&quot;, &quot;D://xx.xlsx&quot;)
+
+    :param table_path:  读取文件的路径
+    :param sheet_name: 读取数据的sheet表名
+    :param start_cell: 读取数据格式的开始单元格
+    :param end_cell: 读取数据格式的结束单元格
+    :return:
+    &quot;&quot;&quot;
+    &quot;&quot;&quot;读取文件,如果输入新的文件路径，将替换原有表格&quot;&quot;&quot;
+    if table_path:
+        self.copy_wb = self.xl_app.Workbooks.Open(table_path)
+
+    &quot;&quot;&quot;读取文件表&quot;&quot;&quot;
+    sht_old = self.copy_wb.Worksheets(sheet_name)
+    &quot;&quot;&quot;复制选定区域到粘贴板&quot;&quot;&quot;
+    # 对输入的数据进行处理分析
+    for index, i in enumerate(start_cell):
+        if not i.isalpha():  # 如果当前字符不是字母，就跳出
+            break
+        if not i.isupper():
+            raise &quot;只接受大写字母&quot;
+
+    start_cell = [int(start_cell[index:]), start_cell[:index]]
+    for index, i in enumerate(end_cell):
+        if not i.isalpha():  # 如果当前字符不是字母，就跳出
+            break
+        if not i.isupper():
+            raise &quot;只接受大写字母&quot;
+
+    end_cell = [int(end_cell[index:]), end_cell[:index]]
+
+    rng_data = sht_old.Range(sht_old.Cells(start_cell[0], start_cell[1]), sht_old.Cells(end_cell[0], end_cell[1]))
+    rng_data.Copy()
+
+def paste_style_data(self, sheet_name, position, table_path=None):
+    &quot;&quot;&quot;
+    将剪贴板的内容粘贴到指定文件，指定sheet表，的指定位置上
+    eg:
+        paste_style_data(&quot;sheet2&quot;, &quot;A3&quot;, &quot;D://xx.xlsx&quot;)
+    :param table_path: 文件路径
+    :param sheet_name: 文件sheet名
+    :param position:  粘贴位置
+    :return:
+    &quot;&quot;&quot;
+    &quot;&quot;&quot;读取文件&quot;&quot;&quot;
+    if table_path:
+        self.paste_wb = self.xl_app.Workbooks.Open(table_path)
+
+    sht_new = self.paste_wb.Worksheets(sheet_name)
+    &quot;&quot;&quot;粘贴到指定区域&quot;&quot;&quot;
+    sht_new.Paste(Destination=sht_new.Range(position))  # 将粘贴板的内容复制到指定区域 √
+    # sht_new_3.Range(&quot;A1&quot;).PasteSpecial(Paste=c.xlPasteAll) # 将粘贴板的内容复制到指定区域 √
+    # sht_new_2.Range(&quot;A1&quot;).PasteSpecial(Paste=c.xlPasteValues)  # 经测试，只能复制数据，无法复制格式 ×
+    &quot;&quot;&quot;保存数据&quot;&quot;&quot;
+    self.paste_wb.Save()
+
+def __del__(self):
+    &quot;&quot;&quot;
+    当程序运行完成，或者该对象被销毁时程序将自动保存数据，同时关闭电脑上所有的excel文件
+    :return:
+    &quot;&quot;&quot;
+    try:
+        self.copy_wb.Close()
+        self.paste_wb.Close()
+    except BaseException as err:
+        pass
+
+    try:
+        self.xl_app.Quit()  # 关闭文件，即使文件已打开也还是会被关闭，如果同时有其它Excel文件打开，也会被关闭
+    except BaseException as err:
+        pass
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 2、方案二、通过openpyxl</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制def copy_area(self, paste_sh, start_place, end_place, target_place, copy_sh&#x3D;None, iscpvalue&#x3D;False):<br>    “””<br>    复制并粘贴某一区域的数据和样式，会在目标位置开始计算结束位置，同时拆分这部分单元格,默认不复制值<br>    :param paste_sh: 用于粘贴的sh源<br>    :param copy_sh: 用于复制的sh源<br>    :param start_place: 开始位置<br>    :param end_place: 结束位置<br>    :param target_place: 目标位置<br>    :param iscpvalue: 是否复制值<br>    :return:<br>    “””<br>    if not copy_sh:  # 如果未填写复制源，则表示粘贴复制再同一个sh中<br>        copy_sh &#x3D; paste_sh</p>
+<pre><code>def col_nexts(s, num):
+    &quot;&quot;&quot;获取某一列的后num个对应的列名&quot;&quot;&quot;
+    t = s
+    for i in range(num):
+        t = self.col_next(t)
+    return t
+
+def copy_cell(cy_cell, paste_cell):
+    &quot;&quot;&quot;
+    复制粘贴单个单元格
+    :param cy_cell: 需要复制的单元格
+    :param paste_cell: 需要粘贴的单元格
+    :return:
+    &quot;&quot;&quot;
+    if iscpvalue:
+        try:
+            paste_sh[paste_cell].value = copy_sh[cy_cell].value  # 复制值
+        except BaseException:
+            pass
+
+    paste_sh[paste_cell].font = copy.copy(copy_sh[cy_cell].font)  # 复制：设置字体大小、颜色、下划线等等
+    paste_sh[paste_cell].border = copy.copy(copy_sh[cy_cell].border)  # 复制：设置单元格的边框
+    paste_sh[paste_cell].fill = copy.copy(copy_sh[cy_cell].fill)  # 复制：填充样式
+    paste_sh[paste_cell].number_format = copy.copy(copy_sh[cy_cell].number_format)  # 复制数字格式
+    paste_sh[paste_cell].protection = copy.copy(copy_sh[cy_cell].protection)  # 复制：保护工作表
+    paste_sh[paste_cell].alignment = copy.copy(copy_sh[cy_cell].alignment)  # 复制：单元格对齐
+
+def if_merge(cell):  # 判断该单元格是否是合并单元格，如果是，则返回合并的单元格范围
+    for merge_cell in merge_cell_list:
+        if cell == merge_cell[0]:
+            return merge_cell
+    return False
+
+merge_cell_list = [str(x).split(&#39;:&#39;) for x in copy_sh.merged_cell_ranges]  # 原始sh中的合并单元集合
+
+start_row, start_col = self.analysis_cell(start_place)  # 开始位置
+end_row, end_col = self.analysis_cell(end_place)  # 结束位置
+target_row, target_col = self.analysis_cell(target_place)  # 目标位置
+
+row_gap = end_row - start_row  # 行差
+col_gap = self.col_to_num(end_col) - self.col_to_num(start_col)  # 列差
+
+# 拆分单元格，将需要粘贴的单元格范围进行拆分，避免出现合并单元格，合并的单元格无法二次合并
+try:
+    paste_sh.unmerge_cells(
+        range_string=target_place + &#39;:&#39; + col_nexts(target_col, col_gap) + str(target_row + row_gap))
+except BaseException:
+    pass
+
+for x in range(row_gap + 1):  # 单元格系统性合并
+    for y in range(col_gap + 1):
+        cy_cell = start_col + str(start_row + x)
+        paste_cell = target_col + str(target_row + x)
+
+        if not if_merge(cy_cell):  # 如果需要复制的单元格不是合并单元格，则跳过合并
+            pass
+        else:  # 如果这是一个合并的单元格
+            merge_range = if_merge(cy_cell)  # 得到合并的范围
+
+            start_row_x, start_col_x = self.analysis_cell(merge_range[0])  # 开始位置
+            end_row_x, end_col_x = self.analysis_cell(merge_range[1])  # 结束位置
+            row_gap_x = end_row_x - start_row_x  # 行差
+            col_gap_x = self.col_to_num(end_col_x) - self.col_to_num(start_col_x)  # 列差
+
+            merge_cell_start = self.analysis_cell(paste_cell)
+            merge_cell_end = self.col_nexts(merge_cell_start[1], col_gap_x) + str(merge_cell_start[0] + row_gap_x)  # 合并的末尾
+
+            paste_sh.merge_cells(range_string=&#39;&#123;&#125;:&#123;&#125;&#39;.format(paste_cell, merge_cell_end))  # 进行合并
+
+        start_col = self.col_next(start_col)
+        target_col = self.col_next(target_col)
+
+    start_col = self.analysis_cell(start_place)[1]
+    target_col = self.analysis_cell(target_place)[1]
+
+for x in range(row_gap + 1):  # 单元格系统性复制
+    for y in range(col_gap + 1):
+        cy_cell = start_col + str(start_row + x)
+        paste_cell = target_col + str(target_row + x)
+
+        try:
+            copy_cell(cy_cell, paste_cell)
+        except BaseException as err:
+            print(&#39;复制失败，该单元格可能是合并的单元格&#39;)
+
+        start_col = self.col_next(start_col)
+        target_col = self.col_next(target_col)
+
+    start_col = self.analysis_cell(start_place)[1]
+    target_col = self.analysis_cell(target_place)[1]
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 四、封装函数</span><br><span class="line"></span><br><span class="line">## 1、获取excel某一列的下N列列名</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制def get_next(s):<br>    “””获取excel某一列的下一列 列名”””<br>    if not s.isalpha():  # 先判断是否全是字母<br>      raise ‘错误的参数’</p>
+<pre><code>s = s.upper()
+
+if s[-1] != &#39;Z&#39;:
+    return s[:-1] + chr(ord(s[-1]) + 1)
+
+if len(s) == sum(map(lambda x: 1 if x == &quot;Z&quot; else 0, s)):
+    return &#39;&#39;.join([&#39;A&#39; for x in range(len(s) + 1)])
+
+return get_next(s[:-1]) + &#39;A&#39;
+</code></pre>
+<p>def get_nexts(s, num):<br>    “””获取某一列的后num个对应的列名”””<br>    t &#x3D; s<br>    for i in range(num):<br>        t &#x3D; get_next(t)<br>    return t</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 2、获取指定列对应的列数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制def get_col_num(s):<br>    “””获取指定列对应的列数”””<br>    if not s.isalpha():  # 先判断是否全是字母<br>      raise ‘错误的参数’</p>
+<pre><code>s = s.upper()
+
+if len(s) == 1:
+    return ord(s[-1]) - 64
+
+else:
+    return get_col_num(s[:-1]) * 26 + ord(s[-1]) - 64
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 3、解析坐标具体行列</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制def analysis_coordinate(s):<br>    “””解析excel坐标,返回元祖，分别是行和列”””<br>    for i, v in enumerate(s):<br>        if not v.isalpha():<br>            break<br>    col &#x3D; s[:i].upper()<br>    row &#x3D; s[i:]</p>
+<pre><code>if not col.isalpha() or not row.isdigit():  # 先判断是否全是字母和数字
+    raise &#39;错误的参数&#39;
+
+return int(row), col
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 4、获取某一数字对应的列名</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制def get_num_col(num):<br>    “””获取某一数值对应的列名”””<br>    if num % 26 &#x3D;&#x3D; 0:<br>        if num &#x3D;&#x3D; 26:<br>            return ‘Z’<br>        else:<br>            return get_num_col(num &#x2F;&#x2F; 26 - 1) + ‘Z’<br>    else:<br>        if num &lt; 26:<br>            return chr(64 + num)<br>        else:<br>            return get_num_col(num &#x2F;&#x2F; 26) + get_num_col(num % 26)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 5、判断一个单元格是否是合并的，并返回范围</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制def judgemergecell(sh, cell):<br>    “””<br>    判断这个单元格是否是合并的单元格，如果是则返回单元格区间<br>    :param cell:<br>    :param sh:<br>    :return:<br>    “””<br>    mergecells &#x3D; [x for x in sh.merged_cell_ranges if cell in x]<br>    if len(mergecells) &#x3D;&#x3D; 0:<br>        return False<br>    else:<br>        str(mergecells[0])</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 五、以只读方式打开文件窗口</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制import win32com<br>from win32com.client import constants as c  # 旨在直接使用VBA常数<br>app &#x3D; win32com.client.Dispatch(‘Excel.Application’)  # 若想引用常数的话使用此法调用Excel<br>app.Visible &#x3D; True  # 使文件打开可见<br>workbook &#x3D; app.Workbooks.Open(flag, None, True)  # 以只读方式显示打开文件<br>&#96;&#96;&#96;</p>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E4%B8%8EXpath%E5%AE%9A%E4%BD%8D/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">selenium自动化与Xpath定位</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">数据结构</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://img.tukuppt.com/ad_preview/00/83/15/jmLqkl3XWx.jpg!/fw/260" class="soft-size--round soft-style--box" alt="ChengZhou">
+    
+    
+      <h2>ChengZhou</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>20</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        17
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>学习中。。。</p>
+  </div>
+</section>
+
+
+      <section class="widget-categories widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+      <span>CATEGORIES</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categories-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Django/" style="font-size: 10px;" class="tags-cloud-0">Django</a> <a href="/tags/Django-Linux/" style="font-size: 10px;" class="tags-cloud-0">Django Linux</a> <a href="/tags/Excel%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">Excel自动化</a> <a href="/tags/Flask/" style="font-size: 10px;" class="tags-cloud-0">Flask</a> <a href="/tags/Linux-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Linux Mysql</a> <a href="/tags/Python/" style="font-size: 10px;" class="tags-cloud-0">Python</a> <a href="/tags/Python-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Python Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;" class="tags-cloud-0">Redis</a> <a href="/tags/TkGUI/" style="font-size: 10px;" class="tags-cloud-0">TkGUI</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;" class="tags-cloud-0">博客搭建</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2/" style="font-size: 20px;" class="tags-cloud-10">容器部署</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;" class="tags-cloud-0">数据结构</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">浏览器自动化</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;" class="tags-cloud-0">爬虫</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80/" style="font-size: 10px;" class="tags-cloud-0">网页布局</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 15px;" class="tags-cloud-5">自动化</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" style="font-size: 10px;" class="tags-cloud-0">项目记录</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">ChengZhou</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  
+
+
+
+
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>

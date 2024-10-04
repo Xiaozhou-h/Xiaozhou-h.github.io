@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+
+  
+    <meta name="description" content="Zhou">
+  
+
+  
+
+  
+    <meta name="author" content="ChengZhou">
+  
+
+  
+
+  
+
+  <title>Django在Linux上部署 | XiaoZhou</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          XiaoZhou
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/archives">归档</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">Django在Linux上部署</h1>
+          <h2 class="title-sub-wrap">
+            <strong>ChengZhou</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2024-10-04T13:01:17.000Z" itemprop="datePublished">2024-10-04</time>
+          </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/Django-Linux/">🏷️ Django Linux</a></li>
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <h3><span id="一-一个linux系统">一、一个Linux系统</span></h3><p>可以利用虚拟机在本地创建一个Linux系统，或者使用云服务器</p>
+<h4><span id="1-关闭防火墙">1、关闭防火墙</span></h4><blockquote>
+<p>sudo systemctl stop firewalld.service 关闭防火墙</p>
+<p>sudo systemctl disable firewalld.service 卸载防火墙</p>
+</blockquote>
+<h4><span id="2-下载安装相关依赖包">2、下载安装相关依赖包</span></h4><blockquote>
+<p><code>yum -y install openssl-devel expat-develgdbm-devel zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel libffi-devel db4-devel libpcap-devel xz-devel</code></p>
+</blockquote>
+<h3><span id="二-安装python">二、安装python</span></h3><h4><span id="1安装linux的wget工具用于在网上下载文件">1.安装Linux的wget工具，用于在网上下载文件</span></h4><blockquote>
+<p>yum -y install wget (如果使用的是云服务器这一步可省去)</p>
+</blockquote>
+<h4><span id="2-gcc编译器环境安装python-3-时所需的编译环境">2. GCC编译器环境，安装python 3 时所需的编译环境</span></h4><blockquote>
+<p>yum -y install gcc</p>
+</blockquote>
+<h4><span id="3正式安装python3和pip3">3.正式安装python3，和pip3</span></h4><blockquote>
+<p><code>wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tgz</code></p>
+<p><code>tar zxvf Python-3.6.0.tgz</code> #解压到当前文件压</p>
+<p><code>cd Python-3.6.0</code># 进入文件夹</p>
+<p><code>./configure --prefix=/etc/python/python3.6</code> # 安装到&#x2F;etc&#x2F;python&#x2F;python3.6</p>
+<p><code>make &amp;&amp; make install</code></p>
+<p><code>ln -sf /etc/python/python3.6/bin/python3.6 /usr/bin/python3</code> # 建立python3的软连接</p>
+<p><code>ln -sf /etc/python/python3.6/bin/pip3.6 /usr/bin/pip3</code> # 建立pip3的软连接</p>
+<p><code>pip3 list</code> 查看pip3安装版本 <code>python3 -V</code> 查看python3安装版本</p>
+</blockquote>
+<h3><span id="三-安装mysql并设置密码">三、安装mysql并设置密码</span></h3><p><a target="_blank" rel="noopener" href="https://xiaozhou.top/2020/11/14/Linux%E5%AE%89%E8%A3%85Mysql%E8%AE%BE%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81/#more">安装mysql并设置密码</a></p>
+<h4><span id="1修改项目配置文件settingspy">1.修改项目配置文件settings.py</span></h4><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; # 配置文件</span><br><span class="line">&gt; DEBUG = False</span><br><span class="line">&gt;</span><br><span class="line">&gt; ALLOWED_HOSTS = [&#x27;*&#x27;]</span><br><span class="line">&gt;</span><br><span class="line">&gt; STATIC_ROOT = os.path.join(BASE_DIR, &#x27;static&#x27;)</span><br><span class="line">&gt; # 设置数据库连接信息</span><br><span class="line">&gt; DATABASES = &#123;</span><br><span class="line">&gt;     &#x27;default&#x27;: &#123;</span><br><span class="line">&gt;         &#x27;ENGINE&#x27;: &#x27;django.db.backends.mysql&#x27;,</span><br><span class="line">&gt;         &#x27;NAME&#x27;: &#x27;music_db&#x27;,</span><br><span class="line">&gt;         &#x27;USER&#x27;: &#x27;root&#x27;,</span><br><span class="line">&gt;         &#x27;PASSWORD&#x27;: &#x27;123456&#x27;,</span><br><span class="line">&gt;         &#x27;HOST&#x27;: &#x27;127.0.0.1&#x27;,</span><br><span class="line">&gt;         &#x27;PORT&#x27;: &#x27;3306&#x27;,</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; `与数据库信息一致`</span><br><span class="line">&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4><span id="2项目文件的上传">2.项目文件的上传</span></h4><blockquote>
+<p>通过SecureFXPortable软件上传项目文件和数据库文件</p>
+<p>上传整个项目、数据库文件、python安装包、pip安装包，也可以通过网络方式下载，只是速度太慢</p>
+</blockquote>
+<h4><span id="3数据库文件的导入">3.数据库文件的导入</span></h4><blockquote>
+<p>先登陆mysql此处略，然后执行以下语句</p>
+<p>create database music_db; 在数据库中创建一个与你想导入数据库同名的数据库</p>
+<p>use music_db;</p>
+<p>source &#x2F;root&#x2F;music_db.sql;</p>
+</blockquote>
+<h4><span id="4-测试运行">4、测试运行</span></h4><p>方法一：</p>
+<blockquote>
+<blockquote>
+<p>pip3 install django-ckeditor 下载安装ckeditor 模块</p>
+</blockquote>
+<blockquote>
+<p>pip3 install PyMysql 下载安装PyMySQL模块</p>
+</blockquote>
+<blockquote>
+<p>python3 -m pip install Pillow 下载安装Pillow 模块</p>
+</blockquote>
+<blockquote>
+<p>pip3 install cryptography 下载安装cryptography模块</p>
+</blockquote>
+<blockquote>
+<p>pip3 install django 下载安装django</p>
+</blockquote>
+<blockquote>
+<p>pip3 install mysqlclient 下载安装sql（报错则：yum install mysql-devel）</p>
+</blockquote>
+<p>#安装依赖包确保pip的时候不会有出错</p>
+<p>[root@VM-0-6-centos Myblog]# vi &#x2F;home&#x2F;Myblog&#x2F;Myblog&#x2F;<strong>init</strong>.py<br>import pymysql<br>pymysql.install_as_MySQLdb()</p>
+<p>#测试运行</p>
+<p>python3 manage.py runserver</p>
+<p>测试成功如下图：</p>
+<blockquote>
+<p>[root@VM-0-6-centos Myblog]# python3 manage.py runserver<br>Performing system checks…</p>
+<p>System check identified no issues (0 silenced).<br>March 14, 2021 - 05:44:25<br>Django version 3.1.7, using settings ‘Myblog.settings’<br>Starting development server at <a target="_blank" rel="noopener" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a><br>Quit the server with CONTROL-C.</p>
+</blockquote>
+</blockquote>
+<p>方法二：</p>
+<blockquote>
+<p>#安装： pip install pipreqs</p>
+<p>#在当前目录生成： pipreqs .&#x2F; –encoding&#x3D;utf8 –force</p>
+<p>#使用pip批量下载相应的模块： pip3 install -r requirements.txt</p>
+</blockquote>
+<h3><span id="四-部署uwsgi服务器">四、部署uWSGI服务器</span></h3><h4><span id="1在部署uwsgi前先在linux中安装相应的模块">1.在部署uWSGI前先在Linux中安装相应的模块</span></h4><blockquote>
+<p>[root@zhou ~]# pip3 install uwsgi</p>
+<p><code>ln -s /etc/python/python3.7/bin/uwsgi /usr/bin/uwsgi</code> #建立uwsgi的软连接</p>
+</blockquote>
+<h4><span id="2测试uwsgi是否能正常运行">2.测试uWSGI是否能正常运行</span></h4><p><a target="_blank" rel="noopener" href="http://xiaozhou.top/">项目bug调试</a></p>
+<blockquote>
+<p>uwsgi –http :8080 –chdir &#x2F;home&#x2F;Myblog -w Myblog.wsgi 浏览器输入对应的公网ip和端口号</p>
+</blockquote>
+<h5><span id="报错信息internal-server-error">报错信息：Internal server error</span></h5><blockquote>
+<p>由于使用的虚拟环境中python2 3 共存，项目中的django框架需要在python3中运行，而默认使用的却是python2故会出现此问题。</p>
+<p>解决方案：<br>寻找django的路径 并于uwsgi 中声明</p>
+<p>找到django路径（若有虚拟环境应在虚拟环境中运行）</p>
+<p>pip show django|grep -i location<br>在uwsgi文件中添加路径</p>
+<p>[uwsgi]<br>pythonpath &#x3D; &#x2F;data&#x2F;env&#x2F;MyP02&#x2F;lib&#x2F;python3.6&#x2F;site-packages<br>进入uwsgi所在目录</p>
+<p>cd &#x2F;home&#x2F;MyProject<br>关闭所有uwsgi进程</p>
+<p>kill -9 <code>cat uwsgi.pid</code><br>重新启动uwsgi服务</p>
+<p>uwsgi –ini uwsgi.ini</p>
+<p>查看uwsgi日志后访问网址，检查是否仍然报错</p>
+<p>tail -f uwsgi.log</p>
+</blockquote>
+<h4><span id="3uwsgi配置文件">3.UWSGI配置文件</span></h4><blockquote>
+<p>[root@VM-0-6-centos ~]# cat &#x2F;home&#x2F;Myblog&#x2F;Myblog_uwsgi.ini<br>[uwsgi]<br>socket&#x3D; :8080<br>chdir&#x3D;&#x2F;home&#x2F;Myblog<br>module&#x3D;Myblog.wsgi<br>master&#x3D;true<br>processes&#x3D;4<br>vacuum&#x3D;true</p>
+<p>#wsgi-file&#x3D;&#x2F;home&#x2F;Myblog&#x2F;Myblog&#x2F;wsgi.py</p>
+<p>#callable&#x3D;app</p>
+<p>threads&#x3D;2<br>pidfile&#x3D;uwsgi.pid<br>daemonize&#x3D;uwsgi.log</p>
+<p>[root@zhou music]# uwsgi –ini Myblog_uwsgi.ini 启动uwsgi服务器</p>
+</blockquote>
+<h3><span id="五-安装nginx">五、安装Nginx</span></h3><blockquote>
+<p>[root@zhou ~]# rpm -ivh <a target="_blank" rel="noopener" href="http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm">http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</a> 下载nginx源</p>
+<p>[root@zhou ~]# yum install nginx 安装nginx</p>
+<p>可输入<code>systemctl start nginx</code>启动nginx,查看是否能正常访问 浏览器输入对应的公网ip和端口号</p>
+<p>#如果报错可查看日志</p>
+<p>tail -f &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log</p>
+</blockquote>
+<h4><span id="1配置nginx文件">1.配置nginx文件</span></h4><blockquote>
+<p>[root@zhou ~]# cd &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;<br>[root@zhou conf.d]# vi Myblog.conf #以下配置手打不要直接复制！！！</p>
+<p>#设置项目music的Nginx服务器配置<br>server {<br>listen 8090;<br>server_name 127.0.0.1;<br>charset utf-8;</p>
+<p> client_max_body_size 75M;</p>
+<p>#配置媒体资源文件<br>location &#x2F;media {<br>expires 30d;<br>autoindex on;<br>add_header Cache-Control private;<br>alias &#x2F;home&#x2F;Myblog&#x2F;media;<br>}</p>
+<p>#配置静态资源文件<br>location &#x2F;static {<br>expires 30d;<br>autoindex on;<br>add_header Cache-Control private;<br>alias &#x2F;home&#x2F;Myblog&#x2F;static;<br>}</p>
+<p>#配置uWSGI服务器<br>location &#x2F; {<br>include uwsgi_params;<br>uwsgi_pass 127.0.0.1:8080;<br>uwsgi_read_timeout 2;<br>}</p>
+<p>location &#x3D; &#x2F;favicon.ico {<br>log_not_found off;<br>access_log off;<br>}</p>
+<p>}</p>
+</blockquote>
+<h4><span id="2启动项目">2.启动项目</span></h4><blockquote>
+<p>[root@zhou conf.d]# cd &#x2F;etc&#x2F;nginx&#x2F;</p>
+<p>[root@zhou nginx]# sudo nginx -c nginx.conf</p>
+<p>[root@zhou nginx]# sudo nginx -s reload</p>
+<p>[root@zhou nginx]# cd &#x2F;root&#x2F;music</p>
+<p>[root@zhou music]# uwsgi –ini Myblog_uwsgi.ini</p>
+</blockquote>
+<h3><span id="注">注：</span></h3><blockquote>
+<p>ps -ef | grep uwsgi</p>
+<p>pkill -9 nginx 关闭nginx进程</p>
+<p>kill -9 pid 杀进程</p>
+<p>shutdown -r now 立刻重启</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">复制# 端口进程查看</span><br><span class="line">netstat -tunlp | grep 8080</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/redis%E5%AD%A6%E4%B9%A0/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">redis学习</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2024/10/04/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Python自动化办公</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://img.tukuppt.com/ad_preview/00/83/15/jmLqkl3XWx.jpg!/fw/260" class="soft-size--round soft-style--box" alt="ChengZhou">
+    
+    
+      <h2>ChengZhou</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>20</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        17
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>学习中。。。</p>
+  </div>
+</section>
+
+
+      <section class="widget-categories widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+      <span>CATEGORIES</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categories-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/Django/" style="font-size: 10px;" class="tags-cloud-0">Django</a> <a href="/tags/Django-Linux/" style="font-size: 10px;" class="tags-cloud-0">Django Linux</a> <a href="/tags/Excel%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">Excel自动化</a> <a href="/tags/Flask/" style="font-size: 10px;" class="tags-cloud-0">Flask</a> <a href="/tags/Linux-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Linux Mysql</a> <a href="/tags/Python/" style="font-size: 10px;" class="tags-cloud-0">Python</a> <a href="/tags/Python-Mysql/" style="font-size: 10px;" class="tags-cloud-0">Python Mysql</a> <a href="/tags/Redis/" style="font-size: 10px;" class="tags-cloud-0">Redis</a> <a href="/tags/TkGUI/" style="font-size: 10px;" class="tags-cloud-0">TkGUI</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;" class="tags-cloud-0">博客搭建</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2/" style="font-size: 20px;" class="tags-cloud-10">容器部署</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;" class="tags-cloud-0">数据结构</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;" class="tags-cloud-0">浏览器自动化</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;" class="tags-cloud-0">爬虫</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E5%B8%83%E5%B1%80/" style="font-size: 10px;" class="tags-cloud-0">网页布局</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 15px;" class="tags-cloud-5">自动化</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" style="font-size: 10px;" class="tags-cloud-0">项目记录</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://github.com/Xiaozhou-h" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2024 <a href="/" target="_blank">ChengZhou</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  
+
+
+
+
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>
