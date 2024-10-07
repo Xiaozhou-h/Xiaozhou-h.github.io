@@ -108,6 +108,11 @@
             <time  class="article-date" datetime="2024-10-04T12:33:57.000Z" itemprop="datePublished">2024-10-04</time>
           </h2>
           
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2024-10-07T16:03:12.371Z" itemprop="dateUpdated">2024-10-08</time>
+            </h2>
+          
           
           <ul class="wrap-list dark">
   
@@ -188,7 +193,7 @@
 <ul>
 <li>如果没有SSH key，则创建新的SSH key（在C盘Windows文件夹下打开Git Bash）。</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -b <span class="number">4096</span> -C “your_email@example.com“</span><br><span class="line"></span><br><span class="line"><span class="comment"># Creates a new ssh key, using the provided email as a label</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 觉得不需要设置密码就一路回车。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成成功后可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露，id_rsa.pub是公钥，可以公开。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -b <span class="number">4096</span> -C <span class="string">&quot;your_email@example.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Creates a new ssh key, using the provided email as a label</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 觉得不需要设置密码就一路回车。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成成功后可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露，id_rsa.pub是公钥，可以公开。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>将.ssh文件中<strong>id_rsa.pub</strong>中的内容拷贝，添加到<strong>github</strong>。具体：在<strong>GitHub</strong>右上方点击头像，选择”<strong>Settings</strong>”，在右边的”<strong>Personal settings</strong>”侧边栏选择”<strong>SSH Keys</strong>”。接着粘贴key，点击”<strong>Add key</strong>”按钮。</li>
@@ -236,19 +241,28 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">复制hexo clean //清楚缓存</span><br><span class="line">hexo g # 绚烂</span><br><span class="line">hexo s # 在本地部署</span><br><span class="line">hexo d # 部署到远程服务器</span><br><span class="line">hexo new &quot;新的博客&quot; # 新建博客</span><br><span class="line"></span><br><span class="line">hexo d -g &amp;&amp; hexo clean  //组合命令 一键部署至远程服务器</span><br><span class="line">（一定要记得在网盘或者移动磁盘备份，不然会很麻烦）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2><span id="九-图片插入">九、图片插入</span></h2><p><img src="/2024/10/04/hexo-github%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87.png"></p>
-<h2><span id="十-换机同步">十、换机同步</span></h2><h3><span id="如果已经备份需要通过github新的ssh密钥连接"><em>如果已经备份，需要通过GitHub新的ssh密钥连接</em></span></h3><blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">复制&gt; npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p>首先检查有没有在GitHub的<a target="_blank" rel="noopener" href="https://github.com/settings/keys%E4%B8%8A%E6%B7%BB%E5%8A%A0%E4%BD%A0%E6%9C%AC%E6%9C%BA%E7%9A%84SSH">https://github.com/settings/keys上添加你本机的SSH</a> key。注意换了电脑是要重新添加的，每台都不一样。添加SSH key的方法：（引自廖雪峰老师的教程）<br>在用户主目录下(eg:C:\Users\Mr.Zhou)，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：</p>
-<blockquote>
-<p>$ ssh-keygen -t rsa -C “<a href="mailto:youremail@example.com">youremail@example.com</a>“</p>
-</blockquote>
-<p>你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可。</p>
-<p>如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，*<em>id_rsa.pub是公钥，可以放心地告诉任何人</em>*。</p>
-<p>第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：</p>
-<p>然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容即可</p>
-</blockquote>
+<h2><span id="十-多账号问题">十、多账号问题</span></h2><ul>
+<li>单机生成多个SSH秘钥</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成第一个秘钥，一路回车即可</span></span><br><span class="line">$ ssh-keygen -t rsa -b <span class="number">4096</span> -C <span class="string">&quot;your_email@example.com&quot;</span> -f ~/.ssh/id_rsa</span><br><span class="line"><span class="comment"># 生成第二个秘钥，一路回车即可</span></span><br><span class="line">$ ssh-keygen -t rsa -b <span class="number">4096</span> -C <span class="string">&quot;your_email@example.com&quot;</span> -f ~/.ssh/hfgithub_id_rsa</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新增配置文件：.ssh&#x2F;config</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Host zc<span class="emphasis">_ssh.github.com</span></span><br><span class="line"><span class="emphasis">HostName github.com</span></span><br><span class="line"><span class="emphasis">IdentityFile ~/.ssh/id_</span>rsa</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line"></span><br><span class="line">Host hf<span class="emphasis">_ssh.github.com</span></span><br><span class="line"><span class="emphasis">HostName github.com</span></span><br><span class="line"><span class="emphasis">IdentityFile ~/.ssh/hfgithub_</span>id<span class="emphasis">_rsa</span></span><br><span class="line"><span class="emphasis">PreferredAuthentications publickey</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试连接</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@zc_ssh.github.com</span><br><span class="line">ssh -T git@hf_ssh.github.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定秘钥并更新推送</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GIT_SSH_COMMAND=&#x27;ssh -i ~/.ssh/hfgithub_id_rsa&#x27; hexo d</span><br></pre></td></tr></table></figure>
+
+
+
 <p><strong>参考</strong></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://zipperary.com/2013/05/28/hexo-guide-2/">hexo系列教程：（二）搭建hexo博客</a></li>
